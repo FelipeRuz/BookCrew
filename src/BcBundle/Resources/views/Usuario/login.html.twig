@@ -34,9 +34,8 @@
             </div>
             <div class="col-md-5">
                 <h2> Registro de usuario </h2>
-                <form action="{{path("login_check")}}" method="post">
-
-                </form>
+                {{form_start(form, {'action':'', 'method':'POST'})}}
+                {{(form_end(form))}}
             </div>
         </div>
         <br>
