@@ -1,0 +1,49 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <!--LOGIN-->
+    <br>
+    <div class="container bg-warning">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-5">
+                <br>
+                <h2> Identificación </h2>
+                <form action="{{path("login_check")}}" method="post">
+                    <br>
+                    <label><b>Email del usuario</b></label>
+                    <input type="name" id="email" name="_username" value="{{ last_username }}" class="form-control"/>
+                    <br>
+                    <label><b>Contraseña</b></label>
+                    <input type="password" id="password" name="_password" class="form-control"/>
+                    <br>
+                    <input type="submit" value="Entrar" class="btn btn-success">
+                    <input type="button" value="Cancelar" class="btn btn-danger">
+                    <input type="hidden" name="_target_path" value="/login"/>
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!-- CREACION DE USUARIO -->
+    {% if app.user == null %}
+    <br>        
+    <div  class="container bg-warning">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-5">
+                <h2> Registro de usuario </h2>
+                <form action="{{path("login_check")}}" method="post">
+
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+    {% endif %}
+
+    <br>
+    <div class="clearfix"></div>
+{% endblock %}
+    

@@ -1,0 +1,13 @@
+bc_homepage:
+    path:   /
+    defaults: { _controller: BcBundle:Default:index }
+
+login:
+    path:   /login
+    defaults: { _controller: BcBundle:Usuario:login }
+    
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

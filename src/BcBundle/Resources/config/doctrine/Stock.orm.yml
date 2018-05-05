@@ -1,0 +1,52 @@
+BcBundle\Entity\Stock:
+    type: entity
+    table: stock
+    indexes:
+        id_libro:
+            columns:
+                - id_libro
+                - id_libreria
+        id_libreria:
+            columns:
+                - id_libreria
+        IDX_4B365660B91CEC1B:
+            columns:
+                - id_libro
+    id:
+        idVenta:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_venta
+            generator:
+                strategy: IDENTITY
+    fields:
+        disponible:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        idLibro:
+            targetEntity: Libro
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_libro:
+                    referencedColumnName: id_libro
+            orphanRemoval: false
+        idLibreria:
+            targetEntity: Libreria
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_libreria:
+                    referencedColumnName: id_libreria
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

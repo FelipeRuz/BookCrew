@@ -1,0 +1,42 @@
+BcBundle\Entity\Listalibro:
+    type: entity
+    table: listalibro
+    indexes:
+        id_usuario:
+            columns:
+                - id_usuario
+        id_libro:
+            columns:
+                - id_libro
+    id:
+        idLista:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_lista
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        idUsuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_usuario:
+                    referencedColumnName: id_usuario
+            orphanRemoval: false
+        idLibro:
+            targetEntity: Libro
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_libro:
+                    referencedColumnName: id_libro
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

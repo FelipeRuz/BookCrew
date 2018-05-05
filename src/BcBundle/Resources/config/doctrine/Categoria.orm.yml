@@ -1,0 +1,21 @@
+BcBundle\Entity\Categoria:
+    type: entity
+    table: categoria
+    id:
+        idCategoria:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_categoria
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

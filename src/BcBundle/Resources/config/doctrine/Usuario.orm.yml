@@ -1,0 +1,79 @@
+BcBundle\Entity\Usuario:
+    type: entity
+    table: usuario
+    uniqueConstraints:
+        nick:
+            columns:
+                - nick
+    id:
+        idUsuario:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_usuario
+            generator:
+                strategy: IDENTITY
+    fields:
+        nick:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        pass:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        rol:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+        nombre:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        apellido:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        tlf:
+            type: string
+            nullable: false
+            length: 9
+            options:
+                fixed: false
+        poblacion:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        provincia:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        direccion:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

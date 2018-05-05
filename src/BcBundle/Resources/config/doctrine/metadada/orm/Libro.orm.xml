@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Libro" table="libro">
+    <indexes>
+      <index name="autor" columns="autor"/>
+      <index name="editorial" columns="categoria"/>
+    </indexes>
+    <id name="idLibro" type="integer" column="id_libro">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="isbn" type="string" column="isbn" length="9" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="titulo" type="string" column="titulo" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formato" type="integer" column="formato" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechPublic" type="date" column="fech_public" nullable="false"/>
+    <field name="portada" type="string" column="portada" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="validacion" type="integer" column="validacion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="autor" target-entity="Autor" fetch="LAZY">
+      <join-columns>
+        <join-column name="autor" referenced-column-name="id_autor"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="categoria" target-entity="Categoria" fetch="LAZY">
+      <join-columns>
+        <join-column name="categoria" referenced-column-name="id_categoria"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

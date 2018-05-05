@@ -1,0 +1,33 @@
+BcBundle\Entity\Autor:
+    type: entity
+    table: autor
+    id:
+        idAutor:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_autor
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        apellido:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        foto:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

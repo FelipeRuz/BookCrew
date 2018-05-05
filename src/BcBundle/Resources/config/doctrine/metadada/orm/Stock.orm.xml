@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Stock" table="stock">
+    <indexes>
+      <index name="id_libro" columns="id_libro,id_libreria"/>
+      <index name="id_libreria" columns="id_libreria"/>
+      <index name="IDX_4B365660B91CEC1B" columns="id_libro"/>
+    </indexes>
+    <id name="idVenta" type="integer" column="id_venta">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="disponible" type="integer" column="disponible" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idLibro" target-entity="Libro" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_libro" referenced-column-name="id_libro"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idLibreria" target-entity="Libreria" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_libreria" referenced-column-name="id_libreria"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,75 @@
+BcBundle\Entity\Libro:
+    type: entity
+    table: libro
+    indexes:
+        autor:
+            columns:
+                - autor
+        editorial:
+            columns:
+                - categoria
+    id:
+        idLibro:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_libro
+            generator:
+                strategy: IDENTITY
+    fields:
+        isbn:
+            type: string
+            nullable: false
+            length: 9
+            options:
+                fixed: false
+        titulo:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        formato:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        fechPublic:
+            type: date
+            nullable: false
+            column: fech_public
+        portada:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        validacion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        autor:
+            targetEntity: Autor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                autor:
+                    referencedColumnName: id_autor
+            orphanRemoval: false
+        categoria:
+            targetEntity: Categoria
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categoria:
+                    referencedColumnName: id_categoria
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

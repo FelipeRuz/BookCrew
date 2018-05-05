@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Listalibro" table="listalibro">
+    <indexes>
+      <index name="id_usuario" columns="id_usuario"/>
+      <index name="id_libro" columns="id_libro"/>
+    </indexes>
+    <id name="idLista" type="integer" column="id_lista">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="idUsuario" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_usuario" referenced-column-name="id_usuario"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idLibro" target-entity="Libro" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_libro" referenced-column-name="id_libro"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
