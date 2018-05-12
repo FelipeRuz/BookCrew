@@ -1,7 +1,11 @@
 bc_homepage:
     path:   /
     defaults: { _controller: BcBundle:Default:index }
-
+    
+bc_add_libro:
+    path: /libro/addLibro
+    defaults: { _controller: BcBundle:Libro:addLibro }
+    
 login:
     path:   /login
     defaults: { _controller: BcBundle:Usuario:login }

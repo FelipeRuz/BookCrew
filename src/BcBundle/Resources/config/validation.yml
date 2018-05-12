@@ -1,0 +1,39 @@
+BcBundle\Entity\Usuario:
+    properties:
+        nick:
+            - NotBlank: {message: "El nick no puede estar vacío" }
+            - Length:
+                min: 3
+                minMessage: "El nick debe tener mínimo 3 caracteres"
+        pass:
+            - NotBlank: {message: "La contraseña no puede estar vacía" }
+            - Length:
+                min: 5
+                minMessage: "El nombre debe tener mínimo 5 caracteres"
+        nombre:
+            - NotBlank: {message: "El nombre no puede estar vacío" }
+            - Length:
+                min: 5
+                minMessage: "El nombre debe tener mínimo 5 caracteres"
+        apellido:
+            - NotBlank: {message: "El apellido no puede estar vacío" }
+            - Length:
+                min: 5
+                minMessage: "El apellido debe tener mínimo 5 caracteres"
+        tlf:
+            - Length:
+                min: 9
+                minMessage: "El contraseña debe tener 9 caracteres"
+        email:
+            - NotBlank: {message: "El mail no puede estar vacío" }
+            - Length:
+                min: 13
+                minMessage: "El mail debe tener mínimo 13 caracteres"
+  
+BcBundle\Entity\Libro:
+    properties: 
+        isbn:
+            - NotBlank: {message: "El ISBN no puede estar vacío" }
+            - Lenght: 
+                min: 13
+                minMessage: "El ISBN debe tener 13 caracteres"
