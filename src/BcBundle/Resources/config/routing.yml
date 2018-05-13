@@ -6,6 +6,14 @@ bc_add_libro:
     path: /libro/addLibro
     defaults: { _controller: BcBundle:Libro:addLibro }
     
+bc_add_autor:
+    path: /autor/addAutor
+    defaults: { _controller: BcBundle:Autor:addAutor }
+    
+bc_add_libreria:
+    path: /libreria/addLibreria
+    defaults: { _controller: BcBundle:Libreria:addLibreria }
+    
 login:
     path:   /login
     defaults: { _controller: BcBundle:Usuario:login }

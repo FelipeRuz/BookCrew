@@ -35,7 +35,7 @@ class LibroType extends AbstractType
                 ->add('portada',TextType::class, array("label"=>"Portada","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"25"
                 )))
-                ->add('id_autor',TextType::class, array("label"=>"Autor","required"=>"required","attr"=>array(
+                ->add('autor',TextType::class, array("label"=>"Autor","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"30"
                 )))
                 ->add('categoria',TextType::class, array("label"=>"Categoría","required"=>"required","attr"=>array(
