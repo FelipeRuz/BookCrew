@@ -1,0 +1,27 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    {% for autor in autores %}
+        <div id="tupla_autor" class="container bg-warning">
+            <br>
+            <div class="row">
+                <div class="col-md-2">
+                    {% if autor.foto == null or autor.foto == "" %}
+                        <!--<img src="../../smile.jpg" height="120" width="90"> -->
+                         <i class="fas fa-user"></i>
+                    {% else %}
+                        <img src="autor.foto" height="80" width="50"> 
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <br>
+                    <h2>{{autor.nombre}} {{autor.apellido}}</h2>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

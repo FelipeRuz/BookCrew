@@ -1,0 +1,35 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    {% for libro in libros %}
+        <div id="tupla_autor" class="container bg-warning">
+            <div class="row">
+                <div class="col-md-3">
+                    {% if libro.portada == null or libro.portada == "" %}
+                        <img src="../../img/smile.png" height="80" width="50"> 
+                    {% else %}
+                        <img src="autor.foto" height="80" width="50"> 
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <br>
+                    <h2>{{libro.titulo}}</h2>
+                    <h4>Por .. {{libro.autor}}</h4>
+                    <h6>Publicado el .. {{libro.fechpublic}}</h6>
+                    <h6>
+                        {% if libro.formato == 0 %}
+                            Formato : Físico 
+                        {% elseif libro.formato == 1 %}
+                            Formato : Digital
+                        {% else %}
+                            Formato : Digital y físico.
+                        {% endif %}
+                    </h6>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

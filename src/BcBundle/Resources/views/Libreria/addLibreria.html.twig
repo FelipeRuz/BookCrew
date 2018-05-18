@@ -1,19 +1,47 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
-    <div class="container bg-warning">
-        <div class="row">
-            <div class="col-md-3">
+    {% if app.user != null %}
+        {% if app.user.rol == 'ADMIN' %}
+            <div class="container bg-warning">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5">
+                        <br>
+                        <h2>Añadir Libreria</h2>
+                        <br>
+                        {{form_start(form)}}
+                        {{form_end(form)}}
+                        <br>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-5">
-                <br>
-                <h2>Añadir Libreria</h2>
-                <br>
-                {{form_start(form)}}
-                {{form_end(form)}}
-                <br>
+        {% else %}
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, no tienes los permisos necesarios para acceder a esta sección!</h1>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container bg-danger">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5" align="center">
+                    <br><br>
+                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                    <br><br>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
     <br>
 {% endblock %}

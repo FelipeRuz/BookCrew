@@ -1,0 +1,36 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    {% for libreria in librerias %}
+        <div id="tupla_autor" class="container bg-warning">
+            <div class="row">
+                <div class="col-md-3">
+                    {% if libro.portada == null or libro.portada == "" %}
+                        <img src="../../img/smile.png" height="80" width="50"> 
+                    {% else %}
+                        <img src="autor.foto" height="80" width="50"> 
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <br>
+                    <h2>{{libreria.nombre}}</h2>
+                    <h3>{{libreria.nif}}</h3>
+                    <h4>{{libreria.email}} - {{libreria.tlf}}</h4>
+                    <h6>Publicado el .. {{libro.fechpublic}}</h6>
+                    <h6>
+                        Direccion : {{libreria.poblacion}} // {{libreria.provincia}} <br> {{libreria.direccion}}
+                        {% if libreria.ubicacion != "" or libreria.ubicacion != null %}
+                            Ubicación : {{ libreria.web }} 
+                        {% else %}
+                            Ubicación : {{libreria.ubicacion}}<br>
+                            Web: {{ libreria.web }}
+                        {% endif %}
+                    </h6>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}
