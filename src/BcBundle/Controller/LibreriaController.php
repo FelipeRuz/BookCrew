@@ -17,12 +17,24 @@ class LibreriaController extends Controller
     
     public function indexLibreriaAction(){
         $em=$this->getDoctrine()->getEntityManager();
-        $libreria_repo = $em->getRepository("BcBundle:Libro");
+        $libreria_repo = $em->getRepository("BcBundle:Libreria");
         $librerias=$libreria_repo->findAll();
         
         return $this->render("BcBundle:Libreria:indexLibreria.html.twig",array(
             "librerias"=>$librerias
         ));
+    }
+    
+    public function delLibreriaAction($id)
+    {
+        $em=$this->getDoctrine()->getEntityManager();
+        $libreria_repo = $em->getRepository("BcBundle:Libreria");
+        $libreria=$libreria_repo->find($id);
+        
+        $em->remove($libreria);
+        $em->flush();
+        
+        return $this->redirectToRoute("bc_index_libreria");
     }
     
     public function addLibreriaAction(Request $request){

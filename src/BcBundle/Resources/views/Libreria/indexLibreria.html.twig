@@ -1,31 +1,68 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            {% if app.user.rol == 'ADMIN' %}
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Inscribir librería" class="btn btn-warning"></a>
+            </div>
+            {% endif %}
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
     {% for libreria in librerias %}
-        <div id="tupla_autor" class="container bg-warning">
+        <div id="tupla_libreria" class="container bg-warning">
+            <br>
             <div class="row">
                 <div class="col-md-3">
-                    {% if libro.portada == null or libro.portada == "" %}
-                        <img src="../../img/smile.png" height="80" width="50"> 
-                    {% else %}
-                        <img src="autor.foto" height="80" width="50"> 
-                    {% endif %}
-                </div>
-                <div class="col-md-5">
+                     <h2> 
+                        <i class="fas fa-arrow-alt-circle-right"></i> {{libreria.nombre}}
+                        {% if app.user.rol == 'ADMIN' %} 
+                            <br><br>
+                            <div class="container"><div class="row">
+                                <div class="col-md-6">
+                                    <a href=""><i class="fas fa-pencil-alt" style="font-size: 250"></i></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{path("bc_delete_libreria",{"id":libreria.idLibreria})}}"><i class="fas fa-trash" style="font-size: 250"></i></a>
+                                </div>
+                                </div></div>
+                        {% endif %} 
+                     </h2>
+                </div>    
+                <div class="col-md-9">
                     <br>
-                    <h2>{{libreria.nombre}}</h2>
-                    <h3>{{libreria.nif}}</h3>
-                    <h4>{{libreria.email}} - {{libreria.tlf}}</h4>
-                    <h6>Publicado el .. {{libro.fechpublic}}</h6>
-                    <h6>
-                        Direccion : {{libreria.poblacion}} // {{libreria.provincia}} <br> {{libreria.direccion}}
-                        {% if libreria.ubicacion != "" or libreria.ubicacion != null %}
-                            Ubicación : {{ libreria.web }} 
-                        {% else %}
-                            Ubicación : {{libreria.ubicacion}}<br>
-                            Web: {{ libreria.web }}
-                        {% endif %}
-                    </h6>
+                    <table style="width: 75%">
+                        <h6><b></b>
+                        <tr>
+                            <td><b>Nif : </b>{{libreria.nif}}</td>
+                            <td><b></b></td>
+                        </tr>
+                         <tr>
+                            <td><b>Tlf : </b>{{libreria.tlf}}</td>
+                            <td><b>Email : </b>{{libreria.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Direccion :</b> {{libreria.direccion}};<br> {{libreria.poblacion}}/{{libreria.provincia}}
+                            </td>
+                            <td>
+                                {% if libreria.ubicacion == "" or libreria.ubicacion == null %}
+                                    <b> Web : </b> <a href="{{ libreria.web }}"><i class="fas fa-link"></i> {{libreria.nombre}}</a>
+                                {% else %}
+                                    <b> Ubicación :</b>  <a href="{{libreria.ubicacion}}"><i class="far fa-map"></i> Ubicación</a><br>
+                                    <b> Web : </b> <a href="{{ libreria.web }}"><i class="fas fa-link"></i> {{libreria.nombre}} </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </h6>
+                    </table>
                     <br>
                     <br>
                 </div>

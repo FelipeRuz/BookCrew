@@ -1,35 +1,88 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
-    {% for libro in libros %}
-        <div id="tupla_autor" class="container bg-warning">
-            <div class="row">
-                <div class="col-md-3">
-                    {% if libro.portada == null or libro.portada == "" %}
-                        <img src="../../img/smile.png" height="80" width="50"> 
-                    {% else %}
-                        <img src="autor.foto" height="80" width="50"> 
-                    {% endif %}
-                </div>
-                <div class="col-md-5">
-                    <br>
-                    <h2>{{libro.titulo}}</h2>
-                    <h4>Por .. {{libro.autor}}</h4>
-                    <h6>Publicado el .. {{libro.fechpublic}}</h6>
-                    <h6>
-                        {% if libro.formato == 0 %}
-                            Formato : Físico 
-                        {% elseif libro.formato == 1 %}
-                            Formato : Digital
-                        {% else %}
-                            Formato : Digital y físico.
-                        {% endif %}
-                    </h6>
-                    <br>
-                    <br>
-                </div>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
+            </div>
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
             </div>
         </div>
         <br>
-    {% endfor %}
+    </div>
+    <br>
+    {% if app.user != null %} 
+        {% for libro in libros %}
+            {% if libro.validacion == 1 %}
+                <div id="tupla_libro" class="container bg-warning">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <br>
+                            {% if libro.portada == null or libro.portada == "" %}
+                                <img src="../../img/smile.png" height="230" width="220"> 
+                            {% else %}
+                                <img src="autor.foto" height="80" width="50"> 
+                            {% endif %}
+                            {% if app.user.rol == 'ADMIN' %} 
+                                <br><br>
+                                <div class="container"><div class="row">
+                                    <div class="col-md-6">
+                                        <a href=""><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
+                                    </div>
+                                    </div></div>
+                            {% endif %} 
+                        </div>
+
+                        <div class="col-md-9">
+                            <br>
+                            <h2>
+                                <i class="fas fa-arrow-alt-circle-right"></i> {{libro.titulo}}
+                            </h2>
+                            <h4>Por "AUTOR" </h4>
+                            <table class="bg-success" style="width: 75%">
+                                <tr>
+                                    <td>
+                                        <b>Publicado el </b> {{libro.fechpublic|date('d-m-Y')}}
+                                    </td>
+                                    <td>
+                                        {% if libro.formato == 0 %}
+                                            <b> Formato : </b> Físico 
+                                        {% elseif libro.formato == 1 %}
+                                            <b> Formato : </b> Digital
+                                        {% else %}
+                                            <b> Formato :</b> Digital y físico.
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Categoría : "CATEGORIA"</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <b>Disponible en : </b>
+                            <div id="list_tiendas">
+                                <ul>
+                                    <li>Tienda1</li>
+                                    <li>Tienda2</li>
+                                    <li>Tienda3</li>
+                                    <li><a href=""><i class="fas fa-eye"></i><b> Ver mas librerías..</b></a></li>
+                                </ul>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <br>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -9,16 +9,16 @@ BcBundle\Entity\Usuario:
             - NotBlank: {message: "La contraseña no puede estar vacía" }
             - Length:
                 min: 5
-                minMessage: "El nombre debe tener mínimo 5 caracteres"
+                minMessage: "La contraseña debe tener mínimo 5 caracteres"
         nombre:
             - NotBlank: {message: "El nombre no puede estar vacío" }
             - Length:
-                min: 5
-                minMessage: "El nombre debe tener mínimo 5 caracteres"
+                min: 3
+                minMessage: "El nombre debe tener mínimo 3 caracteres"
         apellido:
             - NotBlank: {message: "El apellido no puede estar vacío" }
             - Length:
-                min: 5
+                min: 3
                 minMessage: "El apellido debe tener mínimo 5 caracteres"
         tlf:
             - Length:

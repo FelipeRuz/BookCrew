@@ -26,6 +26,18 @@ class AutorController extends Controller
         ));
     }
     
+    public function delAutorAction($id)
+    {
+        $em=$this->getDoctrine()->getEntityManager();
+        $autor_repo = $em->getRepository("BcBundle:Autor");
+        $autor=$autor_repo->find($id);
+        
+        $em->remove($autor);
+        $em->flush();
+        
+        return $this->redirectToRoute("bc_index_autor");
+    }
+    
     public function addAutorAction(Request $request){
         $autor = new Autor();
         $form=$this->createForm(AutorType::class,$autor);               

@@ -144,7 +144,7 @@ class Libro
      */
     public function setFechPublic($fechPublic)
     {
-        $this->fechPublic = $fechPublic;
+        $this->fechPublic =$fechPublic;
 
         return $this;
     }

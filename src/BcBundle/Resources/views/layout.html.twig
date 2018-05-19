@@ -7,30 +7,30 @@
         </title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <script src="jquery-3.3.1.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     </head>
     <body>
         <header class="bg-success">
-            <div class="container  text-center">
-                <br>
+            <div class="container text-center">
                 <h2>BOOK CREW</h2>
             </div>
             <nav class="navbar navbar-dark bg-primary">
-                <a class="navbar-brand" href="{{path("bc_homepage")}}"><i class="fas fa-home"></i> Inicio</a>
-            {% if app.user != null %}
-                <a class="navbar-brand btn-right" href="#">
-                    {% if app.user.rol != "ADMIN" %}
-                        <i class="fas fa-user"></i>
-                    {% else %}
-                        <i class="fas fa-chess-king"></i>
-                    {% endif %}
-                    {{(app.user.nick)}}
-                </a>
-                <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
-            {% else %}
-                <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
-            {% endif %}
+                {% if app.user != null %}
+                    <a class="navbar-brand" href="{{path("login")}}"><i class="fas fa-home"></i> Inicio</a>
+                    <a class="navbar-brand btn-right" href="#">
+                        {% if app.user.rol != "ADMIN" %}
+                            <i class="fas fa-user"></i>
+                        {% else %}
+                            <i class="fas fa-chess-king"></i>
+                        {% endif %}
+                        {{(app.user.nick)}}
+                    </a>
+                    <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
+                {% else %}
+                    <a class="navbar-brand" href="{{path("bc_homepage")}}"><i class="fas fa-home"></i> Inicio</a>
+                    <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
+                {% endif %}
             </nav>
         </header>
         <section id="content">

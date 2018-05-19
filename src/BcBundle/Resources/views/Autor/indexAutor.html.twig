@@ -1,22 +1,50 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            {% if app.user.rol == 'ADMIN' %}
+                <div class="col-md-6">
+                    <a href=""><input type="button" value="Inscribir autor" class="btn btn-warning"></a>
+                </div>
+            {% endif %}
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
     {% for autor in autores %}
         <div id="tupla_autor" class="container bg-warning">
             <br>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     {% if autor.foto == null or autor.foto == "" %}
-                        <!--<img src="../../smile.jpg" height="120" width="90"> -->
-                         <i class="fas fa-user"></i>
+                        <img src="../../smile.jpg" height="230" width="220">
                     {% else %}
                         <img src="autor.foto" height="80" width="50"> 
                     {% endif %}
+                    {% if app.user.rol == 'ADMIN' %} 
+                        <br><br>
+                        <div class="container"><div class="row">
+                                <div class="col-md-6">
+                                    <a href=""><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
+                                </div>
+                        </div></div>
+                    {% endif %} 
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-8">
                     <br>
-                    <h2>{{autor.nombre}} {{autor.apellido}}</h2>
+                    <h2>
+                        <i class="fas fa-user"></i> {{autor.nombre}} {{autor.apellido}}
+                    </h2>
                     <br>
+                    <a href=""><i class="fas fa-eye"></i><b> Ver mas libros de este autor</b></a>
                     <br>
                 </div>
             </div>

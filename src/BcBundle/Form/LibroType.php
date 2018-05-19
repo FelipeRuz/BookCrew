@@ -21,7 +21,7 @@ class LibroType extends AbstractType
     {
         $builder
                 ->add('isbn',TextType::class, array("label"=>"ISBN","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"13"
+                    "class"=> "form-name form-control", "maxlength"=>"14"
                 )))
                 ->add('titulo',TextType::class, array("label"=>"Título","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"50"

@@ -25,6 +25,17 @@ class LibroController extends Controller
         ));
     }
     
+    public function delLibroAction($id)
+    {
+        $em=$this->getDoctrine()->getEntityManager();
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+        $libro=$libro_repo->find($id);
+        
+        $em->remove($libro);
+        $em->flush();
+        
+        return $this->redirectToRoute("bc_index_libro");
+    }
     
     public function addLibroAction(Request $request){
         $libro = new Libro();

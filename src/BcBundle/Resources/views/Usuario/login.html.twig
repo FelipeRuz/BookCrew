@@ -1,5 +1,6 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
+    {% if app.user == null %}
     <!--LOGIN-->
     <br>
     <div class="container bg-warning">
@@ -26,7 +27,6 @@
         <br>
     </div>
     <!-- CREACION DE USUARIO -->
-    {% if app.user == null %}
     <br>        
     <div  class="container bg-warning">
         <div class="row">
@@ -45,8 +45,38 @@
         </div>
         <br>
     </div>
-    {% endif %}
+    {% else %}
+    <br>        
+    <div  class="container bg-warning">
+        <div class="row"> 
+            <div class="col-md-5">
+                <br>
+                <h2> Menú </h2>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" align="center">
+                <a href="{{path("bc_index_libro")}}"><input type="button" value="Listado de libros" class="btn btn-info"></a><br><br><br><br>
+            </div>
+            <div class="col-md-3" align="center">   
+                <a href="{{path("bc_index_libreria")}}"><input type="button" value="Listado de Librerías" class="btn btn-info"></a><br><br> 
+                <!--<a href=""><input type="button" value="Mi perfil" class="btn btn-dark"></a>-->
+            </div>
+            <div class="col-md-3" align="center">  
+                <a href="{{path("bc_index_autor")}}"><input type="button" value="Listado de Autores" class="btn btn-info"></a><br><br>
+            </div>
+            {% if app.user.rol == 'ADMIN' %}
+            <div class="col-md-3" align="center">  
+                <a href=""><input type="button" value="Listado de Usuarios" class="btn btn-info"></a><br><br>
+            </div>
+            {% endif %}
+        </div>
+        <br>
+    </div>
     <br>
-    <div class="clearfix"></div>
+    {% endif %}
+<br>
+<div class="clearfix"></div>
 {% endblock %}
     

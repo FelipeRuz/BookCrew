@@ -10,6 +10,10 @@ bc_index_libro:
     path: /libro
     defaults: { _controller: BcBundle:Libro:indexLibro }
     
+bc_delete_libro:
+    path: /libro/delete/{id}
+    defaults: { _controller: BcBundle:Libro:delLibro}
+    
 bc_add_autor:
     path: /autor/addAutor
     defaults: { _controller: BcBundle:Autor:addAutor }
@@ -17,6 +21,10 @@ bc_add_autor:
 bc_index_autor:
     path: /autor
     defaults: { _controller: BcBundle:Autor:indexAutor }
+    
+bc_delete_autor:
+    path: /autor/delete/{id}
+    defaults: { _controller: BcBundle:Autor:delAutor }
    
 bc_add_libreria:
     path: /libreria/addLibreria
@@ -25,9 +33,13 @@ bc_add_libreria:
 bc_index_libreria:
     path: /libreria
     defaults: { _controller: BcBundle:Libreria:indexLibreria }
-    
+
+bc_delete_libreria:
+    path: /autor/libreria/{id}
+    defaults: { _controller: BcBundle:Libreria:delLibreria }
+
 login:
-    path:   /login
+    path: /login
     defaults: { _controller: BcBundle:Usuario:login }
     
 login_check:
@@ -35,3 +47,7 @@ login_check:
 
 logout:
     path: /logout
+
+bc_menu:
+    path: /menu
+    defaults: { _controller: BcBundle:Default:menu}
