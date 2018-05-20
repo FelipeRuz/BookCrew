@@ -22,9 +22,9 @@
                         <div class="col-md-3 text-center">
                             <br>
                             {% if libro.portada == null or libro.portada == "" %}
-                                <img src="../../img/smile.png" height="230" width="220"> 
+                                <img src="../../img/smile.png" height="60%" width="80%"> 
                             {% else %}
-                                <img src="autor.foto" height="80" width="50"> 
+                                <img src="autor.foto" height="60%" width="80%"> 
                             {% endif %}
                             {% if app.user.rol == 'ADMIN' %} 
                                 <br><br>
@@ -44,7 +44,7 @@
                             <h2>
                                 <i class="fas fa-arrow-alt-circle-right"></i> {{libro.titulo}}
                             </h2>
-                            <h4>Por "AUTOR" </h4>
+                            <h4>Por "{{libro.autor}}" </h4>
                             <table class="bg-success" style="width: 75%">
                                 <tr>
                                     <td>
@@ -62,7 +62,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Categoría : "CATEGORIA"</b>
+                                        <b>Categoría : "{{libro.categoria}}"</b>
                                     </td>
                                 </tr>
                             </table>

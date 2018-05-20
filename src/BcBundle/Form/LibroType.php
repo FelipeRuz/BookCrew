@@ -10,7 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LibroType extends AbstractType
 {
@@ -21,7 +22,7 @@ class LibroType extends AbstractType
     {
         $builder
                 ->add('isbn',TextType::class, array("label"=>"ISBN","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"14"
+                    "class"=> "form-name form-control","maxlength"=>"14"
                 )))
                 ->add('titulo',TextType::class, array("label"=>"Título","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"50"
@@ -31,15 +32,18 @@ class LibroType extends AbstractType
                 )))
                 ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación","required"=>"required","attr"=>array(
                     "class"=> "form-name", 
-                )))
-                ->add('portada',TextType::class, array("label"=>"Portada","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"25"
-                )))
-                ->add('autor',TextType::class, array("label"=>"Autor","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"30"
-                )))
-                ->add('categoria',TextType::class, array("label"=>"Categoría","required"=>"required","attr"=>array(
+                )))  
+                ->add('portada',FileType::class, array("label"=>"Portada","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control",
+                )))
+                ->add('autor',EntityType::class, array("label"=>"Autor","required"=>"required",
+                    "class"=>'BcBundle:Autor',
+                    "attr"=>array(
+                    "class"=> "form-name form-control"
+                )))
+                ->add('categoria',EntityType::class, array("label"=>"Categoría","required"=>"required",
+                    "class"=>'BcBundle:Categoria',
+                    "attr"=>array("class"=> "form-name form-control",
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(
                     "class"=> "form-submit btn btn-success"

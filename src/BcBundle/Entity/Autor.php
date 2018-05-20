@@ -109,5 +109,10 @@ class Autor
     {
         return $this->foto;
     }
+    
+    public function __toString() {
+        $string_nom = $this->nombre." ".$this->apellido;
+        return $string_nom ;
+    }
 }
 

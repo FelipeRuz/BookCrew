@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UsuarioType extends AbstractType
 {
@@ -38,10 +39,15 @@ class UsuarioType extends AbstractType
                 ->add('tlf',TextType::class, array("label"=>"Teléfono","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"9"
                 )))
-                ->add('poblacion',TextType::class, array("label"=>"Población","required"=>"required","attr"=>array(
+                /*->add('provincia',ChoiceType::class, array("label"=>"Provincia","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control",
-                )))
-                ->add('provincia',TextType::class, array("label"=>"Provincia","required"=>"required","attr"=>array(
+                    "choices"=> array("Álava"=>"Álava", "Albacete"=>"Albacete", "Alicante"=>"Alicante", "Almería"=>"Almería", "Asturias"=>"Asturias", "Ávila"=>"Ávila", "Badajoz"=>"Badajoz", "Barcelona"=>"Barcelona", "Burgos"=>"Burgos", "Cáceres"=>"Cáceres", "Cádiz"=>"Cádiz", 
+                        "Cantabria"=>"Cantabria", "Castellón"=>"Cantabria", "Ciudad Real"=>"Cantabria", "Córdoba"=>"Córdoba", "Cuenca"=>"Cuenca", "Gerona"=>"Gerona", "Granada"=>"Granada", "Guadalajara"=>"Guadalajara", "Guipúzcoa"=>"Guipúzcoa", "Huelva"=>"Huelva", 
+                        "Huesca"=>"Huesca", "Islas Baleares"=>"Islas Baleares", "Jaén"=>"Jaén", "La Coruña"=>"La Coruña", "La Rioja"=>"La Rioja", "Las Palmas"=>"Las Palmas", "León"=>"León", "Lérida"=>"Lérida", "Lugo"=>"Lugo", "Madrid"=>"Madrid", "Málaga"=>"Málaga", 
+                        "Murcia"=>"Murcia", "Navarra"=>"Navarra", "Orense"=>"Orense", "Palencia"=>"Palencia", "Pontevedra"=>"Pontevedra", "Salamanca"=>"Salamanca", "Santa Cruz de Tenerife"=>"Santa Cruz de Tenerife", "Segovia"=>"Segovia", "Sevilla"=>"Sevilla", "Soria"=>"Soria", 
+                        "Tarragona"=>"Tarragona", "Teruel"=>"Teruel", "Toledo"=>"Toledo", "Valencia"=>"Valencia", "Valladolid"=>"Valladolid", "Vizcaya"=>"Vizcaya", "Zamora"=>"Zamora", "Zaragoza"=>"Zaragoza")
+                )))*/
+                ->add('poblacion',TextType::class, array("label"=>"Población","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control",
                 )))
                 ->add('direccion',TextType::class, array("label"=>"Dirección","required"=>"required","attr"=>array(

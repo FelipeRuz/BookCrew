@@ -20,11 +20,11 @@
         <div id="tupla_autor" class="container bg-warning">
             <br>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 text-center">
                     {% if autor.foto == null or autor.foto == "" %}
-                        <img src="../../smile.jpg" height="230" width="220">
+                        <img src="../../smile.jpg" height="60%" width="80%">
                     {% else %}
-                        <img src="autor.foto" height="80" width="50"> 
+                        <img src="autor.foto" height="60%" width="80%"> 
                     {% endif %}
                     {% if app.user.rol == 'ADMIN' %} 
                         <br><br>

@@ -254,5 +254,9 @@ class Libro
     {
         return $this->categoria;
     }
+    
+    public function __toString() {
+        return $this->titulo;
+    }
 }
 

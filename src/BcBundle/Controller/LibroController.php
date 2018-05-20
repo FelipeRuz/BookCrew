@@ -51,7 +51,21 @@ class LibroController extends Controller
                 $libro->setIsbn($form->get("isbn")->getData());
                 $libro->setFormato($form->get("formato")->getData());
                 $libro->setFechPublic($form->get("fechpublic")->getData());
-                $libro->setPortada("");
+                
+                /*Caso de no obtención de imagen, introducir campo vacío.*/
+                If(($form->get("portada")->getData()) == null )
+                {
+                   $libro->setPortada(""); 
+                }
+                Else{
+                    $file=$form["portada"]->getData();
+                    $ext=$file->guessExtension();
+                    $file_name=time().".".$ext;
+                    $file->move("uploads",$file_name);
+                    
+                    $libro->setPortada($file_name);
+                }
+                
                 $libro->setValidacion(0);
                 $libro->setAutor($form->get("autor")->getData());
                 $libro->setCategoria($form->get("categoria")->getData());

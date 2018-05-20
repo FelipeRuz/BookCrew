@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class AutorType extends AbstractType
@@ -26,8 +27,8 @@ class AutorType extends AbstractType
                 ->add('apellido',TextType::class, array("label"=>"Apellido del autor","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"30"
                 )))
-                ->add('foto',TextType::class, array("label"=>"Foto del autor","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"50"
+                ->add('foto',FileType::class, array("label"=>"Foto del autor","required"=>"required","attr"=>array(
+                    "class"=> "form-name form-control"
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(
                     "class"=> "form-submit btn btn-success"
