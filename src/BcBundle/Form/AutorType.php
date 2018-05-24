@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace BcBundle\Form;
 
@@ -27,7 +27,7 @@ class AutorType extends AbstractType
                 ->add('apellido',TextType::class, array("label"=>"Apellido del autor","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"30"
                 )))
-                ->add('foto',FileType::class, array("label"=>"Foto del autor","required"=>"required","attr"=>array(
+                ->add('foto',FileType::class, array("label"=>"Foto del autor","attr"=>array(
                     "class"=> "form-name form-control"
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(

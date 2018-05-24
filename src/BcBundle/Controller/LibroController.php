@@ -1,4 +1,5 @@
 <?php
+
 namespace BcBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -7,88 +8,157 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use BcBundle\Entity\Libro;
 use BcBundle\Form\LibroType;
 
-class LibroController extends Controller
-{
-    private $session;
-    
-    /*public function __construct() {
-        $this->session=new Session();
-    }*/
+class LibroController extends Controller {
 
-    public function indexLibroAction(){
-        $em=$this->getDoctrine()->getEntityManager();
+    private $session;
+
+    /* public function __construct() {
+      $this->session=new Session();
+      } */
+
+    public function indexLibroAction() {
+        $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
-        $libros=$libro_repo->findAll();
-        
-        return $this->render("BcBundle:Libro:indexLibro.html.twig",array(
-            "libros"=>$libros
+        $libros = $libro_repo->findAll();
+
+        return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
+                    "libros" => $libros
         ));
     }
-    
-    public function delLibroAction($id)
-    {
-        $em=$this->getDoctrine()->getEntityManager();
+
+    public function editLibroAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
-        $libro=$libro_repo->find($id);
-        
-        $em->remove($libro);
-        $em->flush();
-        
-        return $this->redirectToRoute("bc_index_libro");
-    }
-    
-    public function addLibroAction(Request $request){
-        $libro = new Libro();
-        $form=$this->createForm(LibroType::class,$libro);               
-        
+        $libro = $libro_repo->find($id);
+
+        $form = $this->createForm(LibroType::class, $libro);
         $form->handleRequest($request);
-        
-        If($form->isSubmitted()){
-            If($form->isValid()){
-                $em=$this->getDoctrine()->getEntityManager();
-                $libro = new Usuario();
-                
+
+        If ($form->isSubmitted()) {
+            If ($form->isValid()) {
                 $libro->setIsbn($form->get("isbn")->getData());
+                $libro->setTitulo($form->get("titulo")->getData());
                 $libro->setFormato($form->get("formato")->getData());
-                $libro->setFechPublic($form->get("fechpublic")->getData());
-                
-                /*Caso de no obtención de imagen, introducir campo vacío.*/
-                If(($form->get("portada")->getData()) == null )
-                {
-                   $libro->setPortada(""); 
-                }
-                Else{
-                    $file=$form["portada"]->getData();
-                    $ext=$file->guessExtension();
-                    $file_name=time().".".$ext;
-                    $file->move("uploads",$file_name);
-                    
+                $libro->setFechPublic($form->get("fechPublic")->getData());
+
+                /* Caso de no obtención de imagen, introducir campo vacío. */
+                If (($form->get("portada")->getData()) == null || ($form->get("portada")->getData()) == "") {
+                    $libro->setPortada("");
+                } Else {
+                    $isbn = ($form->get("isbn")->getData());
+                    $file = $form["portada"]->getData();
+                    $ext = $file->guessExtension();
+                    $file_name = $isbn." - ".time().".".$ext;
+                    $file->move("uploads", $file_name);
                     $libro->setPortada($file_name);
                 }
-                
+
+                //$libro->setPortada("");
+                $libro->setValidacion($form->get("validacion")->getData());
+                $libro->setAutor($form->get("autor")->getData());
+                $libro->setCategoria($form->get("categoria")->getData());
+
+                $em->persist($libro);
+                $flush = $em->flush();
+
+                If ($flush == NULL) {
+                    $status = "Se ha enviado al servidor su petición de libro para ser validada";
+                } Else {
+                    $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
+                }
+                /* }
+                  Else{
+                  $status = "El libro ya ha sido registrado";
+                  } */
+            } Else {
+                $status = "No se ha enviado correctamente la petición de libro. El formato no es válido";
+            }
+            //$this->session->getFlashBag()->add("status",$status);
+        }
+
+        return $this->render("BcBundle:Libro:editLibro.html.twig", array(
+                    "form" => $form->createView()
+        ));
+    }
+
+    public function delLibroAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+        $libro = $libro_repo->find($id);
+
+        $em->remove($libro);
+        $em->flush();
+
+        return $this->redirectToRoute("bc_index_libro");
+    }
+
+    public function addLibroAction(Request $request) {
+        $libro = new Libro();
+        $form = $this->createForm(LibroType::class, $libro);
+        $form->handleRequest($request);
+
+        If ($form->isSubmitted()) {
+            If ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $libro = new Libro();
+
+                $libro->setIsbn($form->get("isbn")->getData());
+                $libro->setTitulo($form->get("titulo")->getData());
+                $libro->setFormato($form->get("formato")->getData());
+                $libro->setFechPublic($form->get("fechPublic")->getData());
+
+                /* Caso de no obtención de imagen, introducir campo vacío. */
+                If (($form->get("portada")->getData()) == null || ($form->get("portada")->getData()) == "") {
+                    $libro->setPortada("");
+                } Else {
+                    $isbn = ($form->get("isbn")->getData());
+                    $file = $form["portada"]->getData();
+                    $ext = $file->guessExtension();
+                    $file_name = $isbn." - ".time().".".$ext;
+                    $file->move("uploads", $file_name);
+                    $libro->setPortada($file_name);
+                }
+
+                //$libro->setPortada("");
                 $libro->setValidacion(0);
                 $libro->setAutor($form->get("autor")->getData());
                 $libro->setCategoria($form->get("categoria")->getData());
-                
+
                 $em->persist($libro);
-                $flush=$em->flush();
-                
-                If($flush== NULL){
-                    $status= "Se ha enviado al servidor su petición de libro para ser validada"; 
+                $flush = $em->flush();
+
+                If ($flush == NULL) {
+                    $status = "Se ha enviado al servidor su petición de libro para ser validada";
+                } Else {
+                    $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
                 }
-                Else{
-                    $status= "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
-                }
-            }
-            Else{
+                /* }
+                  Else{
+                  $status = "El libro ya ha sido registrado";
+                  } */
+            } Else {
                 $status = "No se ha enviado correctamente la petición de libro. El formato no es válido";
-                
             }
             //$this->session->getFlashBag()->add("status",$status);
-        }            
+        }
+
+        return $this->render("BcBundle:Libro:addLibro.html.twig", array(
+                    "form" => $form->createView()
+        ));
+    }
+
+    public function valLibroAction(Request $request,$id){
+        $em = $this->getDoctrine()->getEntityManager();
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+        $libro = $libro_repo->find($id);
+
+        $form = $this->createForm(LibroType::class, $libro);
+        $form->handleRequest($request);
         
-        return $this->render("BcBundle:Libro:addLibro.html.twig",array(
-            "form"=>$form->createView()
+        $libro->setValidacion(1);
+        
+        return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
+                    "form" => $form->createView()
         ));
     }
 }

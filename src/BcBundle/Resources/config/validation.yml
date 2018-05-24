@@ -34,15 +34,13 @@ BcBundle\Entity\Libro:
     properties: 
         isbn:
             - NotBlank: {message: "El ISBN no puede estar vacío" }
-            - Lenght: 
+            - Length: 
                 min: 13
                 minMessage: "El ISBN debe tener 13 caracteres"
         titulo:
             - NotBlank: {message: "El título no puede estar vacío" }
-        fechpublic:
+        fechPublic:
             - NotBlank: {message: "La fecha de publicación no puede estar vacía" }
-        portada:
-            - NotBlank: {message: "La portada no puede estar vacía" }
         autor:
             - NotBlank: {message: "El autor del libro no puede estar vacío" }
         categoria:
@@ -60,5 +58,3 @@ BcBundle\Entity\Autor:
             - Length:
                 min: 5
                 minMessage: "El apellido debe tener mínimo 5 caracteres"
-        foto:
-            - NotBlank: {message: "La foto no puede estar vacía" }

@@ -6,7 +6,7 @@
         <div class="row">
             {% if app.user.rol == 'ADMIN' %}
                 <div class="col-md-6">
-                    <a href=""><input type="button" value="Inscribir autor" class="btn btn-warning"></a>
+                    <a href="{{path("bc_add_autor")}}"><input type="button" value="Inscribir autor" class="btn btn-warning"></a>
                 </div>
             {% endif %}
             <div class="col-md-6">
@@ -16,40 +16,69 @@
         <br>
     </div>
     <br>
-    {% for autor in autores %}
-        <div id="tupla_autor" class="container bg-warning">
-            <br>
-            <div class="row">
-                <div class="col-md-3 text-center">
-                    {% if autor.foto == null or autor.foto == "" %}
-                        <img src="../../smile.jpg" height="60%" width="80%">
-                    {% else %}
-                        <img src="autor.foto" height="60%" width="80%"> 
-                    {% endif %}
-                    {% if app.user.rol == 'ADMIN' %} 
-                        <br><br>
-                        <div class="container"><div class="row">
-                                <div class="col-md-6">
-                                    <a href=""><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
-                                </div>
-                        </div></div>
-                    {% endif %} 
+    {% if app.user != null %} 
+        {% if app.user.rol != null %}
+            {% for autor in autores %}
+                <div id="tupla_autor" class="container bg-warning">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            {% if autor.foto == null or autor.foto == "" %}
+                                <!--<img src="https://vignette.wikia.nocookie.net/mario/images/e/e9/Bloque_interrogacion.PNG/revision/latest?cb=20130702202658&path-prefix=es" height="60%" width="80%">-->
+                                <img src="smile.png" height="60%" width="80%"> 
+                            {% else %}
+                                <img src="autor.foto" height="60%" width="80%">
+                            {% endif %}
+                            {% if app.user.rol == 'ADMIN' %} 
+                                <br><br>
+                                <div class="container"><div class="row">
+                                        <div class="col-md-6">
+                                            <a href="{{path("bc_edit_autor",{"id":autor.idAutor})}}"><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
+                                        </div>
+                                    </div></div>
+                                {% endif %} 
+                        </div>
+                        <div class="col-md-8">
+                            <br>
+                            <h2>
+                                <i class="fas fa-user"></i> {{autor.nombre}} {{autor.apellido}}
+                            </h2>
+                            <br>
+                            <a href=""><i class="fas fa-eye"></i><b> Ver mas libros de este autor</b></a>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
                 </div>
-                <div class="col-md-8">
-                    <br>
-                    <h2>
-                        <i class="fas fa-user"></i> {{autor.nombre}} {{autor.apellido}}
-                    </h2>
-                    <br>
-                    <a href=""><i class="fas fa-eye"></i><b> Ver mas libros de este autor</b></a>
-                    <br>
+                <br>
+            {% endfor %}
+        {% else %}
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, no tienes los permisos necesarios para acceder a esta sección!</h1>
+                        <br><br>
+                    </div>
                 </div>
             </div>
-            <br>
+        {% endif %}
+    {% else %}
+        <div class="container bg-danger">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5" align="center">
+                    <br><br>
+                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                    <br><br>
+                </div>
+            </div>
         </div>
-        <br>
-    {% endfor %}
+    {% endif %}
 {% endblock %}

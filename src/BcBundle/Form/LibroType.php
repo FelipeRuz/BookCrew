@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LibroType extends AbstractType
@@ -30,16 +31,22 @@ class LibroType extends AbstractType
                 ->add('formato',TextType::class, array("label"=>"Formato disponible","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"10"
                 )))
+                ->add('formato', ChoiceType::class, array(
+                    "label" => "Formato",
+                    "choices" => array(
+                        'Físico' => 0, 'Digital' => 1, 'Digital y físico' => 2
+                    ),
+                    "required" => "required",
+                ))
                 ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación","required"=>"required","attr"=>array(
                     "class"=> "form-name", 
                 )))  
-                ->add('portada',FileType::class, array("label"=>"Portada","required"=>"required","attr"=>array(
+                ->add('portada',FileType::class, array("label"=>"Portada","attr"=>array(
                     "class"=> "form-name form-control",
                 )))
                 ->add('autor',EntityType::class, array("label"=>"Autor","required"=>"required",
                     "class"=>'BcBundle:Autor',
-                    "attr"=>array(
-                    "class"=> "form-name form-control"
+                    "attr"=>array("class"=> "form-name form-control"
                 )))
                 ->add('categoria',EntityType::class, array("label"=>"Categoría","required"=>"required",
                     "class"=>'BcBundle:Categoria',

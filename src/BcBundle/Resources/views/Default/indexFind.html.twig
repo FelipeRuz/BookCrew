@@ -1,0 +1,41 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
+            </div>
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
+                    {% if app.user.rol == 'ADMIN' %} 
+                    <span id="VerValidados">
+                        <input id="BTVerValidados" type="button" value="Ver libros validados" class="btn btn-danger">
+                    </span>
+                    <span id="VerNoValidados">
+                        <input id="BTVerNoValidados" type="button" value="Ver libros NO validados" class="btn btn-danger">
+                    </span>
+                {% endif %} 
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+    <div class="container bg-warning">
+        <br>
+        <br>
+    </div>
+    {% block javascript %}
+        <script>
+            $(document).ready(function () {
+                $("titulolibro").click(function () {
+                    $("cuerpoLibro").toggle(1000);
+                });
+            });
+        </script>
+        <!--    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>-->
+    {% endblock %}
+{% endblock %}
+

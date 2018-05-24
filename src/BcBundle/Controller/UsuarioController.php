@@ -17,14 +17,14 @@ class UsuarioController extends Controller
     
     public function indexAction()
     {
-        /*return $this->render('BcBundle:Default:index.html.twig');*/
-        $em= $this->getDoctrine()->getEntityManager();
+        return $this->render('BcBundle:Default:index.html.twig');
+        /*$em= $this->getDoctrine()->getEntityManager();
         $usuario_repo=$em->getRepository("BcBundle:Usuario");
         $usuarios=$usuario_repo->findAll();
         
         return $this->render('BcBundle:Default:index.html.twig',array(
             "usuarios"=> $usuarios
-        ));
+        ));*/
     }
     
     public function delAction($id)
@@ -47,7 +47,6 @@ class UsuarioController extends Controller
         /*Esta parte la añadimos hasta poder usar la zona de adicion de usuario independiente de login*/
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class,$usuario);
-        
         $form->handleRequest($request);
         
         If($form->isSubmitted()){
@@ -60,12 +59,12 @@ class UsuarioController extends Controller
                 //If((array_count_values($usuario))==0){
                     $usuario = new Usuario();
                     $usuario->setNick($form->get("nick")->getData());
-                    //Codificación de la contraseña
+                    //********Codificación de la contraseña*********
                     $factory=$this->get("security.encoder_factory");
                     $encoder=$factory->getEncoder($usuario);
                     $password=$encoder->encodePassword($form->get("pass")->getData(),$usuario->getSalt());
                     $usuario->setPassword($password);
-                    //
+                    //**********************************************
                     $usuario->setRol("USER");  
                     $usuario->setNombre($form->get("nombre")->getData());
                     $usuario->setApellido($form->get("apellido")->getData());

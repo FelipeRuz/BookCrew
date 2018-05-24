@@ -32,19 +32,28 @@ class LibreriaType extends AbstractType
                 ->add('tlf',TextType::class, array("label"=>"Teléfono","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"9"
                 )))
-                ->add('poblacion',TextType::class, array("label"=>"Población","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control",
-                )))
+            ->add('provincia', ChoiceType::class, array(
+                "label" => "Provincia",
+                "choices" => array(
+                    'Álava' => 'Álava', 'Albacete' => 'Albacete', 'Alicante' => 'Alicante', 'Almería' => 'Almería', 'Asturias' => 'Asturias', 'Avila' => 'Avila', 'Badajoz' => 'Badajoz', 'Barcelona' => 'Barcelona', 'Burgos' => 'Burgos', 'Cáceres' => 'Cáceres',
+                    'Cádiz' => 'Cádiz', 'Cantabria' => 'Cantabria', 'Castellón' => 'Castellón', 'Ciudad Real' => 'Ciudad Real', 'Córdoba' => 'Córdoba', 'La Coruña' => 'La Coruña±a', 'Cuenca' => 'Cuenca', 'Gerona' => 'Gerona', 'Granada' => 'Granada', 'Guadalajara' => 'Guadalajara',
+                    'Guipúzcoa' => 'Guipúzcoa', 'Huelva' => 'Huelva', 'Huesca' => 'Huesca', 'Islas Baleares' => 'Islas Baleares', 'Jaén' => 'Jaén©n', 'León' => 'León', 'Lérida' => 'Lérida', 'Lugo' => 'Lugo', 'Madrid' => 'Madrid', 'Málaga' => 'Málaga', 'Murcia' => 'Murcia', 'Navarra' => 'Navarra',
+                    'Orense' => 'Orense', 'Palencia' => 'Palencia', 'Las Palmas' => 'Las Palmas', 'Pontevedra' => 'Pontevedra', 'La Rioja' => 'La Rioja', 'Salamanca' => 'Salamanca', 'Segovia' => 'Segovia', 'Sevilla' => 'Sevilla', 'Soria' => 'Soria', 'Tarragona' => 'Tarragona',
+                    'Santa Cruz de Tenerife' => 'Santa Cruz de Tenerife', 'Teruel' => 'Teruel', 'Toledo' => 'Toledo', 'Valencia' => 'Valencia', 'Valladolid' => 'Valladolid', 'Vizcaya' => 'Vizcaya', 'Zamora' => 'Zamora', 'Zaragoza' => 'Zaragoza',
+                    "attr" => array("class" => "form-control")
+                ),
+                "required" => "required",
+            ))
                 ->add('provincia',TextType::class, array("label"=>"Provincia","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control",
                 )))
                 ->add('direccion',TextType::class, array("label"=>"Dirección","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control","maxlength"=>"20"
                 )))
-                ->add('ubicacion',TextType::class, array("label"=>"Dirección","attr"=>array(
+                ->add('ubicacion',TextType::class, array("label"=>"Ubicación","attr"=>array(
                     "class"=> "form-name form-control","maxlength"=>"20"
                 )))
-                ->add('web',TextType::class, array("label"=>"Dirección","required"=>"required","attr"=>array(
+                ->add('web',TextType::class, array("label"=>"Web","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control","maxlength"=>"20"
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(
