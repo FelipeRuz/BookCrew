@@ -1,0 +1,106 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h2><b><i class="fas fa-check"></i> Mi lista</b></h2>    
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+    {% if app.user != null %} 
+        {% if app.user.rol != null %}
+            {% for stock in stocks %}
+                    <div id="tupla_libreria" class="container bg-warning">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>
+                                <i class="fas fa-arrow-alt-circle-right"></i><b> Búsqueda de libro: </b>{{stock.titulo}}
+                                <br><i class="fas fa-arrow-alt-circle-right"></i><b> Se halla en :</b> {{stock.nombre}}
+                                <br><i class="fas fa-check"></i><b> Disponibilidad :</b> 
+                                {% if stock.disponible == 0 %}
+                                    <span style="color:red;">No disponible</span>
+                                {% else %}
+                                    <span style="color:green;">Disponible</span>  
+                                {% endif %}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">  
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+                            <table style="width: 75%">
+                                <h4>
+                                    <b>DATOS:</b><hr></hr>
+                                    <tr>
+                                        <td><b>Nif : </b>{{stock.nif}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tlf : </b>{{stock.tlf}}</td>
+                                        <td><b>Email : </b>{{stock.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Direccion :</b> {{stock.direccion}};<br> {{stock.poblacion}}/{{stock.provincia}}
+                                        </td>
+                                        <td>
+                                            {% if stock.ubicacion == "" or stock.ubicacion == null %}
+                                                <b> Web : </b> <a href="{{ stock.web }}"><i class="fas fa-link"></i> {{stock.nombre}}</a>
+                                            {% else %}
+                                                <b> Ubicación :</b>  <a href="{{stock.ubicacion}}"><i class="far fa-map"></i> Ubicación</a><br>
+                                                <b> Web : </b> <a href="{{ stock.web }}"><i class="fas fa-link"></i> {{stock.nombre}} </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </h4>
+                            </table>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <br><br>     
+            {% endfor %}
+        {% else %}
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container bg-danger">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5" align="center">
+                    <br><br>
+                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% block javascript %}
+        <script>
+            $(document).ready(function () {
+                $("titulolibro").click(function () {
+                    $("cuerpoLibro").toggle(1000);
+                });
+            });
+        </script>
+    {% endblock %}
+{% endblock %}
+

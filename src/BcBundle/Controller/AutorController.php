@@ -15,7 +15,20 @@ class AutorController extends Controller {
     /* public function __construct() {
       $this->session=new Session();
       } */
-
+    
+    public function listLibAutorAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = '.$id.'';
+        $statement = $em->getConnection()->prepare($query);
+        
+        $statement->execute();
+        $listados = $statement->fetchAll();
+        
+        return $this->render("BcBundle:Listadolibro:indexListadolibro.html.twig", array(
+            "listados" => $listados
+        ));
+    }
+    
     public function indexAutorAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $autor_repo = $em->getRepository("BcBundle:Autor");

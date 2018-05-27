@@ -31,16 +31,13 @@
                             <h2>
                                 {% if app.user.rol == 'ADMIN' %} 
                                     <br><br>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                    <div class="col-md-3">
                                                 <a href="{{path("bc_edit_libreria",{"id":libreria.idLibreria})}}"><i class="fas fa-pencil-alt" style="font-size: 250"></i></a>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <a href="{{path("bc_delete_libreria",{"id":libreria.idLibreria})}}"><i class="fas fa-trash" style="font-size: 250"></i></a>
                                             </div>
-                                        </div>
-                                    </div>
+    
                                 {% endif %} 
                             </h2>
                         </div>    

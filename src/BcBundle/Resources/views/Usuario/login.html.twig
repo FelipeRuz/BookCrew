@@ -86,20 +86,7 @@
     <div class="clearfix"></div>
     {% block javascript %}
         <script>
-            $(document).ready(function () {
-                $("#logSesion").toggle(1000);
-                $("#add").toggle(1000, "swing");
-
-                $("#reg").click(function () {
-                    $("#add").toggle(1000, "swing");
-                });
-                $("#titleSesion").click(function () {
-                    $("#logSesion").toggle(1000);
-                });
-                $("#menu_princ").click(function () {
-                    $("#menuContentprinc").toggle(1000);
-                });
-            });
+           
         </script>
     {% endblock %}
 {% endblock %}
