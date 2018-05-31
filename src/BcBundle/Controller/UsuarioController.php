@@ -18,13 +18,6 @@ class UsuarioController extends Controller
     public function indexAction()
     {
         return $this->render('BcBundle:Default:index.html.twig');
-        /*$em= $this->getDoctrine()->getEntityManager();
-        $usuario_repo=$em->getRepository("BcBundle:Usuario");
-        $usuarios=$usuario_repo->findAll();
-        
-        return $this->render('BcBundle:Default:index.html.twig',array(
-            "usuarios"=> $usuarios
-        ));*/
     }
     
     public function delAction($id)

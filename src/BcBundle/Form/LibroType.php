@@ -42,7 +42,7 @@ class LibroType extends AbstractType
                     "class"=> "form-name", 
                 )))  
                 ->add('portada',FileType::class, array("label"=>"Portada","attr"=>array(
-                    "class"=> "form-name form-control",
+                    "class"=> "form-name btn btn-dark",
                 )))
                 ->add('autor',EntityType::class, array("label"=>"Autor","required"=>"required",
                     "class"=>'BcBundle:Autor',

@@ -1,0 +1,116 @@
+{% extends "BcBundle::layout.html.twig" %}
+{% block content %}
+    <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
+            </div>
+            <div class="col-md-6">
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
+                    {% if app.user.rol == 'ADMIN' %} 
+                    <a href="{{path("bc_index_libro")}}">
+                        <input id="BTVerValidados" type="button" value="Ver libros validados" class="btn btn-success">
+                    </a>
+                {% endif %} 
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+    {% if app.user != null %} 
+        {% if app.user.rol != null %}
+            {% for libro in libros %}
+                <div id="tuplaLibro_{{libro.isbn}}" class="container bg-danger">
+                    <br>
+                    <titulolibro>
+                        <h2 id="titleLibro">
+                            <i class="fas fa-arrow-alt-circle-right"></i><b> {{libro.titulo}}</b>
+                        </h2>
+                    </titulolibro>
+                    <br>
+                    <div id="bodyLibro" class="row">
+                        <div class="col-md-4 text-center">
+                            <br>
+                            {% if libro.portada == null or libro.portada == "" %}
+                                <img src="{{asset("imgdata/smile.png")}}" height="180" width="200"> 
+                            {% else %}
+                                <img src="{{asset("libro.portada")}}" height="180" width="200"> 
+                            {% endif %}
+                            {% if app.user.rol == 'ADMIN' %} 
+                                <br><br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href=""><i class="fa fa-check" style="font-size: 250%"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <br><br>
+                            <h4><b>Por </b>"<i>{{libro.autor_nom}} {{libro.apellido}}</i>" </h4>
+                            <table class="bg-success" style="width: 75%">
+                                <tr>
+                                    <td>
+                                        <b>Publicado el </b> {{libro.fech_public|date('d-m-Y')}}
+                                    </td>
+                                    <td>
+                                        {% if libro.formato == 0 %}
+                                            <b> Formato : </b> Físico 
+                                        {% elseif libro.formato == 1 %}
+                                            <b> Formato : </b> Digital
+                                        {% else %}
+                                            <b> Formato :</b> Digital y físico.
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Categoría : "{{libro.categoria}}"</b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <b>Disponible en : </b>
+                            <div id="list_tiendas">
+                                <ul>
+                                    <li><a href="{{path("bc_index_stocks",{"id":libro.id_libro})}}"><i class="fas fa-eye"></i><b> Ver mas librerías..</b></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br> 
+            {% endfor %}
+        {% else %}
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container bg-danger">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5" align="center">
+                    <br><br>
+                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+

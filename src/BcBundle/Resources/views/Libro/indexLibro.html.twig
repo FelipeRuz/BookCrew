@@ -8,14 +8,12 @@
                 <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
             </div>
             <div class="col-md-6">
-                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
-                    {% if app.user.rol == 'ADMIN' %} 
-                    <span id="VerValidados">
-                        <input id="BTVerValidados" type="button" value="Ver libros validados" class="btn btn-danger">
-                    </span>
-                    <span id="VerNoValidados">
-                        <input id="BTVerNoValidados" type="button" value="Ver libros NO validados" class="btn btn-danger">
-                    </span>
+                <a href=""><input type="button" value="Buscar" class="btn btn-warning">
+                </a>
+                    {% if app.user.rol == 'ADMIN' %}
+                    <a href="{{path("bc_index_NoVallibro")}}">
+                        <input type="button" value="Libros NO validados" class="btn btn-danger">
+                    </a>
                 {% endif %} 
             </div>
         </div>
@@ -25,40 +23,52 @@
     {% if app.user != null %} 
         {% if app.user.rol != null %}
             {% for libro in libros %}
+                <!--LIBROS VALIDADOS -->
                 {% if libro.validacion == 1 %}
                     <div id="tuplaLibro_{{libro.isbn}}" class="container bg-warning">
                         <br>
                         <titulolibro>
                             <h2 id="titleLibro">
-                                <i class="fas fa-arrow-alt-circle-right"></i> {{libro.titulo}}
+                                <i class="fas fa-arrow-alt-circle-right"></i><b> {{libro.titulo}}</b>
                             </h2>
                         </titulolibro>
                         <br>
                         <div id="bodyLibro" class="row">
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-4 text-center">
                                 <br>
                                 {% if libro.portada == null or libro.portada == "" %}
-                                    <img src="../../img/smile.png" height="60%" width="80%"> 
+                                    <img src="{{asset("imgdata/smile.png")}}" height="180" width="200"> 
                                 {% else %}
-                                    <img src="autor.foto" height="60%" width="80%"> 
+                                    <img src="{{asset("libro.portada")}}" height="180" width="200"> 
                                 {% endif %}
                                 {% if app.user.rol == 'ADMIN' %} 
                                     <br><br>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}"><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-3">
+                                            <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}">
+                                                <i class="fas fa-trash" style="font-size: 250%">   
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}">
+                                                <i class="fas fa-pencil-alt" style="font-size: 250%">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="">
+                                                <i class="fas fa-plus" style="font-size: 250%"></i><b>Lista</b>
+                                            </a>
                                         </div>
                                     </div>
+                                    <br>
                                 {% endif %}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <br><br>
-                                <h4>Por "{{libro.autor}}" </h4>
+                                <h4><b>Por "</b><i>{{libro.autor}}</i><b>"</b> </h4>
                                 <table class="bg-success" style="width: 75%">
                                     <tr>
                                         <td>
@@ -90,87 +100,21 @@
                             </div>
                         </div>
                     </div>
-                    <br><br>     
-                {% elseif libro.validacion == 0 and app.user.rol == 'ADMIN' %}
-                    <div id="tuplaLibro_{{libro.isbn}}" class="container bg-danger">
-                        <br>
-                        <titulolibro>
-                            <h2 id="titleLibro">
-                                <i class="fas fa-arrow-alt-circle-right"></i> {{libro.titulo}}
-                            </h2>
-                        </titulolibro>
-                        <br>
-                        <div id="bodyLibro" class="row">
-                            <div class="col-md-6 text-center">
-                                <br>
-                                {% if libro.portada == null or libro.portada == "" %}
-                                    <img src="../../img/smile.png" height="60%" width="80%"> 
-                                {% else %}
-                                    <img src="autor.foto" height="60%" width="80%"> 
-                                {% endif %}
-                                {% if app.user.rol == 'ADMIN' %} 
-                                    <br><br>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <a href="{{path("bc_val_libro",{"id":libro.idLibro})}}"><i class="fa fa-check" style="font-size: 250%"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6">
-                                <br><br>
-                                <h4>Por "{{libro.autor}}" </h4>
-                                <table class="bg-success" style="width: 75%">
-                                    <tr>
-                                        <td>
-                                            <b>Publicado el </b> {{libro.fechpublic|date('d-m-Y')}}
-                                        </td>
-                                        <td>
-                                            {% if libro.formato == 0 %}
-                                                <b> Formato : </b> Físico 
-                                            {% elseif libro.formato == 1 %}
-                                                <b> Formato : </b> Digital
-                                            {% else %}
-                                                <b> Formato :</b> Digital y físico.
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Categoría : "{{libro.categoria}}"</b>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br>
-                                <b>Disponible en : </b>
-                                <div id="list_tiendas">
-                                    <ul>
-                                        <li>Tienda1</li>
-                                        <li>Tienda2</li>
-                                        <li>Tienda3</li>
-                                        <li><a href=""><i class="fas fa-eye"></i><b> Ver mas librerías..</b></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <br><br> 
                 {% endif %}
             {% endfor %}
         {% else %}
-        <div class="container bg-danger">
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-5" align="center">
-                    <br><br>
-                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
-                    <br><br>
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                        <br><br>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endif %}
     {% else %}
         <div class="container bg-danger">
@@ -185,15 +129,5 @@
             </div>
         </div>
     {% endif %}
-
-    {% block javascript %}
-        <script>
-            $(document).ready(function () {
-                $("titulolibro").click(function () {
-                    $("cuerpoLibro").toggle(1000);
-                });
-            });
-        </script>
-    {% endblock %}
 {% endblock %}
 

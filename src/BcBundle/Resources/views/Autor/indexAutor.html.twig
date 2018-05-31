@@ -19,35 +19,37 @@
     {% if app.user != null %} 
         {% if app.user.rol != null %}
             {% for autor in autores %}
+
                 <div id="tupla_autor" class="container bg-warning">
                     <br>
                     <div class="row">
                         <div class="col-md-3 text-center">
                             {% if autor.foto == null or autor.foto == "" %}
-                                <!--<img src="https://vignette.wikia.nocookie.net/mario/images/e/e9/Bloque_interrogacion.PNG/revision/latest?cb=20130702202658&path-prefix=es" height="60%" width="80%">-->
-                                <img src="smile.png" height="60%" width="80%"> 
+                                <img src="{{asset("imgdata/smile.png")}}" height="120" width="150"> 
                             {% else %}
-                                <img src="autor.foto" height="60%" width="80%">
+                                <img src="{{asset(autor.foto)}}" height="120" width="150"> 
                             {% endif %}
-                            {% if app.user.rol == 'ADMIN' %} 
-                                <br><br>
-                                <div class="container"><div class="row">
-                                        <div class="col-md-6">
-                                            <a href="{{path("bc_edit_autor",{"id":autor.idAutor})}}"><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
-                                        </div>
-                                    </div></div>
-                                {% endif %} 
                         </div>
                         <div class="col-md-8">
                             <br>
                             <h2>
                                 <i class="fas fa-user"></i> {{autor.nombre}} {{autor.apellido}}
+
                             </h2>
-                            <br>
-                            <a href=""><i class="fas fa-eye"></i><b> Ver mas libros de este autor</b></a>
+                            {% if app.user.rol == 'ADMIN' %}
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a href="{{path("bc_edit_autor",{"id":autor.idAutor})}}"><i class="fas fa-pencil-alt" style="font-size: 250%"></i></a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><i class="fas fa-trash" style="font-size: 250%"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <!--<br>
+                             <a href=""><i class="fas fa-eye"></i><b> Ver mas libros de este autor</b></a>-->
                             <br>
                         </div>
                     </div>

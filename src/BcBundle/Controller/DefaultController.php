@@ -8,15 +8,29 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        /*$em= $this->getDoctrine()->getEntityManager();
-        $data_repo= $em->getRepository("BcBundle:Listalibro");
-        $listados = $data_repo->findAll();
+        /*$em = $this->getDoctrine()->getManager();
+        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = '.(1).'';
+        $statement = $em->getConnection()->prepare($query);
         
-        foreach($listados as $listado){
-            echo $listado->getidUsuario()->getNombre()."<br>";
-            echo $listado->getidLibro()->getTitulo()."<br>";
-        }
-        die();*/
-        return $this->render('BcBundle:Default:index.html.twig');
+        $statement->execute();
+        $listados = $statement->fetchAll();*/
+        
+        return $this->render("BcBundle:Default:index.html.twig", array(
+        ));
+
+    }
+    
+    public function indexFindAction()
+    {
+        /*$em = $this->getDoctrine()->getManager();
+        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = '.(1).'';
+        $statement = $em->getConnection()->prepare($query);
+        
+        $statement->execute();
+        $listados = $statement->fetchAll();*/
+        
+        return $this->render("BcBundle:Default:indexFind.html.twig", array(
+        ));
+
     }
 }

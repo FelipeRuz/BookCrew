@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace BcBundle\Form;
 
@@ -28,7 +28,7 @@ class AutorType extends AbstractType
                     "class"=> "form-name form-control", "maxlength"=>"30"
                 )))
                 ->add('foto',FileType::class, array("label"=>"Foto del autor","attr"=>array(
-                    "class"=> "form-name form-control"
+                    "class"=> "form-name btn btn-dark"
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(
                     "class"=> "form-submit btn btn-success"

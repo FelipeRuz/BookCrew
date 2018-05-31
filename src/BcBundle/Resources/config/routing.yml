@@ -8,19 +8,15 @@ bc_add_libro:
     
 bc_index_libro:
     path: /libro
-    defaults: { _controller: BcBundle:Libro:indexLibro }
-    
-bc_index_libroValid:
-    path: /libroValid
-    defaults: { _controller: BcBundle:Libro:indexLibro }
+    defaults: { _controller: BcBundle:Libro:indexLibroVal }
+
+bc_index_NoVallibro:
+    path: /libroValidacion
+    defaults: { _controller: BcBundle:Libro:indexLibroNoVal }    
     
 bc_edit_libro:
     path: /libro/edit/{id}
     defaults: { _controller: BcBundle:Libro:editLibro }    
-
-bc_val_libro:
-    path: /libro/val/{id}
-    defaults: { _controller: BcBundle:Libro:valLibro }
 
 bc_delete_libro:
     path: /libro/delete/{id}
@@ -61,11 +57,15 @@ bc_edit_libreria:
 bc_index_listadolibros:
     path: /listadolibro/index/{id}
     defaults: { _controller: BcBundle:Listadolibro:indexListadolibro }
-    
+  
 bc_index_stocks:
     path: /stock/index/{id}
     defaults: { _controller: BcBundle:Stock:indexStock }    
-    
+
+bc_index_find:
+    path: /indexFind
+    defaults: { _controller: BcBundle:Default:indexFind }
+  
 login:
     path: /login
     defaults: { _controller: BcBundle:Usuario:login }
@@ -76,10 +76,4 @@ login_check:
 logout:
     path: /logout
 
-bc_menu:
-    path: /menu
-    defaults: { _controller: BcBundle:Default:menu}
     
-bc_menu:
-    path: /menu/find
-    defaults: { _controller: BcBundle:Default:indexFind}

@@ -62,7 +62,7 @@ class AutorController extends Controller {
                 Else{
                     $file=$form["foto"]->getData();
                     $ext=$file->guessExtension();
-                    $file_name= time().".".$ext;
+                    $file_name= "uploads/".time().".".$ext;
                     $file->move("uploads",$file_name);
                     
                     $autor->setFoto($file_name);
@@ -112,8 +112,24 @@ class AutorController extends Controller {
 
                 $autor->setNombre($form->get("nombre")->getData());
                 $autor->setApellido($form->get("apellido")->getData());
-                $autor->setFoto("");
-
+                
+                
+                /*Caso de no obtención de imagen, introducir campo vacío.*/
+                If(($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "")
+                {
+                   $autor->setPortada(""); 
+                }
+                Else{
+                    $file=$form["foto"]->getData();
+                    $ext=$file->guessExtension();
+                    $file_name= "uploads/".time().".".$ext;
+                    $file->move("uploads",$file_name);
+                    
+                    $autor->setFoto($file_name);
+                }
+                
+                //$autor->setFoto("");
+                
                 $em->persist($autor);
                 $flush = $em->flush();
 

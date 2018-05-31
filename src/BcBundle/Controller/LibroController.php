@@ -16,13 +16,25 @@ class LibroController extends Controller {
       $this->session=new Session();
       } */
 
-    public function indexLibroAction() {
+    public function indexLibroValAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
         $libros = $libro_repo->findAll();
 
         return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
-                    "libros" => $libros
+                "libros" => $libros
+        ));
+    }
+
+    public function indexLibroNoValAction() {
+        $em = $this->getDoctrine()->getManager();
+        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 1';
+        $statement = $em->getConnection()->prepare($query);
+        $statement->execute();
+        $libros = $statement->fetchAll();
+
+        return $this->render("BcBundle:Libro:indexNoValLibro.html.twig", array(
+                "libros" => $libros
         ));
     }
 
@@ -48,13 +60,13 @@ class LibroController extends Controller {
                     $isbn = ($form->get("isbn")->getData());
                     $file = $form["portada"]->getData();
                     $ext = $file->guessExtension();
-                    $file_name = $isbn." - ".time().".".$ext;
+                    $file_name = "uploads/" . $isbn . "-" . time() . "." . $ext;
                     $file->move("uploads", $file_name);
                     $libro->setPortada($file_name);
                 }
 
                 //$libro->setPortada("");
-                $libro->setValidacion($form->get("validacion")->getData());
+                $libro->setValidacion(0);
                 $libro->setAutor($form->get("autor")->getData());
                 $libro->setCategoria($form->get("categoria")->getData());
 
@@ -66,10 +78,6 @@ class LibroController extends Controller {
                 } Else {
                     $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
                 }
-                /* }
-                  Else{
-                  $status = "El libro ya ha sido registrado";
-                  } */
             } Else {
                 $status = "No se ha enviado correctamente la petición de libro. El formato no es válido";
             }
@@ -110,11 +118,11 @@ class LibroController extends Controller {
                 /* Caso de no obtención de imagen, introducir campo vacío. */
                 If (($form->get("portada")->getData()) == null || ($form->get("portada")->getData()) == "") {
                     $libro->setPortada("");
-                } Else {
+                } Else { //Sino, guardaremos la imagen con titulo de isbn que pertenece y la hora de guardado.
                     $isbn = ($form->get("isbn")->getData());
                     $file = $form["portada"]->getData();
                     $ext = $file->guessExtension();
-                    $file_name = $isbn." - ".time().".".$ext;
+                    $file_name = $isbn . " - " . time() . "." . $ext;
                     $file->move("uploads", $file_name);
                     $libro->setPortada($file_name);
                 }
@@ -147,18 +155,19 @@ class LibroController extends Controller {
         ));
     }
 
-    public function valLibroAction(Request $request,$id){
+    public function valLibroAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
         $libro = $libro_repo->find($id);
 
         $form = $this->createForm(LibroType::class, $libro);
         $form->handleRequest($request);
-        
+
         $libro->setValidacion(1);
-        
+
         return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
                     "form" => $form->createView()
         ));
     }
+
 }

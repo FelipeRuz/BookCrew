@@ -5,37 +5,63 @@
         <br>
         <div class="row">
             <div class="col-md-6">
-                <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
+                <h3><b>Búsqueda</b></h3>
             </div>
-            <div class="col-md-6">
-                <a href=""><input type="button" value="Buscar" class="btn btn-warning"></a>
-                    {% if app.user.rol == 'ADMIN' %} 
-                    <span id="VerValidados">
-                        <input id="BTVerValidados" type="button" value="Ver libros validados" class="btn btn-danger">
-                    </span>
-                    <span id="VerNoValidados">
-                        <input id="BTVerNoValidados" type="button" value="Ver libros NO validados" class="btn btn-danger">
-                    </span>
-                {% endif %} 
+            <div id="controlBusqueda" class="col-md-6">
+                <table style="width: 75%">
+                    <form accept-charset="utf-8" method="POST">
+                        <tr>
+                            <td><b>Seleccione el parámetro de búsqueda : </b><br>
+                                <select name="ParamBusq">
+                                    <option value="nada"></option>
+                                    <option value="titulo">Libro</option>
+                                    <option value="autor">Autor</option>
+                                    <option value="categoria">Categoría</option>
+                                    <option value="libreria">Libreria</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="campBusqLibro">
+                            <td><b>Campo de búsqueda : </b><br>
+                                <select name="campBusqLibro">
+                                    <option value="titulo">Titulo</option>
+                                    <option value="autor">Autor</option>
+                                    <option value="categoria">Categoría</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><b>Texto de clave : </b><br>
+                                <input type="text" id="parametroBusqueda" value="" placeholder="" maxlength="30" autocomplete="off" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br><input id="activarBusqueda" type="button" value="Buscar.." class="btn btn-dark"><input id="cancelarBusqueda" type="button" value="Cancelar" class="btn btn-danger">
+                            </td>
+                        </tr>
+                    </form>
+                </table>
             </div>
         </div>
         <br>
     </div>
     <br>
-    <div class="container bg-warning">
+    <div id="resultadosBusq" class="container bg-warning">
         <br>
-        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <h3><b>Resultados</b></h3><br>
+            </div>
+            <div class="col-md-8">
+                <table style="width: 75%; bg-color: white">
+                    <tr>
+                        <td>Var1</td><td>Var2</td><td>Var3</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    {% block javascript %}
-        <script>
-            $(document).ready(function () {
-                $("titulolibro").click(function () {
-                    $("cuerpoLibro").toggle(1000);
-                });
-            });
-        </script>
-        <!--    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>-->
-    {% endblock %}
+    <br>
+    <br>
 {% endblock %}
-

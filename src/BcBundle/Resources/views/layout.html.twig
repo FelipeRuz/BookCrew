@@ -74,11 +74,13 @@
     </body>
 </html>
 {% block javascript %}
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            $("#titleDespUser").hide();
+            $("#menuDespUser").hide();
             $("#titleDespUser").click(function () {
-                $("#menuDespUser").toggle(1000, "swing");
+                $("#menuDespUser").toggle();
             });
         });
     </script>

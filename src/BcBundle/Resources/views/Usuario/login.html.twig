@@ -9,7 +9,10 @@
                 </div>
                 <div class="col-md-5">
                     <br>
-                    <h2 id="titleSesion"> Identificación </h2>
+                    <h2 id="titleSesion">
+                        <img src="{{asset("imgdata/user-base.png")}}" height="50" width="50">
+                        Identificación 
+                    </h2>
                     <span id="logSesion">
                         <form action="{{path("login_check")}}" method="post">
                             <br>
@@ -36,7 +39,10 @@
                 </div>
                 <div class="col-md-5">
                     <br>
-                    <h2 id="reg">Registro de usuario </h2>
+                    <h2 id="reg">
+                        <img src="{{asset("imgdata/user-add.png")}}" height="50" width="50">
+                        Registro de usuario 
+                    </h2>
                     <br>
                     <span id="add">
                         {% for message in app.session.flashbag().get('status') %}
@@ -50,7 +56,8 @@
             <br>
         </div>
     {% else %}
-        <br>        
+        <br> 
+        <!-- MENU PRINCIPAL -->
         <div  class="container bg-warning">
             <div class="row"> 
                 <div class="col-md-12 text-center">
@@ -62,18 +69,29 @@
             <span id="menuContentprinc">
                 <div class="row">
                     <div class="col-md-3" align="center">
-                        <a href="{{path("bc_index_libro")}}"><input type="button" value="Listado de libros" class="btn btn-info"></a><br><br><br><br>
+                        <a href="{{path("bc_index_libro")}}">
+                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <input type="button" value="Listado de libros" class="btn btn-info">
+                        </a><br><br><br><br>
                     </div>
                     <div class="col-md-3" align="center">   
-                        <a href="{{path("bc_index_libreria")}}"><input type="button" value="Listado de Librerías" class="btn btn-info"></a><br><br> 
-                        <!--<a href=""><input type="button" value="Mi perfil" class="btn btn-dark"></a>-->
+                        <a href="{{path("bc_index_libreria")}}">
+                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <input type="button" value="Listado de Librerías" class="btn btn-info">
+                        </a><br><br> 
                     </div>
                     <div class="col-md-3" align="center">  
-                        <a href="{{path("bc_index_autor")}}"><input type="button" value="Listado de Autores" class="btn btn-info"></a><br><br>
+                        <a href="{{path("bc_index_autor")}}">
+                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <input type="button" value="Listado de Autores" class="btn btn-info">
+                        </a><br><br>
                     </div>
                     {% if app.user.rol == 'ADMIN' %}
                         <div class="col-md-3" align="center">  
-                            <a href=""><input type="button" value="Listado de Usuarios" class="btn btn-danger"></a><br><br>
+                            <a href="">
+                                <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de Usuarios" class="btn btn-danger">
+                            </a><br><br>
                         </div>
                     {% endif %}
                 </div>
@@ -84,9 +102,21 @@
     {% endif %}
     <br>
     <div class="clearfix"></div>
-    {% block javascript %}
-        <script>
-           
-        </script>
-    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#add").toggle();
+            $("#logSesion").toggle();
+            
+            $("#titleSesion").click(function () {
+                $("#logSesion").toggle();
+            });
+            $("#reg").click(function () {
+                $("#add").toggle();
+            });
+        });
+    </script>
 {% endblock %}
