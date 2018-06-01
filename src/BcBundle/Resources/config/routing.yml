@@ -13,6 +13,10 @@ bc_index_libro:
 bc_index_NoVallibro:
     path: /libroValidacion
     defaults: { _controller: BcBundle:Libro:indexLibroNoVal }    
+
+bc_validar:
+    path: /libroValidacion/{id}
+    defaults: { _controller: BcBundle:Libro:Validar }
     
 bc_edit_libro:
     path: /libro/edit/{id}

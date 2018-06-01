@@ -22,21 +22,83 @@ class LibroController extends Controller {
         $libros = $libro_repo->findAll();
 
         return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
-                "libros" => $libros
+                    "libros" => $libros
         ));
     }
 
     public function indexLibroNoValAction() {
         $em = $this->getDoctrine()->getManager();
-        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 1';
+        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 0';
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
         $libros = $statement->fetchAll();
 
         return $this->render("BcBundle:Libro:indexNoValLibro.html.twig", array(
-                "libros" => $libros
+                    "libros" => $libros
         ));
     }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* public function ValidarAction(Request $request, $id){
+      // Indice: 0 -> No validado // 1-> Validado
+      $var_val = 1;
+      //Editamos el dato y lo ejecutamos.
+      $em = $this->getDoctrine()->getManager();
+      $query = 'Update libro set validacion ='.($var_val).'WHERE id_libro = '.$id.';';
+      $statement = $em->getConnection()->prepare($query);
+      $statement->execute();
+      //Recargamos la vista y la devolvemos.
+      $query2 = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 1';
+      $statement = $em->getConnection()->prepare($query2);
+      $statement->execute();
+      $libros = $statement->fetchAll();
+
+      return $this->render("BcBundle:Libro:indexNoValLibro.html.twig", array(
+      "libros" => $libros
+      ));
+      } */
+
+
+    public function ValidarAction(Request $request, $id) {
+        //Buscamos el libro por su ID,y editamos el campo "validacion"
+        $em = $this->getDoctrine()->getEntityManager();
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+        $libro = $libro_repo->find($id);
+        $form = $this->createForm(LibroType::class, $libro);
+        $form->handleRequest($request);
+        /*echo '->'.$form->get("isbn")->getData();
+        die();*/
+        $libro->setIsbn($form->get("isbn")->getData());
+        $libro->setTitulo($form->get("titulo")->getData());
+        $libro->setFormato($form->get("formato")->getData());
+        $libro->setFechPublic($form->get("fechPublic")->getData());
+        $libro->setPortada($form->get("portada")->getData());
+        //////////////////////////////////////////////////
+        $libro->setValidacion(1);
+        //////////////////////////////////////////////////
+        $libro->setAutor($form->get("autor")->getData());
+        $libro->setCategoria($form->get("categoria")->getData());
+        
+                
+        $em->persist($libro);
+        $flush = $em->flush();
+
+        $em->persist($libro);
+        $flush = $em->flush();
+
+        //Retornamos la vista de todos los libros "no validados"
+        $query2 = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 0';
+        $statement = $em->getConnection()->prepare($query2);
+        $statement->execute();
+        $libros = $statement->fetchAll();
+
+        return $this->render("BcBundle:Libro:indexNoValLibro.html.twig", array(
+                    "libros" => $libros
+        ));
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     public function editLibroAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -151,21 +213,6 @@ class LibroController extends Controller {
         }
 
         return $this->render("BcBundle:Libro:addLibro.html.twig", array(
-                    "form" => $form->createView()
-        ));
-    }
-
-    public function valLibroAction(Request $request, $id) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $libro_repo = $em->getRepository("BcBundle:Libro");
-        $libro = $libro_repo->find($id);
-
-        $form = $this->createForm(LibroType::class, $libro);
-        $form->handleRequest($request);
-
-        $libro->setValidacion(1);
-
-        return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
                     "form" => $form->createView()
         ));
     }

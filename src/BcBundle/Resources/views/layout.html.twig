@@ -15,73 +15,71 @@
             <link href="{{asset('assets/css/bootstrap.cosmo.min.css')}}" type="text/css" rel="stylesheet" />
             <link href="{{asset('assets/css/styles.css')}}" type="text/css" rel="stylesheet" />
         {% endblock %}
-        {% block javascripts %}
-            <!--<script src="{{asset('assets/js/jquery-3.3.1.min.css')}}"></scripts>-->
-            <!--<script src="{{asset('assets/bootstrap/js/bootstrap.min.css')}}"></scripts>-->
-        {% endblock %}
-    </head>
-    <body>
-        <header class="bg-primary">
-            <div class="container text-center">
-                <h2>BOOK CREW</h2>
-            </div>
-            <nav class="navbar navbar-dark bg-primary">
-                {% if app.user != null %}
-                    <a class="navbar-brand" href="{{path("login")}}"><i class="fas fa-home"></i> Inicio</a>
-                    <h4 id="titleDespUser">
-                        {% if app.user.rol != "ADMIN" %}
-                            <i class="fas fa-user"></i>
-                        {% else %}
-                            <i class="fas fa-chess-king"></i>
-                        {% endif %}
-                        {{(app.user.nick)}}
-                    </h4>
-                    <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
-                {% else %}
-                    <a class="navbar-brand" href="{{path("bc_homepage")}}"><i class="fas fa-home"></i> Inicio</a>
-                    <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
-                {% endif %}
-            </nav>
-        </header>
-        {% if app.user != null %}
-            <div id="menuDespUser" class="container ">
-                <div class="row">
-                    <div class="col-md-5">
-                    </div>
-                    <div class="col-md-2 bg-dark text-center">
-                        <a class="navbar-brand btn-left" href=""><i class="fas fa-cog"></i> Perfil</a>
-                        <br>
-                        <a class="navbar-brand btn-left" href="{{path("bc_index_listadolibros",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Mis libros </a>
-                    </div>
-                    <div class="col-4">
+        {% block javascript %}
+            <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
+            <!--Aquí alojaremos las funciones jQuery y JS para el funcionamiento global de la página :) -->
+            <script>
+            <script src="{{asset('assets/js/function.js')}}"></scripts>
+                $(document).ready(function () {
+                    $("#menuDespUser").hide();
+                    $("#titleDespUser").click(function () {
+                        $("#menuDespUser").toggle();
+                    });
+                });
+            </script>
+            {% endblock %}
+        </head>
+        <body>
+            <header class="bg-primary">
+                <div class="container text-center">
+                    <h2>BOOK CREW</h2>
+                </div>
+                <nav class="navbar navbar-dark bg-primary">
+                    {% if app.user != null %}
+                        <a class="navbar-brand" href="{{path("login")}}"><i class="fas fa-home"></i> Inicio</a>
+                        <h4 id="titleDespUser">
+                            {% if app.user.rol != "ADMIN" %}
+                                <i class="fas fa-user"></i>
+                            {% else %}
+                                <i class="fas fa-chess-king"></i>
+                            {% endif %}
+                            {{(app.user.nick)}}
+                        </h4>
+                        <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
+                    {% else %}
+                        <a class="navbar-brand" href="{{path("bc_homepage")}}" on><i class="fas fa-home"></i> Inicio</a>
+                        <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
+                    {% endif %}
+                </nav>
+            </header>
+            {% if app.user != null %}
+                <div id="menuDespUser" class="container ">
+                    <div class="row">
+                        <div class="col-md-5">
+                        </div>
+                        <div class="col-md-2 bg-dark text-center">
+                            <a class="navbar-brand btn-left" href=""><i class="fas fa-cog"></i> Perfil</a>
+                            <br>
+                            <a class="navbar-brand btn-left" href="{{path("bc_index_listadolibros",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Mis libros </a>
+                        </div>
+                        <div class="col-4">
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endif %}
-        <section id="content">
-            {% block content %} 
-                Contenido por defecto
-            {% endblock %}
-        </section>
-        <footer class="bg-success text-center">
-            <br>
-            <h4>Autor: Felipe Ruz Pérez - DAW 2017-2018</h4>
-            <h8>Herramientas usadas:</h8>
-            Symfony 3
-            <br>
-            <br>     
-        </footer>
-    </body>
-</html>
-{% block javascript %}
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $("#menuDespUser").hide();
-            $("#titleDespUser").click(function () {
-                $("#menuDespUser").toggle();
-            });
-        });
-    </script>
-{% endblock %}
+            {% endif %}
+            <section id="content">
+                {% block content %} 
+                    Contenido por defecto
+                {% endblock %}
+            </section>
+            <footer class="bg-success text-center">
+                <br>
+                <h4><b>Autor:</b> Felipe Ruz Pérez - DAW 2017-2018</h4>
+                <h8><b>Herramientas usadas:</b></h8>
+                Symfony 3
+                <br>
+                <br>     
+            </footer>
+        </body>
+    </html>
+

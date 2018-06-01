@@ -52,8 +52,9 @@ class LibroType extends AbstractType
                     "class"=>'BcBundle:Categoria',
                     "attr"=>array("class"=> "form-name form-control",
                 )))
-                ->add('Guardar',SubmitType::class,array("attr"=>array(
-                    "class"=> "form-submit btn btn-success"
+                ->add('Guardar',SubmitType::class,array("attr"=> array(
+                    "class"=> "form-submit btn btn-success",
+                    "onclick" => "confirmarCambios('/libro/addLibro')"
                 )))
                 ->add('Cancelar',ButtonType::class,array("attr"=>array(
                     "class"=> "form-submit btn btn-danger", 
