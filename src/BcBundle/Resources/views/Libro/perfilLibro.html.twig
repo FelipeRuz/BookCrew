@@ -7,21 +7,24 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{{path("bc_add_libro")}}"><input type="button" value="Proponer libro" class="btn btn-warning"></a>
+                        <a href="{{path("bc_add_libro")}}">
+                            <img src="{{asset("imgdata/libro-add.png")}}" height="50" width="50">
+                            <input type="button" value="Proponer libro" class="btn btn-success">
+                        </a>
                     </div>
                     {% if app.user.rol != null %}
                         {% if app.user.rol == 'ADMIN' %}
                             <div class="col-md-3">
                                 <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}">
-                                    <i class="fas fa-pencil-alt" style="font-size: 170%"> Editar 
-                                    </i>
+                                    <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
+                                    <input type="button" value="Editar libro" class="btn btn-warning">
                                 </a>
                             </div>
                             <br>
                             <div class="col-md-3">
                                 <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}">
-                                    <i class="fas fa-trash" style="font-size: 170%"> Eliminar
-                                    </i>
+                                    <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
+                                    <input type="button" value="Eliminar libro" class="btn btn-danger">
                                 </a>
                             </div>
                         {% endif %}     
@@ -50,19 +53,17 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-3">
                                     <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}">
-                                        <i class="fas fa-trash" style="font-size: 250%">   
-                                        </i>
+                                        <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                     </a>
                                 </div>
                                 <div class="col-md-3">
                                     <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}">
-                                        <i class="fas fa-pencil-alt" style="font-size: 250%">
-                                        </i>
+                                        <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
                                     </a>
                                 </div>
                                 <div class="col-md-3">
                                     <a href="">
-                                        <i class="fas fa-plus" style="font-size: 250%"></i><b>Lista</b>
+                                        <i class="fas fa-plus" style="font-size: 260%"></i><b>MiLista</b>
                                     </a>
                                 </div>
                             </div>

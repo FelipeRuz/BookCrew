@@ -1,13 +1,5 @@
-/*function confirmarCambio()
-{
-    var r = confirm("¿Desea confirmar los cambios?");
-    if (r == true) {
-        alert("You pressed OK!");
-    } else {
-        alert("You pressed Cancel!");
-    }    
-}*/
-
+//Función usada para confirmar los cambios de edición y adición.
+//var rutaPath ; Ruta de acceso al controlador para efectuar la funcionalidad desde el servidor.
 function confirmarCambios(rutaPath)
 {
     var r = confirm("¿Desea confirmar los cambios?");
@@ -18,4 +10,16 @@ function confirmarCambios(rutaPath)
     } else {
         alert("Cancelando...");
     }    
+}
+
+function confirmarBorradoLibro(id_borrar)
+{
+    var r = confirm("¿Desea borrar este libro?");
+    if (r == true) {
+        alert("Eliminando..."+id_borrar);
+        //AÑADIR LLAMADA AL CONTROLADOR
+        windows.location.href= "/libro/delete/"+id_borrar;
+    } else {
+        alert("Cancelando..."+id_borrar);
+    }
 }

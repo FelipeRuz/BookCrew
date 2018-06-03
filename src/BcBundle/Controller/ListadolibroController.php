@@ -3,6 +3,10 @@
 namespace BcBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use BcBundle\Entity\Listalibro;
+use BcBundle\Form\ListalibroType;
 
 class ListadolibroController extends Controller {
 
@@ -20,35 +24,34 @@ class ListadolibroController extends Controller {
     }
 
     public function delListadoAction($idlibro, $idusuario) {
-        /* $em = $this->getDoctrine()->getEntityManager();
-          $usuario_repo = $em->getRepository("BcBundle:Usuario");
-          $usuario = $usuario_repo->find($id); */
         $em = $this->getDoctrine()->getManager();
-        $query = 'DELETE FROM listalibro WHERE id_usuario = ' . $idusuario . ' AND id_libro = '.$idlibro;
+        $query = 'DELETE FROM listalibro WHERE id_usuario = ' . $idusuario . ' AND id_libro = ' . $idlibro;
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
-        
+
         return $this->redirectToRoute("bc_index_listadolibros");
     }
 
-    public function addListadolibroAction(Request $request, $idlibro, $idusuario) {
-        $listalibro = new Listalibro();
-        $form = $this->createForm(LibroType::class, $listalibro);
-        $form->handleRequest($request);
 
+    public function addListadoLibroAction(Request $request, $idlibro, $idusuario) {
         $em = $this->getDoctrine()->getEntityManager();
-
+        $listalibro = new Listalibro();
+        $form = $this->createForm(ListalibroType::class, $listalibro);
+        $form->handleRequest($request);
+        
         $listalibro->setIdUsuario($idusuario);
         $listalibro->setIdLibro($idlibro);
 
-        $em->persist($libro);
+        $em->persist($listalibro);
         $flush = $em->flush();
 
-        //$this->session->getFlashBag()->add("status",$status);
+        If ($flush == NULL) {
+            $status = "Se ha enviado al servidor su petición de libro para ser validada";
+        } Else {
+            $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
+        }
 
-        return $this->render("BcBundle:Listalibro:indexListadolibro.html.twig", array(
-                    "form" => $form->createView()
-        ));
+        return $this->redirectToRoute("bc_index_libro");
     }
 
 }

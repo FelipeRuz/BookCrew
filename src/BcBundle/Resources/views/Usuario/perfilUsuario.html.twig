@@ -8,15 +8,19 @@
                 <div class="row">
                     <div class="col-md-3">
                         <a href="{{path("bc_edit_usuario",{"id":usuario.idUsuario})}}">
-                            <i class="fas fa-pencil-alt" style="font-size: 170%"> Editar 
-                            </i>
+                            <!--<i class="fas fa-pencil-alt" style="font-size: 170%"> Editar 
+                            </i>-->
+                            <img src="{{asset("imgdata/user-edit.png")}}" height="50" width="50">
+                            <input type="button" value="Editar usuario" class="btn btn-warning">
                         </a>
                     </div>
                     <br>
                     <div class="col-md-3">
                         <a href="{{path("bc_del_usuario",{"id":usuario.idUsuario})}}">
-                            <i class="fas fa-trash" style="font-size: 170%"> Eliminar
-                            </i>
+                            <!--<i class="fas fa-trash" style="font-size: 170%"> Eliminar
+                            </i>-->
+                            <img src="{{asset("imgdata/user-del.png")}}" height="50" width="50">
+                            <input type="button" value="Eliminar usuario" class="btn btn-danger">
                         </a>
                     </div>
                 </div>

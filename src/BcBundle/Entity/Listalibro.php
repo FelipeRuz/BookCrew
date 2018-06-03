@@ -5,8 +5,8 @@ namespace BcBundle\Entity;
 /**
  * Listalibro
  */
-class Listalibro
-{
+class Listalibro {
+
     /**
      * @var integer
      */
@@ -22,14 +22,12 @@ class Listalibro
      */
     private $idLibro;
 
-
     /**
      * Get idLista
      *
      * @return integer
      */
-    public function getIdLista()
-    {
+    public function getIdLista() {
         return $this->idLista;
     }
 
@@ -40,8 +38,7 @@ class Listalibro
      *
      * @return Listalibro
      */
-    public function setIdUsuario(\BcBundle\Entity\Usuario $idUsuario = null)
-    {
+    public function setIdUsuario(\BcBundle\Entity\Usuario $idUsuario = null) {
         $this->idUsuario = $idUsuario;
 
         return $this;
@@ -52,8 +49,7 @@ class Listalibro
      *
      * @return \BcBundle\Entity\Usuario
      */
-    public function getIdUsuario()
-    {
+    public function getIdUsuario() {
         return $this->idUsuario;
     }
 
@@ -64,8 +60,7 @@ class Listalibro
      *
      * @return Listalibro
      */
-    public function setIdLibro(\BcBundle\Entity\Libro $idLibro = null)
-    {
+    public function setIdLibro(\BcBundle\Entity\Libro $idLibro = null) {
         $this->idLibro = $idLibro;
 
         return $this;
@@ -76,9 +71,12 @@ class Listalibro
      *
      * @return \BcBundle\Entity\Libro
      */
-    public function getIdLibro()
-    {
+    public function getIdLibro() {
         return $this->idLibro;
     }
-}
 
+    public function __toString() {
+        return $this->idUsuario;
+    }
+
+}

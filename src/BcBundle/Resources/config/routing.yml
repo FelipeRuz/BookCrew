@@ -25,7 +25,15 @@ bc_perfil_libro:
 bc_add_libro:
     path: /libro/addLibro
     defaults: { _controller: BcBundle:Libro:addLibro }
-    
+
+bc_edit_libro:
+    path: /libro/edit/{id}
+    defaults: { _controller: BcBundle:Libro:editLibro }    
+
+bc_delete_libro:
+    path: /libro/delete/{id}
+    defaults: { _controller: BcBundle:Libro:delLibro}     
+   
 bc_index_libro:
     path: /libro
     defaults: { _controller: BcBundle:Libro:indexLibroVal }
@@ -37,14 +45,6 @@ bc_index_NoVallibro:
 bc_validar:
     path: /libroValidacion/{id}
     defaults: { _controller: BcBundle:Libro:Validar }
-    
-bc_edit_libro:
-    path: /libro/edit/{id}
-    defaults: { _controller: BcBundle:Libro:editLibro }    
-
-bc_delete_libro:
-    path: /libro/delete/{id}
-    defaults: { _controller: BcBundle:Libro:delLibro}  
     
 bc_add_autor:
     path: /autor/addAutor
@@ -85,6 +85,14 @@ bc_edit_libreria:
 bc_index_listadolibros:
     path: /listadolibro/index/{id}
     defaults: { _controller: BcBundle:Listadolibro:indexListadolibro }
+
+bc_add_listadolibros:
+    path: /listadolibros/addListaLibro/{idusuario},{idlibro}
+    defaults: { _controller: BcBundle:Listadolibro:addListadolibro }
+
+bc_del_listadolibros:
+    path: /listadolibros/delListaLibro/{idusuario},{idlibro}
+    defaults: { _controller: BcBundle:Listadolibro:delListadolibro }  
   
 bc_index_stocks:
     path: /stock/index/{id}

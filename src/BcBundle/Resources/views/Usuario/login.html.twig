@@ -70,26 +70,26 @@
                 <div class="row">
                     <div class="col-md-3" align="center">
                         <a href="{{path("bc_index_libro")}}">
-                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <img src="{{asset("imgdata/libro-base.png")}}" height="50" width="50">
                             <input type="button" value="Listado de libros" class="btn btn-info">
                         </a><br><br><br><br>
                     </div>
                     <div class="col-md-3" align="center">   
                         <a href="{{path("bc_index_libreria")}}">
-                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <img src="{{asset("imgdata/libreria-base.png")}}" height="50" width="50">
                             <input type="button" value="Listado de Librerías" class="btn btn-info">
                         </a><br><br> 
                     </div>
                     <div class="col-md-3" align="center">  
                         <a href="{{path("bc_index_autor")}}">
-                            <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                            <img src="{{asset("imgdata/user-base.png")}}" height="50" width="50">
                             <input type="button" value="Listado de Autores" class="btn btn-info">
                         </a><br><br>
                     </div>
                     {% if app.user.rol == 'ADMIN' %}
                         <div class="col-md-3" align="center">  
                             <a href="{{path("bc_index_usuario")}}">
-                                <img src="{{asset("imgdata/smile.png")}}" height="50" width="50">
+                                <img src="{{asset("imgdata/user-find.png")}}" height="50" width="50">
                                 <input type="button" value="Listado de Usuarios" class="btn btn-danger">
                             </a><br><br>
                         </div>
