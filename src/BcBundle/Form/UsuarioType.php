@@ -53,6 +53,7 @@ class UsuarioType extends AbstractType {
                     'Santa Cruz de Tenerife' => 'Santa Cruz de Tenerife', 'Teruel' => 'Teruel', 'Toledo' => 'Toledo', 'Valencia' => 'Valencia', 'Valladolid' => 'Valladolid', 'Vizcaya' => 'Vizcaya', 'Zamora' => 'Zamora', 'Zaragoza' => 'Zaragoza',
                 ),
                 "required" => "required",
+                "attr"=>array("class"=> "form-name btn btn-dark")
             ))
                 ->add('poblacion', TextType::class, array("label" => "Población", "required" => "required", "attr" => array(
                         "class" => "form-name form-control", "maxlength" => "30"
@@ -64,7 +65,8 @@ class UsuarioType extends AbstractType {
                         "class" => "form-name form-control", "maxlength" => "20"
             )))
                 ->add('Guardar', SubmitType::class, array("attr" => array(
-                        "class" => "form-submit btn btn-success"
+                        "class" => "form-submit btn btn-success",
+                        "onclick" => "confirmarCambios('/usuario/addUsuario')"
             )))
                 ->add('Cancelar', ButtonType::class, array("attr" => array(
                         "class" => "form-submit btn btn-danger",

@@ -15,20 +15,20 @@ class AutorController extends Controller {
     /* public function __construct() {
       $this->session=new Session();
       } */
-    
+
     public function listLibAutorAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = '.$id.'';
+        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = ' . $id . '';
         $statement = $em->getConnection()->prepare($query);
-        
+
         $statement->execute();
         $listados = $statement->fetchAll();
-        
+
         return $this->render("BcBundle:Listadolibro:indexListadolibro.html.twig", array(
-            "listados" => $listados
+                    "listados" => $listados
         ));
     }
-    
+
     public function indexAutorAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $autor_repo = $em->getRepository("BcBundle:Autor");
@@ -49,22 +49,20 @@ class AutorController extends Controller {
 
         If ($form->isSubmitted()) {
             If ($form->isValid()) {
-                
+
                 $autor->setNombre($form->get("nombre")->getData());
                 $autor->setApellido($form->get("apellido")->getData());
                 //$autor->setFoto("");
 
-                /*Caso de no obtención de imagen, introducir campo vacío.*/
-                If(($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "")
-                {
-                   $autor->setPortada(""); 
-                }
-                Else{
-                    $file=$form["foto"]->getData();
-                    $ext=$file->guessExtension();
-                    $file_name= "uploads/".time().".".$ext;
-                    $file->move("uploads",$file_name);
-                    
+                /* Caso de no obtención de imagen, introducir campo vacío. */
+                If (($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "") {
+                    $autor->setFoto("");
+                } Else {
+                    $file = $form["foto"]->getData();
+                    $ext = $file->guessExtension();
+                    $file_name = "uploads/" . time() . "." . $ext;
+                    $file->move("uploads", $file_name);
+
                     $autor->setFoto($file_name);
                 }
 
@@ -112,24 +110,21 @@ class AutorController extends Controller {
 
                 $autor->setNombre($form->get("nombre")->getData());
                 $autor->setApellido($form->get("apellido")->getData());
-                
-                
-                /*Caso de no obtención de imagen, introducir campo vacío.*/
-                If(($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "")
-                {
-                   $autor->setPortada(""); 
-                }
-                Else{
-                    $file=$form["foto"]->getData();
-                    $ext=$file->guessExtension();
-                    $file_name= "uploads/".time().".".$ext;
-                    $file->move("uploads",$file_name);
-                    
+
+                /* Caso de no obtención de imagen, introducir campo vacío. */
+                If (($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "") {
+                    $autor->setFoto("");
+                } Else {
+                    $file = $form["foto"]->getData();
+                    $ext = $file->guessExtension();
+                    $file_name = "uploads/" . time() . "." . $ext;
+                    $file->move("uploads", $file_name);
+
                     $autor->setFoto($file_name);
                 }
-                
+
                 //$autor->setFoto("");
-                
+
                 $em->persist($autor);
                 $flush = $em->flush();
 

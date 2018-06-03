@@ -16,10 +16,7 @@
             <link href="{{asset('assets/css/styles.css')}}" type="text/css" rel="stylesheet" />
         {% endblock %}
         {% block javascript %}
-            <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
-            <!--Aquí alojaremos las funciones jQuery y JS para el funcionamiento global de la página :) -->
-            <script>
-            <script src="{{asset('assets/js/function.js')}}"></scripts>
+            <script src="{{asset('assets/js/function.js')}}" type="text/javascript">
                 $(document).ready(function () {
                     $("#menuDespUser").hide();
                     $("#titleDespUser").click(function () {
@@ -58,7 +55,7 @@
                         <div class="col-md-5">
                         </div>
                         <div class="col-md-2 bg-dark text-center">
-                            <a class="navbar-brand btn-left" href=""><i class="fas fa-cog"></i> Perfil</a>
+                            <a class="navbar-brand btn-left" href="{{path("bc_perfil_usuario",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Perfil</a>
                             <br>
                             <a class="navbar-brand btn-left" href="{{path("bc_index_listadolibros",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Mis libros </a>
                         </div>
@@ -72,7 +69,8 @@
                     Contenido por defecto
                 {% endblock %}
             </section>
-            <footer class="bg-success text-center">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <footer class="bg-info text-center">
                 <br>
                 <h4><b>Autor:</b> Felipe Ruz Pérez - DAW 2017-2018</h4>
                 <h8><b>Herramientas usadas:</b></h8>

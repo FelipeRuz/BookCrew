@@ -27,11 +27,13 @@ class AutorType extends AbstractType
                 ->add('apellido',TextType::class, array("label"=>"Apellido del autor","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"30"
                 )))
-                ->add('foto',FileType::class, array("label"=>"Foto del autor","attr"=>array(
-                    "class"=> "form-name btn btn-dark"
-                )))
+                ->add('foto',FileType::class, array("label"=>"Foto del autor","data_class" => null,"attr"=>array(
+                    "class"=> "form-name btn btn-dark"),
+                    "data_class" => null
+                    ))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(
-                    "class"=> "form-submit btn btn-success"
+                    "class"=> "form-submit btn btn-success",
+                    "onclick" => "confirmarCambios('/autor/addAutor')"
                 )))
                 ->add('Cancelar',ButtonType::class,array("attr"=>array(
                     "class"=> "form-submit btn btn-danger", 

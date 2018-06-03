@@ -28,29 +28,29 @@ class LibroType extends AbstractType
                 ->add('titulo',TextType::class, array("label"=>"Título","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"50"
                 )))
-                ->add('formato',TextType::class, array("label"=>"Formato disponible","required"=>"required","attr"=>array(
-                    "class"=> "form-name form-control", "maxlength"=>"10"
-                )))
                 ->add('formato', ChoiceType::class, array(
                     "label" => "Formato",
                     "choices" => array(
                         'Físico' => 0, 'Digital' => 1, 'Digital y físico' => 2
                     ),
-                    "required" => "required",
+                    "attr"=>array(
+                    "class"=> "form-name btn btn-dark"),
+                    "required" => "required"
                 ))
                 ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación","required"=>"required","attr"=>array(
                     "class"=> "form-name", 
                 )))  
                 ->add('portada',FileType::class, array("label"=>"Portada","attr"=>array(
-                    "class"=> "form-name btn btn-dark",
-                )))
+                    "class"=> "form-name btn btn-dark"),
+                    "data_class" => null
+                    ))
                 ->add('autor',EntityType::class, array("label"=>"Autor","required"=>"required",
                     "class"=>'BcBundle:Autor',
-                    "attr"=>array("class"=> "form-name form-control"
+                    "attr"=>array("class"=> "form-name btn btn-dark"
                 )))
                 ->add('categoria',EntityType::class, array("label"=>"Categoría","required"=>"required",
                     "class"=>'BcBundle:Categoria',
-                    "attr"=>array("class"=> "form-name form-control",
+                    "attr"=>array("class"=> "form-name btn btn-dark",
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=> array(
                     "class"=> "form-submit btn btn-success",

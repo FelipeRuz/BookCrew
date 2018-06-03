@@ -1,6 +1,26 @@
 bc_homepage:
     path:   /
-    defaults: { _controller: BcBundle:Default:index }
+    defaults: { _controller: BcBundle:Usuario:Login }
+
+bc_perfil_usuario:
+    path: /usuario/{id}
+    defaults: { _controller: BcBundle:Usuario:perfilUsuario }   
+
+bc_index_usuario:
+    path: /usuario
+    defaults: { _controller: BcBundle:Usuario:indexUsuario }    
+
+bc_del_usuario:
+    path: /usuario/delete/{id}
+    defaults: { _controller: BcBundle:Usuario:delUsuario } 
+ 
+bc_edit_usuario:
+    path: /usuario/edit/{id}
+    defaults: { _controller: BcBundle:Usuario:editUsuario } 
+
+bc_perfil_libro:
+    path: /libro/{id}
+    defaults: { _controller: BcBundle:Libro:perfilLibro }    
     
 bc_add_libro:
     path: /libro/addLibro
@@ -24,7 +44,7 @@ bc_edit_libro:
 
 bc_delete_libro:
     path: /libro/delete/{id}
-    defaults: { _controller: BcBundle:Libro:delLibro}
+    defaults: { _controller: BcBundle:Libro:delLibro}  
     
 bc_add_autor:
     path: /autor/addAutor
@@ -49,6 +69,10 @@ bc_add_libreria:
 bc_index_libreria:
     path: /libreria
     defaults: { _controller: BcBundle:Libreria:indexLibreria }
+
+bc_perfil_libreria:
+    path: /libreria/{id}
+    defaults: { _controller: BcBundle:Libreria:perfilLibreria }
 
 bc_delete_libreria:
     path: /libreria/delete/{id}

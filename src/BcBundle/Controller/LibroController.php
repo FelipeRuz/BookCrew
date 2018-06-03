@@ -16,6 +16,16 @@ class LibroController extends Controller {
       $this->session=new Session();
       } */
 
+    public function perfilLibroAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+        $libro = $libro_repo->find($id);
+
+        return $this->render("BcBundle:Libro:perfilLibro.html.twig", array(
+                    "libro" => $libro
+        ));
+    }
+
     public function indexLibroValAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
@@ -38,27 +48,6 @@ class LibroController extends Controller {
         ));
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* public function ValidarAction(Request $request, $id){
-      // Indice: 0 -> No validado // 1-> Validado
-      $var_val = 1;
-      //Editamos el dato y lo ejecutamos.
-      $em = $this->getDoctrine()->getManager();
-      $query = 'Update libro set validacion ='.($var_val).'WHERE id_libro = '.$id.';';
-      $statement = $em->getConnection()->prepare($query);
-      $statement->execute();
-      //Recargamos la vista y la devolvemos.
-      $query2 = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  FROM libro l JOIN autor a ON a.id_autor=l.autor JOIN categoria c ON c.id_categoria=l.categoria WHERE validacion = 1';
-      $statement = $em->getConnection()->prepare($query2);
-      $statement->execute();
-      $libros = $statement->fetchAll();
-
-      return $this->render("BcBundle:Libro:indexNoValLibro.html.twig", array(
-      "libros" => $libros
-      ));
-      } */
-
-
     public function ValidarAction(Request $request, $id) {
         //Buscamos el libro por su ID,y editamos el campo "validacion"
         $em = $this->getDoctrine()->getEntityManager();
@@ -66,8 +55,7 @@ class LibroController extends Controller {
         $libro = $libro_repo->find($id);
         $form = $this->createForm(LibroType::class, $libro);
         $form->handleRequest($request);
-        /*echo '->'.$form->get("isbn")->getData();
-        die();*/
+
         $libro->setIsbn($form->get("isbn")->getData());
         $libro->setTitulo($form->get("titulo")->getData());
         $libro->setFormato($form->get("formato")->getData());
@@ -78,8 +66,8 @@ class LibroController extends Controller {
         //////////////////////////////////////////////////
         $libro->setAutor($form->get("autor")->getData());
         $libro->setCategoria($form->get("categoria")->getData());
-        
-                
+
+
         $em->persist($libro);
         $flush = $em->flush();
 
@@ -96,9 +84,6 @@ class LibroController extends Controller {
                     "libros" => $libros
         ));
     }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     public function editLibroAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -127,7 +112,6 @@ class LibroController extends Controller {
                     $libro->setPortada($file_name);
                 }
 
-                //$libro->setPortada("");
                 $libro->setValidacion(0);
                 $libro->setAutor($form->get("autor")->getData());
                 $libro->setCategoria($form->get("categoria")->getData());
@@ -180,16 +164,18 @@ class LibroController extends Controller {
                 /* Caso de no obtención de imagen, introducir campo vacío. */
                 If (($form->get("portada")->getData()) == null || ($form->get("portada")->getData()) == "") {
                     $libro->setPortada("");
-                } Else { //Sino, guardaremos la imagen con titulo de isbn que pertenece y la hora de guardado.
+
+                    //Sino, guardaremos la imagen con titulo de isbn que pertenece y la hora de guardado.
+                } Else {
                     $isbn = ($form->get("isbn")->getData());
                     $file = $form["portada"]->getData();
                     $ext = $file->guessExtension();
-                    $file_name = $isbn . " - " . time() . "." . $ext;
+                    $file_name = "uploads/" . $isbn . "-" . time() . "." . $ext;
                     $file->move("uploads", $file_name);
                     $libro->setPortada($file_name);
                 }
 
-                //$libro->setPortada("");
+
                 $libro->setValidacion(0);
                 $libro->setAutor($form->get("autor")->getData());
                 $libro->setCategoria($form->get("categoria")->getData());

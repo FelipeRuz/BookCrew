@@ -1,6 +1,18 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
+    <div class="container bg-info">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{path("bc_index_autor")}}">
+                    <input type="button" value="Ver autores" class="btn btn-warning">
+                </a>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
     {% if app.user != null %}
         {% if app.user.rol == 'ADMIN' %}
             <div class="container bg-warning">
