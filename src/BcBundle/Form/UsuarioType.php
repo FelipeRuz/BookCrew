@@ -62,7 +62,7 @@ class UsuarioType extends AbstractType {
                         "class" => "form-name form-control", "maxlength" => "30"
             )))
                 ->add('direccion', TextType::class, array("label" => "Dirección", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20"
+                        "class" => "form-name form-control", "maxlength" => "30"
             )))
                 ->add('Guardar', SubmitType::class, array("attr" => array(
                         "class" => "form-submit btn btn-success",

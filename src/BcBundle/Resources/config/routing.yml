@@ -17,10 +17,6 @@ bc_del_usuario:
 bc_edit_usuario:
     path: /usuario/edit/{id}
     defaults: { _controller: BcBundle:Usuario:editUsuario } 
-
-bc_perfil_libro:
-    path: /libro/{id}
-    defaults: { _controller: BcBundle:Libro:perfilLibro }    
     
 bc_add_libro:
     path: /libro/addLibro
@@ -32,7 +28,15 @@ bc_edit_libro:
 
 bc_delete_libro:
     path: /libro/delete/{id}
-    defaults: { _controller: BcBundle:Libro:delLibro}     
+    defaults: { _controller: BcBundle:Libro:delLibro} 
+    
+bc_perfil_libro:
+    path: /libro/{id}
+    defaults: { _controller: BcBundle:Libro:perfilLibro }  
+    
+bc_find_libro:
+    path: /libro/findLibro/
+    defaults: { _controller: BcBundle:Libro:findLibro }    
    
 bc_index_libro:
     path: /libro
@@ -61,6 +65,10 @@ bc_edit_autor:
 bc_delete_autor:
     path: /autor/delete/{id}
     defaults: { _controller: BcBundle:Autor:delAutor }
+
+bc_perfil_autor:
+    path: /autor/{id}
+    defaults: { _controller: BcBundle:Autor:perfilAutor }     
    
 bc_add_libreria:
     path: /libreria/addLibreria
@@ -87,8 +95,8 @@ bc_index_listadolibros:
     defaults: { _controller: BcBundle:Listadolibro:indexListadolibro }
 
 bc_add_listadolibros:
-    path: /listadolibros/addListaLibro/{idusuario},{idlibro}
-    defaults: { _controller: BcBundle:Listadolibro:addListadolibro }
+    path: /libro/{idusuario},{idlibro}
+    defaults: { _controller: BcBundle:Listadolbro:addListadolibro }
 
 bc_del_listadolibros:
     path: /listadolibros/delListaLibro/{idusuario},{idlibro}

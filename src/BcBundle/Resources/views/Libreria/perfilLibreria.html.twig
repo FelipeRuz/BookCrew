@@ -7,23 +7,23 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{{path("bc_add_libro")}}">
-                            <img src="{{asset("imgdata/libro-add.png")}}" height="50" width="50">
-                            <input type="button" value="Proponer libro" class="btn btn-success"></a>
+                        <a href="{{path("bc_add_libreria")}}">
+                            <img src="{{asset("imgdata/libreria-add.png")}}" height="50" width="50">
+                            <input type="button" value="Añadir libreria" class="btn btn-success"></a>
                     </div>
                     {% if app.user.rol != null %}
                         {% if app.user.rol == 'ADMIN' %}
                             <div class="col-md-3">
                                 <a href="{{path("bc_edit_libreria",{"id":libreria.idLibreria})}}">
-                                    <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
-                                    <input type="button" value="Editar libro" class="btn btn-warning"></a>
+                                    <img src="{{asset("imgdata/libreria-edit.png")}}" height="50" width="50">
+                                    <input type="button" value="Editar libreria" class="btn btn-warning"></a>
                                 </a>
                             </div>
                             <br>
                             <div class="col-md-3">
                                 <a href="{{path("bc_delete_libreria",{"id":libreria.idLibreria})}}">
-                                    <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
-                                    <input type="button" value="Eliminar libro" class="btn btn-danger"></a>
+                                    <img src="{{asset("imgdata/libreria-del.png")}}" height="50" width="50">
+                                    <input type="button" value="Eliminar libreria" class="btn btn-danger"></a>
                                 </a>
                             </div>
                         {% endif %}   
@@ -31,7 +31,12 @@
                 </div>
                 <br>
             </div>
-            <br>
+                <br>
+            <div class="container bg-info">
+                <br>      
+                <br>
+            </div>
+                <br>
             <div class="container bg-warning">
                 <br>
                 <div class="row">

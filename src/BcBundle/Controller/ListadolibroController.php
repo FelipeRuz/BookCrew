@@ -32,13 +32,12 @@ class ListadolibroController extends Controller {
         return $this->redirectToRoute("bc_index_listadolibros");
     }
 
-
     public function addListadoLibroAction(Request $request, $idlibro, $idusuario) {
         $em = $this->getDoctrine()->getEntityManager();
         $listalibro = new Listalibro();
         $form = $this->createForm(ListalibroType::class, $listalibro);
         $form->handleRequest($request);
-        
+
         $listalibro->setIdUsuario($idusuario);
         $listalibro->setIdLibro($idlibro);
 
@@ -51,7 +50,19 @@ class ListadolibroController extends Controller {
             $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
         }
 
-        return $this->redirectToRoute("bc_index_libro");
+        return $this->redirectToRoute("bc_index_listadolibro");
+        //Retornamos la vista de todos los libros "no validados"
+        /*$query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 ';
+        $statement = $em->getConnection()->prepare($query);
+        $statement->execute();
+        $libro = $statement->fetchAll();
+
+        return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
+                    "libro" => $libro
+        ));*/
     }
 
 }

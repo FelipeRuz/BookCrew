@@ -8,7 +8,8 @@
         <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>-->
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         {% block stylesheet %}
             <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet" />
@@ -24,65 +25,65 @@
                     });
                 });
             </script>
-            {% endblock %}
-        </head>
-        <body>
-            <header class="bg-primary">
-                <div class="container text-center">
-                    <h1>
-                        BOOK CREW<br>
-                        <img src="{{asset("imgdata/ICON-BC.png")}}" height="150" width="150">
+        {% endblock %}
+    </head>
+    <body>
+        <header class="bg-primary">
+            <div class="container text-center">
+                <h1>
+                    BOOK CREW<br>
+                    <img src="{{asset("imgdata/ICON-BC.png")}}" height="150" width="150">
+                    <br>
+                    <h5><i>¡Comienza tu travesía en la tripulación del conocimiento!</i></h5>
+                </h1>
+            </div>
+            <nav class="navbar navbar-dark bg-primary">
+                {% if app.user != null %}
+                    <a class="navbar-brand" href="{{path("login")}}"><i class="fas fa-home"></i> Inicio</a>
+                    <h4 id="titleDespUser">
+                        {% if app.user.rol != "ADMIN" %}
+                            <i class="fas fa-user"></i>
+                        {% else %}
+                            <i class="fas fa-chess-king"></i>
+                        {% endif %}
+                        {{(app.user.nick)}}
+                    </h4>
+                    <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
+                {% else %}
+                    <a class="navbar-brand" href="{{path("bc_homepage")}}" on><i class="fas fa-home"></i> Inicio</a>
+                    <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
+                {% endif %}
+            </nav>
+        </header>
+        {% if app.user != null %}
+            <div id="menuDespUser" class="container ">
+                <div class="row">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                        <a class="navbar-brand btn-left" href="{{path("bc_perfil_usuario",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Perfil</a>
                         <br>
-                        <h5><i>¡Comienza tu travesía en la tripulación del conocimiento!</i></h5>
-                    </h1>
-                </div>
-                <nav class="navbar navbar-dark bg-primary">
-                    {% if app.user != null %}
-                        <a class="navbar-brand" href="{{path("login")}}"><i class="fas fa-home"></i> Inicio</a>
-                        <h4 id="titleDespUser">
-                            {% if app.user.rol != "ADMIN" %}
-                                <i class="fas fa-user"></i>
-                            {% else %}
-                                <i class="fas fa-chess-king"></i>
-                            {% endif %}
-                            {{(app.user.nick)}}
-                        </h4>
-                        <a class="navbar-brand btn-left" href="{{path("logout")}}"><i class="fas fa-cog"></i> Cerrar sesion</a>
-                    {% else %}
-                        <a class="navbar-brand" href="{{path("bc_homepage")}}" on><i class="fas fa-home"></i> Inicio</a>
-                        <a class="navbar-brand btn-left" href="{{path("login")}}"><i class="fas fa-cog"></i> Iniciar sesion</a>
-                    {% endif %}
-                </nav>
-            </header>
-            {% if app.user != null %}
-                <div id="menuDespUser" class="container ">
-                    <div class="row">
-                        <div class="col-md-5">
-                        </div>
-                        <div class="col-md-2 bg-dark text-center">
-                            <a class="navbar-brand btn-left" href="{{path("bc_perfil_usuario",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Perfil</a>
-                            <br>
-                            <a class="navbar-brand btn-left" href="{{path("bc_index_listadolibros",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Mis libros </a>
-                        </div>
-                        <div class="col-4">
-                        </div>
+                        <a class="navbar-brand btn-left" href="{{path("bc_index_listadolibros",{"id":app.user.idUsuario})}}"><i class="fas fa-cog"></i> Mis libros </a>
+                    </div>
+                    <div class="col-4">
                     </div>
                 </div>
-            {% endif %}
-            <section id="content">
-                {% block content %} 
-                    Contenido por defecto
-                {% endblock %}
-            </section>
-            <br><br><br><br><br>
-            <footer class="bg-info text-center">
-                <br>
-                <h4><b>Autor:</b> Felipe Ruz Pérez - DAW 2017-2018</h4>
-                <h8><b>Herramientas usadas:</b></h8>
-                Symfony 3
-                <br>
-                <br>     
-            </footer>
-        </body>
-    </html>
+            </div>
+        {% endif %}
+        <section id="content">
+            {% block content %} 
+                Contenido por defecto
+            {% endblock %}
+        </section>
+        <br><br><br><br><br>
+        <footer class="bg-info text-center">
+            <br>
+            <h4><b>Autor:</b> Felipe Ruz Pérez - DAW 2017-2018</h4>
+            <h8><b>Herramientas usadas:</b></h8>
+            Symfony 3
+            <br>
+            <br>     
+        </footer>
+    </body>
+</html>
 

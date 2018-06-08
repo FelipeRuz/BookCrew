@@ -47,12 +47,15 @@ class LibreriaType extends AbstractType {
                         'Santa Cruz de Tenerife' => 'Santa Cruz de Tenerife', 'Teruel' => 'Teruel', 'Toledo' => 'Toledo', 'Valencia' => 'Valencia', 'Valladolid' => 'Valladolid', 'Vizcaya' => 'Vizcaya', 'Zamora' => 'Zamora', 'Zaragoza' => 'Zaragoza',
                     ),
                     "required" => "required",
-                    "attr"=>array("class"=> "form-name btn btn-dark")
+                    "attr" => array("class" => "form-name btn btn-dark")
                 ))
-                ->add('direccion', TextType::class, array("label" => "Dirección", "required" => "required", "attr" => array(
+                ->add('poblacion', TextType::class, array("label" => "Población", "attr" => array(
                         "class" => "form-name form-control", "maxlength" => "20"
             )))
                 ->add('ubicacion', TextType::class, array("label" => "Ubicación", "attr" => array(
+                        "class" => "form-name form-control", "maxlength" => "20"
+            )))
+                ->add('direccion', TextType::class, array("label" => "Dirección", "required" => "required", "attr" => array(
                         "class" => "form-name form-control", "maxlength" => "20"
             )))
                 ->add('web', TextType::class, array("label" => "Web", "required" => "required", "attr" => array(

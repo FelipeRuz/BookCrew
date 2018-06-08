@@ -5,8 +5,8 @@ namespace BcBundle\Entity;
 /**
  * Libro
  */
-class Libro
-{
+class Libro {
+
     /**
      * @var integer
      */
@@ -52,14 +52,22 @@ class Libro
      */
     private $categoria;
 
+    /**
+     * @var string
+     */
+    private $campBusq;
+
+    /**
+     * @var string
+     */
+    private $paramBusq;
 
     /**
      * Get idLibro
      *
      * @return integer
      */
-    public function getIdLibro()
-    {
+    public function getIdLibro() {
         return $this->idLibro;
     }
 
@@ -70,8 +78,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setIsbn($isbn)
-    {
+    public function setIsbn($isbn) {
         $this->isbn = $isbn;
 
         return $this;
@@ -82,8 +89,7 @@ class Libro
      *
      * @return string
      */
-    public function getIsbn()
-    {
+    public function getIsbn() {
         return $this->isbn;
     }
 
@@ -94,8 +100,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setTitulo($titulo)
-    {
+    public function setTitulo($titulo) {
         $this->titulo = $titulo;
 
         return $this;
@@ -106,8 +111,7 @@ class Libro
      *
      * @return string
      */
-    public function getTitulo()
-    {
+    public function getTitulo() {
         return $this->titulo;
     }
 
@@ -118,8 +122,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setFormato($formato)
-    {
+    public function setFormato($formato) {
         $this->formato = $formato;
 
         return $this;
@@ -130,8 +133,7 @@ class Libro
      *
      * @return integer
      */
-    public function getFormato()
-    {
+    public function getFormato() {
         return $this->formato;
     }
 
@@ -142,9 +144,8 @@ class Libro
      *
      * @return Libro
      */
-    public function setFechPublic($fechPublic)
-    {
-        $this->fechPublic =$fechPublic;
+    public function setFechPublic($fechPublic) {
+        $this->fechPublic = $fechPublic;
 
         return $this;
     }
@@ -154,8 +155,7 @@ class Libro
      *
      * @return \DateTime
      */
-    public function getFechPublic()
-    {
+    public function getFechPublic() {
         return $this->fechPublic;
     }
 
@@ -166,8 +166,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setPortada($portada)
-    {
+    public function setPortada($portada) {
         $this->portada = $portada;
 
         return $this;
@@ -178,8 +177,7 @@ class Libro
      *
      * @return string
      */
-    public function getPortada()
-    {
+    public function getPortada() {
         return $this->portada;
     }
 
@@ -190,8 +188,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setValidacion($validacion)
-    {
+    public function setValidacion($validacion) {
         $this->validacion = $validacion;
 
         return $this;
@@ -202,8 +199,7 @@ class Libro
      *
      * @return integer
      */
-    public function getValidacion()
-    {
+    public function getValidacion() {
         return $this->validacion;
     }
 
@@ -214,8 +210,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setAutor(\BcBundle\Entity\Autor $autor = null)
-    {
+    public function setAutor(\BcBundle\Entity\Autor $autor = null) {
         $this->autor = $autor;
 
         return $this;
@@ -226,8 +221,7 @@ class Libro
      *
      * @return \BcBundle\Entity\Autor
      */
-    public function getAutor()
-    {
+    public function getAutor() {
         return $this->autor;
     }
 
@@ -238,8 +232,7 @@ class Libro
      *
      * @return Libro
      */
-    public function setCategoria(\BcBundle\Entity\Categoria $categoria = null)
-    {
+    public function setCategoria(\BcBundle\Entity\Categoria $categoria = null) {
         $this->categoria = $categoria;
 
         return $this;
@@ -250,13 +243,57 @@ class Libro
      *
      * @return \BcBundle\Entity\Categoria
      */
-    public function getCategoria()
-    {
+    public function getCategoria() {
         return $this->categoria;
     }
-    
+
+    /**
+     * Convert to string
+     *
+     * @return \BcBundle\Entity\Categoria
+     */
     public function __toString() {
         return $this->titulo;
     }
-}
 
+    /**
+     * Get campBusq
+     *
+     * @return libro
+     */
+    public function getCampBusq() {
+        return $this->campBusq;
+    }
+
+    /**
+     * Set campBusq
+     * @param campBusq
+     * 
+     * @return libro
+     */
+    public function setCampBusq($campBusq) {
+        $this->campBusq = $campBusq;
+        return $this;
+    }
+
+    /**
+     * Get paramBusq
+     *
+     * @return libro
+     */
+    public function getParamBusq() {
+        return $this->campBusq;
+    }
+
+    /**
+     * Set paramBusq
+     * @param paramBusq
+     * 
+     * @return libro
+     */
+    public function setParamBusq($paramBusq) {
+        $this->paramBusq = $paramBusq;
+        return $this;
+    }
+
+}

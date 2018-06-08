@@ -14,10 +14,10 @@
                             </a>
                         </div>
                     {% endif %}
-                    <div class="col-md-6">
+                    <!--<div class="col-md-6">
                         <img src="{{asset("imgdata/user-find.png")}}" height="50" width="50">
                         <input id="act_busq" type="button" value="¿Buscas algo?" class="btn btn-info">
-                    </div>
+                    </div>-->
                 </div>
                 <br>
             </div>
@@ -27,31 +27,6 @@
                 <div id="controlBusqueda" class="row">
                     <div class="col-md-6">
                         <h3><b><img src="{{asset("imgdata/user-find.png")}}" height="50" width="50">Búsqueda de autor</b></h3>
-                    </div>
-                    <div class="col-md-6">
-                        <table style="width: 75%">
-                            <form accept-charset="utf-8" method="POST">
-                                <tr>
-                                    <td><b>Seleccione el parámetro de búsqueda : </b><br>
-                                        <select name="ParamBusq">
-                                            <option value="nada"></option>
-                                            <option value="nombre">Nombre</option>
-                                            <option value="apellido">Apellido</option>
-                                        </select>
-                                    </td>
-                                </tr>             
-                                <tr>
-                                    <td ><b>Texto de clave : </b><br>
-                                        <input type="text" id="parametroBusqueda" value="" placeholder="" maxlength="30" autocomplete="off" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br><input id="activarBusqueda" type="button" value="Buscar.." class="btn btn-dark"><input id="cancelarBusqueda" type="button" value="Cancelar" class="btn btn-danger">
-                                    </td>
-                                </tr>
-                            </form>
-                        </table>
                     </div>
                 </div>
                 <br>
@@ -71,7 +46,7 @@
                         <div class="col-md-8">
                             <br>
                             <h2>
-                                <i class="fas fa-user"></i> {{autor.nombre}} {{autor.apellido}}
+                                <i class="fas fa-user"></i><b><a href="{{path("bc_perfil_autor",{"id":autor.idAutor})}}">{{autor.nombre}} {{autor.apellido}}</b></a> 
                             </h2>
                             {% if app.user.rol == 'ADMIN' %}
                                 <div class="container">

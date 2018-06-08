@@ -15,14 +15,14 @@
                     {% if app.user.rol != null %}
                         {% if app.user.rol == 'ADMIN' %}
                             <div class="col-md-3">
-                                <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}">
+                                <a href="{{path("bc_edit_libro",{"id":libros.idLibro})}}">
                                     <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
                                     <input type="button" value="Editar libro" class="btn btn-warning">
                                 </a>
                             </div>
                             <br>
                             <div class="col-md-3">
-                                <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}">
+                                <a href="{{path("bc_delete_libro",{"id":libros.idLibro})}}">
                                     <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                     <input type="button" value="Eliminar libro" class="btn btn-danger">
                                 </a>
@@ -33,31 +33,36 @@
                 <br>
             </div>
             <br>
+            <div id="busq_libro" class="container bg-info">
+                <br>      
+                <br>
+            </div>
+            <br>
             <div class="container bg-warning">
                 <br>
                 <h2>
-                    <i class="fas fa-arrow-alt-circle-right"></i><b> {{libro.titulo}}</b>
+                    <i class="fas fa-arrow-alt-circle-right"></i><b> {{libros.titulo}}</b>
                 </h2>
                 <br>
                 <div id="bodyLibro" class="row">
                     <div class="col-md-4 text-center">
                         <br>
-                        {% if libro.portada == null or libro.portada == "" %}
+                        {% if libros.portada == null or libros.portada == "" %}
                             <img src="{{asset("imgdata/smile.png")}}" height="230" width="200"> 
                         {% else %}
-                            <img src="{{asset(libro.portada)}}" height="230" width="200"> 
+                            <img src="{{asset(libros.portada)}}" height="230" width="200"> 
                         {% endif %}
                         {% if app.user.rol == 'ADMIN' %} 
                             <br><br>
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-3">
-                                    <a href="{{path("bc_delete_libro",{"id":libro.idLibro})}}">
+                                    <a href="{{path("bc_delete_libro",{"id":libros.idLibro})}}">
                                         <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                     </a>
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="{{path("bc_edit_libro",{"id":libro.idLibro})}}">
+                                    <a href="{{path("bc_edit_libro",{"id":libros.idLibro})}}">
                                         <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
                                     </a>
                                 </div>
@@ -72,16 +77,16 @@
                     </div>
                     <div class="col-md-8">
                         <br><br>
-                        <h4><b>Por "</b><i>{{libro.autor}}</i><b>"</b> </h4>
+                        <h4><b>Por "</b><i>{{libros.autor}}</i><b>"</b> </h4>
                         <table class="bg-success" style="width: 75%">
                             <tr>
                                 <td>
-                                    <b>Publicado el </b> {{libro.fechpublic|date('d-m-Y')}}
+                                    <b>Publicado el </b> {{libros.fechpublic|date('d-m-Y')}}
                                 </td>
                                 <td>
-                                    {% if libro.formato == 0 %}
+                                    {% if libros.formato == 0 %}
                                         <b> Formato : </b> Físico 
-                                    {% elseif libro.formato == 1 %}
+                                    {% elseif libros.formato == 1 %}
                                         <b> Formato : </b> Digital
                                     {% else %}
                                         <b> Formato :</b> Digital y físico.
@@ -90,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Categoría : "{{libro.categoria}}"</b>
+                                    <b>Categoría : "{{libros.categoria}}"</b>
                                 </td>
                             </tr>
                         </table>
@@ -98,7 +103,7 @@
                         <b>Disponible en : </b>
                         <div id="list_tiendas">
                             <ul>
-                                <li><a href="{{path("bc_index_stocks",{"id":libro.idLibro})}}"><i class="fas fa-eye"></i><b> Ver librerías..</b></a></li>
+                                <li><a href="{{path("bc_index_stocks",{"id":libros.idLibro})}}"><i class="fas fa-eye"></i><b> Ver librerías..</b></a></li>
                                 <br><br>
                             </ul>
                         </div>

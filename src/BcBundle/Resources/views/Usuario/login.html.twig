@@ -68,29 +68,48 @@
             </div>
             <span id="menuContentprinc">
                 <div class="row">
-                    <div class="col-md-3" align="center">
-                        <a href="{{path("bc_index_libro")}}">
-                            <img src="{{asset("imgdata/libro-base.png")}}" height="50" width="50">
-                            <input type="button" value="Listado de libros" class="btn btn-info">
-                        </a><br><br><br><br>
-                    </div>
-                    <div class="col-md-3" align="center">   
-                        <a href="{{path("bc_index_libreria")}}">
-                            <img src="{{asset("imgdata/libreria-base.png")}}" height="50" width="50">
-                            <input type="button" value="Listado de Librerías" class="btn btn-info">
-                        </a><br><br> 
-                    </div>
-                    <div class="col-md-3" align="center">  
-                        <a href="{{path("bc_index_autor")}}">
-                            <img src="{{asset("imgdata/user-base.png")}}" height="50" width="50">
-                            <input type="button" value="Listado de Autores" class="btn btn-info">
-                        </a><br><br>
-                    </div>
                     {% if app.user.rol == 'ADMIN' %}
+                        <div class="col-md-3" align="center">
+                            <a href="{{path("bc_index_libro")}}">
+                                <img src="{{asset("imgdata/libro-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de libros" class="btn btn-info  btn-block">
+                            </a><br><br><br><br>
+                        </div>
+                        <div class="col-md-3" align="center">   
+                            <a href="{{path("bc_index_libreria")}}">
+                                <img src="{{asset("imgdata/libreria-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de Librerías" class="btn btn-info  btn-block">
+                            </a><br><br> 
+                        </div>
+                        <div class="col-md-3" align="center">  
+                            <a href="{{path("bc_index_autor")}}">
+                                <img src="{{asset("imgdata/user-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de Autores" class="btn btn-info  btn-block">
+                            </a><br><br>
+                        </div>
                         <div class="col-md-3" align="center">  
                             <a href="{{path("bc_index_usuario")}}">
                                 <img src="{{asset("imgdata/user-find.png")}}" height="50" width="50">
-                                <input type="button" value="Listado de Usuarios" class="btn btn-danger">
+                                <input type="button" value="Listado de Usuarios" class="btn btn-danger  btn-block">
+                            </a><br><br>
+                        </div>
+                    {% else %}
+                        <div class="col-md-4" align="center">
+                            <a href="{{path("bc_index_libro")}}">
+                                <img src="{{asset("imgdata/libro-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de libros" class="btn btn-info  btn-block">
+                            </a><br><br><br><br>
+                        </div>
+                        <div class="col-md-4" align="center">   
+                            <a href="{{path("bc_index_libreria")}}">
+                                <img src="{{asset("imgdata/libreria-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de Librerías" class="btn btn-info  btn-block">
+                            </a><br><br> 
+                        </div>
+                        <div class="col-md-4" align="center">  
+                            <a href="{{path("bc_index_autor")}}">
+                                <img src="{{asset("imgdata/user-base.png")}}" height="50" width="50">
+                                <input type="button" value="Listado de Autores" class="btn btn-info  btn-block">
                             </a><br><br>
                         </div>
                     {% endif %}
@@ -105,11 +124,11 @@
 {% endblock %}
 {% block javascript %}
     <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
-    <script>       
+    <script>
         $(document).ready(function () {
             $("#add").toggle();
             $("#logSesion").toggle();
-            
+
             $("#titleSesion").click(function () {
                 $("#logSesion").toggle();
             });

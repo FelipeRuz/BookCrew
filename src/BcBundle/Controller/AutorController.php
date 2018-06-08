@@ -15,6 +15,17 @@ class AutorController extends Controller {
     /* public function __construct() {
       $this->session=new Session();
       } */
+    
+    public function perfilAutorAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
+        $autor_repo = $em->getRepository("BcBundle:Autor");
+        $autor = $autor_repo->find($id);
+
+        return $this->render("BcBundle:Autor:perfilAutor.html.twig", array(
+                    "autor" => $autor
+        ));
+    }
 
     public function listLibAutorAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -144,5 +155,4 @@ class AutorController extends Controller {
                     "form" => $form->createView()
         ));
     }
-
 }

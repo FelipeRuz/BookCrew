@@ -59,7 +59,7 @@
                         <i class="fas fa-arrow-alt-circle-right"></i><b>N# :<a href="{{path("bc_perfil_usuario",{"id":usuario.id_usuario})}}"> {{usuario.id_usuario}} || {{usuario.nick}} </a></b>
                     </h2>
                     <h4>
-                        {% if app.user.rol != "ADMIN" %}
+                        {% if usuario.rol != "ADMIN" %}
                             <i class="fas fa-user"></i>
                         {% else %}
                             <i class="fas fa-chess-king"></i>

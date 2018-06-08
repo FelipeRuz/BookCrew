@@ -12,14 +12,14 @@ function confirmarCambios(rutaPath)
     }    
 }
 
-function confirmarBorradoLibro(id_borrar)
+function confirmarBorradoLibro()
 {
     var r = confirm("¿Desea borrar este libro?");
     if (r == true) {
-        alert("Eliminando..."+id_borrar);
+        alert("Eliminando...");
         //AÑADIR LLAMADA AL CONTROLADOR
-        windows.location.href= "/libro/delete/"+id_borrar;
+        windows.location.href= "/libro/delete/";
     } else {
-        alert("Cancelando..."+id_borrar);
+        alert("Cancelando...");
     }
 }
