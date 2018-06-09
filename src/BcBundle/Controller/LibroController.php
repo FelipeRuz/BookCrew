@@ -18,19 +18,19 @@ class LibroController extends Controller {
       } */
 
     public function perfilLibroAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $em = $this->getDoctrine()->getEntityManager();
-        $libro_repo = $em->getRepository("BcBundle:Libro");
-        $libros = $libro_repo->find($id);
-
         /* $em = $this->getDoctrine()->getManager();
-          $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
-          . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-          . 'JOIN categoria c ON c.id_categoria=l.categoria '
-          . 'WHERE validacion = 1 and l.id_libro = "'.$id.'"';
-          $statement = $em->getConnection()->prepare($query);
-          $statement->execute();
-          $libro = $statement->fetchAll(); */
+          $em = $this->getDoctrine()->getEntityManager();
+          $libro_repo = $em->getRepository("BcBundle:Libro");
+          $libros = $libro_repo->find($id); */
+        //var_dump($id);die();
+        $em = $this->getDoctrine()->getManager();
+        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 and l.id_libro = "' . $id . '"';
+        $statement = $em->getConnection()->prepare($query);
+        $statement->execute();
+        $libros = $statement->fetchAll();
 
         return $this->render("BcBundle:Libro:perfilLibro.html.twig", array(
                     "libros" => $libros
@@ -264,8 +264,8 @@ class LibroController extends Controller {
                 $libros = $statement->fetchAll();
                 //Comprobar la consulta null || ""
                 return $this->render("BcBundle:Libro:findLibro.html.twig", array(
-                    "form" => $form->createView(),
-                    "libros" => $libros
+                            "form" => $form->createView(),
+                            "libros" => $libros
                 ));
             }
         }

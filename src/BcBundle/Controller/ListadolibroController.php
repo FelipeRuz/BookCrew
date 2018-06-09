@@ -12,7 +12,10 @@ class ListadolibroController extends Controller {
 
     public function indexListadolibroAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = ' . $id . '';
+        $query = 'SELECT a.*, c.id_usuario '
+                . 'FROM libro a JOIN listalibro b on a.id_libro=b.id_libro '
+                . 'JOIN usuario c on b.id_usuario = c.id_usuario '
+                . 'WHERE c.id_usuario = '.$id.'';
         $statement = $em->getConnection()->prepare($query);
 
         $statement->execute();
@@ -25,7 +28,9 @@ class ListadolibroController extends Controller {
 
     public function delListadoAction($idlibro, $idusuario) {
         $em = $this->getDoctrine()->getManager();
-        $query = 'DELETE FROM listalibro WHERE id_usuario = ' . $idusuario . ' AND id_libro = ' . $idlibro;
+        $query = 'DELETE FROM listalibro '
+                . 'WHERE id_usuario = '.$idusuario.' '
+                . 'AND id_libro = '.$idlibro;
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
 
@@ -49,20 +54,20 @@ class ListadolibroController extends Controller {
         } Else {
             $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
         }
-
-        return $this->redirectToRoute("bc_index_listadolibro");
+        indexLibroValAction();
+        //return $this->redirectToRoute("bc_index_listadolibro");
         //Retornamos la vista de todos los libros "no validados"
-        /*$query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
-                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-                . 'JOIN categoria c ON c.id_categoria=l.categoria '
-                . 'WHERE validacion = 1 ';
-        $statement = $em->getConnection()->prepare($query);
-        $statement->execute();
-        $libro = $statement->fetchAll();
+        /* $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
+          . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+          . 'JOIN categoria c ON c.id_categoria=l.categoria '
+          . 'WHERE validacion = 1 ';
+          $statement = $em->getConnection()->prepare($query);
+          $statement->execute();
+          $libro = $statement->fetchAll();
 
-        return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
-                    "libro" => $libro
-        ));*/
+          return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
+          "libro" => $libro
+          )); */
     }
 
 }

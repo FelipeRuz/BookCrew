@@ -39,8 +39,8 @@ bc_find_libro:
     defaults: { _controller: BcBundle:Libro:findLibro }    
    
 bc_index_libro:
-    path: /libro
-    defaults: { _controller: BcBundle:Libro:indexLibroVal }
+    path: /libro/{page}
+    defaults: { _controller: BcBundle:Libro:indexLibroVal,page:1 }
 
 bc_index_NoVallibro:
     path: /libroValidacion
@@ -96,7 +96,7 @@ bc_index_listadolibros:
 
 bc_add_listadolibros:
     path: /libro/{idusuario},{idlibro}
-    defaults: { _controller: BcBundle:Listadolbro:addListadolibro }
+    defaults: { _controller: BcBundle:Listadolibro:addListadolibro }
 
 bc_del_listadolibros:
     path: /listadolibros/delListaLibro/{idusuario},{idlibro}
