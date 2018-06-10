@@ -53,10 +53,10 @@ class LibreriaType extends AbstractType {
                         "class" => "form-name form-control", "maxlength" => "20"
             )))
                 ->add('ubicacion', TextType::class, array("label" => "Ubicación", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20"
+                        "class" => "form-name form-control", "maxlength" => "20", "placeholder"=>"Ubicación gráfica de la librería"
             )))
                 ->add('direccion', TextType::class, array("label" => "Dirección", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20"
+                        "class" => "form-name form-control", "maxlength" => "30"
             )))
                 ->add('web', TextType::class, array("label" => "Web", "required" => "required", "attr" => array(
                         "class" => "form-name form-control", "maxlength" => "20"

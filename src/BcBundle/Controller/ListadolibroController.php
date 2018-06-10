@@ -15,7 +15,7 @@ class ListadolibroController extends Controller {
         $query = 'SELECT a.*, c.id_usuario '
                 . 'FROM libro a JOIN listalibro b on a.id_libro=b.id_libro '
                 . 'JOIN usuario c on b.id_usuario = c.id_usuario '
-                . 'WHERE c.id_usuario = '.$id.'';
+                . 'WHERE c.id_usuario = ' . $id . '';
         $statement = $em->getConnection()->prepare($query);
 
         $statement->execute();
@@ -26,15 +26,23 @@ class ListadolibroController extends Controller {
         ));
     }
 
-    public function delListadoAction($idlibro, $idusuario) {
+    public function delListadoLibroAction($idlibro, $idusuario) {
         $em = $this->getDoctrine()->getManager();
         $query = 'DELETE FROM listalibro '
-                . 'WHERE id_usuario = '.$idusuario.' '
-                . 'AND id_libro = '.$idlibro;
+                . 'WHERE id_usuario = ' . $idusuario . ' '
+                . 'AND id_libro = ' . $idlibro;
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
 
-        return $this->redirectToRoute("bc_index_listadolibros");
+        return $this->redirectToRoute("login");
+        /*$em = $this->getDoctrine()->getEntityManager();
+        $listadolibro_repo = $em->getRepository("BcBundle:Listadolibro");
+        $libro = $listadolibro_repo->find($id);
+
+        $em->remove($libro);
+        $em->flush();
+
+        return $this->redirectToRoute("bc_index_libro");*/
     }
 
     public function addListadoLibroAction(Request $request, $idlibro, $idusuario) {
@@ -43,8 +51,13 @@ class ListadolibroController extends Controller {
         $form = $this->createForm(ListalibroType::class, $listalibro);
         $form->handleRequest($request);
 
-        $listalibro->setIdUsuario($idusuario);
-        $listalibro->setIdLibro($idlibro);
+        $usu_repo = $em->getRepository("BcBundle:Usuario");
+        $libro_repo = $em->getRepository("BcBundle:Libro");
+
+        $usuario_ins = $usu_repo->find($idusuario);
+        $libro_ins = $libro_repo->find($idlibro);
+        $listalibro->setIdUsuario($usuario_ins);
+        $listalibro->setIdLibro($libro_ins);
 
         $em->persist($listalibro);
         $flush = $em->flush();
@@ -54,20 +67,8 @@ class ListadolibroController extends Controller {
         } Else {
             $status = "No se ha enviado al servidor su petición de libro para ser validada. Error: 'flush inválido'";
         }
-        indexLibroValAction();
-        //return $this->redirectToRoute("bc_index_listadolibro");
-        //Retornamos la vista de todos los libros "no validados"
-        /* $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
-          . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-          . 'JOIN categoria c ON c.id_categoria=l.categoria '
-          . 'WHERE validacion = 1 ';
-          $statement = $em->getConnection()->prepare($query);
-          $statement->execute();
-          $libro = $statement->fetchAll();
 
-          return $this->render("BcBundle:Libro:indexLibro.html.twig", array(
-          "libro" => $libro
-          )); */
+        return $this->redirectToRoute("bc_index_libro");
     }
 
 }

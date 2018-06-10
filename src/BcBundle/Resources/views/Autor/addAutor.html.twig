@@ -12,7 +12,7 @@
             </div>
             <br>
         </div>
-        <br>
+                        <br><br>
     {% if app.user != null %}
         {% if app.user.rol == 'ADMIN' %}
             <div class="container bg-warning">
@@ -56,4 +56,13 @@
         </div>
     {% endif %}
     <br>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
+    <script>
+        $("#MenuUser").toggle();
+        $("#titleUser").click(function () {
+            $("#MenuUser").toggle();
+        });
+    </script>
 {% endblock %}

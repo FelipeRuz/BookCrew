@@ -22,35 +22,35 @@ class LibroType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('isbn',TextType::class, array("label"=>"ISBN","required"=>"required","attr"=>array(
+                ->add('isbn',TextType::class, array("label"=>"ISBN ","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control","maxlength"=>"14"
                 )))
-                ->add('titulo',TextType::class, array("label"=>"Título","required"=>"required","attr"=>array(
+                ->add('titulo',TextType::class, array("label"=>"Título ","required"=>"required","attr"=>array(
                     "class"=> "form-name form-control", "maxlength"=>"50"
                 )))
                 ->add('formato', ChoiceType::class, array(
-                    "label" => "Formato",
+                    "label" => "Formato ",
                     "choices" => array(
                         'Físico' => 0, 'Digital' => 1, 'Digital y físico' => 2
                     ),
                     "attr"=>array(
-                    "class"=> "form-name btn btn-dark"),
+                    "class"=> "form-name btn btn-secondary"),
                     "required" => "required"
                 ))
-                ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación","required"=>"required","attr"=>array(
+                ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación ","required"=>"required","attr"=>array(
                     "class"=> "form-name", 
                 )))  
-                ->add('portada',FileType::class, array("label"=>"Portada","attr"=>array(
+                ->add('portada',FileType::class, array("label"=>"Portada ","attr"=>array(
                     "class"=> "form-name btn btn-dark"),
                     "data_class" => null
                     ))
-                ->add('autor',EntityType::class, array("label"=>"Autor","required"=>"required",
+                ->add('autor',EntityType::class, array("label"=>"Autor ","required"=>"required",
                     "class"=>'BcBundle:Autor',
-                    "attr"=>array("class"=> "form-name btn btn-dark"
+                    "attr"=>array("class"=> "form-name btn btn-primary"
                 )))
-                ->add('categoria',EntityType::class, array("label"=>"Categoría","required"=>"required",
+                ->add('categoria',EntityType::class, array("label"=>"Categoría ","required"=>"required",
                     "class"=>'BcBundle:Categoria',
-                    "attr"=>array("class"=> "form-name btn btn-dark",
+                    "attr"=>array("class"=> "form-name btn btn-secondary",
                 )))
                 ->add('Guardar',SubmitType::class,array("attr"=> array(
                     "class"=> "form-submit btn btn-success",

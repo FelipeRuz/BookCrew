@@ -68,3 +68,12 @@
         </div>
     {% endif %}
 {% endblock %}
+{% block javascript %}
+    <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
+    <script>
+        $("#MenuUser").toggle();
+        $("#titleUser").click(function () {
+            $("#MenuUser").toggle();
+        });
+    </script>
+{% endblock %}

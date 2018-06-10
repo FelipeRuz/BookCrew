@@ -44,6 +44,12 @@ class Listalibro {
         return $this;
     }
 
+    /* public function setIdUsuario(string $idUsuario = null) {
+      $this->idUsuario = $idUsuario;
+
+      return $this;
+      } */
+
     /**
      * Get idUsuario
      *
@@ -65,6 +71,12 @@ class Listalibro {
 
         return $this;
     }
+
+    /* public function setIdLibro(string $idLibro = null) {
+      $this->idLibro = $idLibro;
+
+      return $this;
+      } */
 
     /**
      * Get idLibro

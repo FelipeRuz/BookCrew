@@ -26,12 +26,12 @@ class FindLibroType extends AbstractType
                     "label" => "Campo Búsqueda",
                     "choices" => array(
                         'Nada' => 'nada', 
-                        'Autor' => 'autor', 
+                        'Titulo del Libro' => 'titulo',
+                        'Nombre del Autor' => 'autor', 
                         'Categoria' => 'categoria',
-                        'Libreria' => 'libreria'
                     ),
                     "attr"=>array(
-                    "class"=> "form-name btn btn-dark"),
+                    "class"=> "form-name btn btn-secondary"),
                     "required" => "required"
                 ))
                 
@@ -39,7 +39,7 @@ class FindLibroType extends AbstractType
                     "class"=> "form-name form-control","maxlength"=>"30"
                 )))
                 ->add('Buscar',SubmitType::class,array("attr"=> array(
-                    "class"=> "form-submit btn btn-info",
+                    "class"=> "form-submit btn btn-dark",
                     "target"=> "_blank"
                 )))
                 ->add('Cancelar',ButtonType::class,array("attr"=>array(

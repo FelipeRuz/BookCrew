@@ -1,13 +1,18 @@
 {% extends "BcBundle::layout.html.twig" %}
 {% block content %}
     <br>
-    <div class="container bg-info">
+    <div class="container bg-dark">
         <br>
         <div class="row">
             <div class="col-md-6">
-                <h2><b><i class="fas fa-check"></i> Mi lista</b></h2>    
+                <h2><b style="color: white"><i class="fas fa-check"></i> Mi lista</b></h2>
             </div>
         </div>
+        <br>
+    </div>
+    <br>
+    <div id="busq_libro" class="container bg-info">
+        <br>      
         <br>
     </div>
     <br>
@@ -26,7 +31,7 @@
                             <br>
                             <div class="col-md-6 text-center">
                                 <br>
-                                <a href="{{path("bc_add_listadolibros",{"idusuario":app.user.idUsuario,"idlibro":listado.id_libro})}}">
+                                <a href="{{path("bc_del_listadolibros",{"idusuario":app.user.idUsuario,"idlibro":listado.id_libro})}}">
                                     <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                     <input type="button" value="Quitar de la lista" class="btn btn-danger">
                                 </a>
@@ -76,14 +81,14 @@
         </div>
     {% endif %}
 
-    {% block javascript %}
-        <script>
-            $(document).ready(function () {
-                $("titulolibro").click(function () {
-                    $("cuerpoLibro").toggle(1000);
-                });
-            });
-        </script>
-    {% endblock %}
+
 {% endblock %}
 
+{% block javascript %}
+    <script>
+        $("#MenuUser").toggle();
+        $("#titleUser").click(function () {
+            $("#MenuUser").toggle();
+        });
+    </script>
+{% endblock %}
