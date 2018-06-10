@@ -19,12 +19,14 @@
                     <br>
                     <div class="col-md-3">
                         <br><br><br><br>
-                        <a href="{{path("bc_del_usuario",{"id":usuario.idUsuario})}}">
-                            <!--<i class="fas fa-trash" style="font-size: 170%"> Eliminar
-                            </i>-->
-                            <img src="{{asset("imgdata/user-del.png")}}" height="50" width="50">
-                            <input type="button" value="Eliminar usuario" class="btn btn-danger">
-                        </a>
+                        {% if app.user.email != usuario.email %}
+                            <a href="{{path("bc_del_usuario",{"id":usuario.idUsuario})}}">
+                                <!--<i class="fas fa-trash" style="font-size: 170%"> Eliminar
+                                </i>-->
+                                <img src="{{asset("imgdata/user-del.png")}}" height="50" width="50">
+                                <input type="button" value="Eliminar usuario" class="btn btn-danger">
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <br>

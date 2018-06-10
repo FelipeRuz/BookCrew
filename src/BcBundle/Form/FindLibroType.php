@@ -43,7 +43,8 @@ class FindLibroType extends AbstractType
                     "target"=> "_blank"
                 )))
                 ->add('Cancelar',ButtonType::class,array("attr"=>array(
-                    "class"=> "form-submit btn btn-danger", 
+                    "class"=> "form-submit btn btn-danger",
+                    "onclick" => "confirmarAtras()" 
                 )))
                 ;
     }/**

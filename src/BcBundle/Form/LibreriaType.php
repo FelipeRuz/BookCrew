@@ -26,16 +26,16 @@ class LibreriaType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('nif', TextType::class, array("label" => "Nif de la librería", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "10"
+                        "class" => "form-name form-control", "maxlength" => "10","placeholder"=>"Ejem: 11223344Z"
             )))
                 ->add('nombre', TextType::class, array("label" => "Nombre", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "15"
+                        "class" => "form-name form-control", "maxlength" => "15","placeholder"=>"Ejem: libreria"
             )))
                 ->add('email', EmailType::class, array("label" => "Email", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "25"
+                        "class" => "form-name form-control", "maxlength" => "25","placeholder"=>"Ejem:libreria@gmail.com"
             )))
                 ->add('tlf', TextType::class, array("label" => "Teléfono", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "9"
+                        "class" => "form-name form-control", "maxlength" => "9","placeholder"=>"Ejem: 900556677"
             )))
                 ->add('provincia', ChoiceType::class, array(
                     "label" => "Provincia",
@@ -50,16 +50,19 @@ class LibreriaType extends AbstractType {
                     "attr" => array("class" => "form-name btn btn-dark")
                 ))
                 ->add('poblacion', TextType::class, array("label" => "Población", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20"
+                        "class" => "form-name form-control", "maxlength" => "20","placeholder"=>"Ejem: Huelva"
             )))
                 ->add('ubicacion', TextType::class, array("label" => "Ubicación", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20", "placeholder"=>"Ubicación gráfica de la librería"
+                        "class" => "form-name form-control", "maxlength" => "50", "placeholder"=>"Ubicación gráfica de la librería"
             )))
                 ->add('direccion', TextType::class, array("label" => "Dirección", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "30"
+                        "class" => "form-name form-control", "maxlength" => "30","placeholder"=>"Ejem: C Prueba,1"
             )))
                 ->add('web', TextType::class, array("label" => "Web", "required" => "required", "attr" => array(
-                        "class" => "form-name form-control", "maxlength" => "20"
+                        "class" => "form-name form-control", 
+                        "maxlength" => "50",
+                        "placeholder"=>"Ejem: libreria-pag.com",
+                        "required" => "false"
             )))
                 ->add('Guardar', SubmitType::class, array("attr" => array(
                         "class" => "form-submit btn btn-success",
@@ -67,6 +70,7 @@ class LibreriaType extends AbstractType {
             )))
                 ->add('Cancelar', ButtonType::class, array("attr" => array(
                         "class" => "form-submit btn btn-danger",
+                        "onclick" => "confirmarAtras()"
             )))
         ;
     }

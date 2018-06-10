@@ -27,7 +27,6 @@ class Autor
      */
     private $foto;
 
-
     /**
      * Get idAutor
      *

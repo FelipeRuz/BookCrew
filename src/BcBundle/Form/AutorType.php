@@ -36,7 +36,8 @@ class AutorType extends AbstractType
                     "onclick" => "confirmarCambios('/autor/addAutor')"
                 )))
                 ->add('Cancelar',ButtonType::class,array("attr"=>array(
-                    "class"=> "form-submit btn btn-danger", 
+                    "class"=> "form-submit btn btn-danger",
+                    "onclick" => "confirmarAtras()" 
                 )))
                 ;
     }/**

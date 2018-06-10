@@ -58,3 +58,4 @@ BcBundle\Entity\Autor:
             - Length:
                 min: 5
                 minMessage: "El apellido debe tener mínimo 5 caracteres"
+                

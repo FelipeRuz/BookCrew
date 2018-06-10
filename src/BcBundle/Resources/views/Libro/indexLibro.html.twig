@@ -15,10 +15,10 @@
                     </div>
                     <div class="col-md-6">
                         <br><br><br><br>
-                        <img src="{{asset("imgdata/libro-find.png")}}" height="50" width="50">
-                        <a href="{{path("bc_find_libro")}}">
+                         <!--<img src="{{asset("imgdata/libro-find.png")}}" height="50" width="50">
+                       <a href="{{path("bc_find_libro")}}">
                             <input id="act_busq" type="button" value="¿Buscas algo?" class="btn btn-info">
-                        </a>
+                        </a>-->
                         {% if app.user.rol == 'ADMIN' %}
                             <a href="{{path("bc_index_NoVallibro")}}"> 
                                 <input type="button" value="Libros NO validados" class="btn btn-danger">
@@ -76,7 +76,14 @@
                                 </div>
                                 <div class="col-md-8">
                                     <br><br>
-                                    <h4><b>Por "</b><i>{{libro.autor_nom}} {{libro.apellido}}</i><b>"</b> </h4>
+                                    <h4>
+                                        <b>Por "</b>
+                                        <i><a href="{{path("bc_perfil_autor",{"id":libro.autor})}}">{{libro.autor_nom}} {{libro.apellido}}</i></a>
+                                        <b>"</b><br>
+                                        <a href="{{path("bc_lib_autor",{"id":libro.autor})}}">
+                                            <i class="fas fa-eye" style="font-size: 75%"></i><b>{ Ver mas libros del autor }</b> 
+                                        </a>
+                                    </h4>
                                     <table class="bg-success" style="width: 75%">
                                         <tr>
                                             <td>

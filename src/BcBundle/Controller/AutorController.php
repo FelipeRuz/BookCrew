@@ -15,7 +15,10 @@ class AutorController extends Controller {
     /* public function __construct() {
       $this->session=new Session();
       } */
-    
+
+    /* Función para obtener los datos de un perfil de un autor en concreto
+     * @param: $id - El id representativo de la entidad
+     */
     public function perfilAutorAction($id) {
         $em = $this->getDoctrine()->getManager();
         $em = $this->getDoctrine()->getEntityManager();
@@ -27,19 +30,29 @@ class AutorController extends Controller {
         ));
     }
 
+    /* Función para obtener los libros favoritos de un perfil del usuario
+     * @param: $id - El id del autor para mostrar sus libros
+     */
     public function listLibAutorAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $query = 'SELECT a.*, c.id_usuario FROM libro a JOIN listalibro b on a.id_libro=b.id_libro JOIN usuario c on b.id_usuario = c.id_usuario WHERE c.id_usuario = ' . $id . '';
+        $query = 'SELECT l.*,a.id_autor, a.nombre AS autor_nom,a.apellido ,c.* '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 '
+                . 'AND a.id_autor = '.$id.'';
         $statement = $em->getConnection()->prepare($query);
 
         $statement->execute();
         $listados = $statement->fetchAll();
 
-        return $this->render("BcBundle:Listadolibro:indexListadolibro.html.twig", array(
+        return $this->render("BcBundle:Autor:listAutor.html.twig", array(
                     "listados" => $listados
         ));
     }
 
+    /* Función para obtener todos los autores de la BD
+     * 
+     */
     public function indexAutorAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $autor_repo = $em->getRepository("BcBundle:Autor");
@@ -50,6 +63,10 @@ class AutorController extends Controller {
         ));
     }
 
+    /*Funcion para editar un autor
+     * @param: Request $request
+     * @param: $id - El id del autor para editar sus datos
+     */
     public function editAutorAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $autor_repo = $em->getRepository("BcBundle:Autor");
@@ -63,7 +80,6 @@ class AutorController extends Controller {
 
                 $autor->setNombre($form->get("nombre")->getData());
                 $autor->setApellido($form->get("apellido")->getData());
-                //$autor->setFoto("");
 
                 /* Caso de no obtención de imagen, introducir campo vacío. */
                 If (($form->get("foto")->getData()) == null || ($form->get("foto")->getData()) == "") {
@@ -73,7 +89,7 @@ class AutorController extends Controller {
                     $ext = $file->guessExtension();
                     $file_name = "uploads/" . time() . "." . $ext;
                     $file->move("uploads", $file_name);
-
+                    //Asignamos la fotografía que hemos seleccionado
                     $autor->setFoto($file_name);
                 }
 
@@ -96,6 +112,9 @@ class AutorController extends Controller {
         ));
     }
 
+    /*Funcion para eliminar un autor
+     * @param: $id - El id del autor para editar sus datos
+     */
     public function delAutorAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $autor_repo = $em->getRepository("BcBundle:Autor");
@@ -108,6 +127,9 @@ class AutorController extends Controller {
         return $this->redirectToRoute("bc_index_autor");
     }
 
+    /*Funcion para añadir un autor
+     * @param: Request $request
+     */
     public function addAutorAction(Request $request) {
         $autor = new Autor();
         $form = $this->createForm(AutorType::class, $autor);
@@ -155,4 +177,5 @@ class AutorController extends Controller {
                     "form" => $form->createView()
         ));
     }
+
 }

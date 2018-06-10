@@ -16,6 +16,9 @@ class LibreriaController extends Controller {
       $this->session=new Session();
       } */
 
+    /* Funcion para ver el perfil de una libreria
+     * @param: $id - El id de la librería
+     */
     public function perfilLibreriaAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libreria_repo = $em->getRepository("BcBundle:Libreria");
@@ -26,6 +29,9 @@ class LibreriaController extends Controller {
         ));
     }
 
+    /* Funcion para visualizar todas las liberías
+     * 
+     */
     public function indexLibreriaAction() {
         $em = $this->getDoctrine()->getEntityManager();
         $libreria_repo = $em->getRepository("BcBundle:Libreria");
@@ -36,6 +42,10 @@ class LibreriaController extends Controller {
         ));
     }
 
+    /* Funcion para editar una libreria
+     * @param: Request $request
+     * @param: $id - El id de la libreria para editar sus datos
+     */
     public function editLibreriaAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libreria_repo = $em->getRepository("BcBundle:Libreria");
@@ -75,6 +85,9 @@ class LibreriaController extends Controller {
         ));
     }
 
+    /* Funcion para editar una libreria
+     * @param: $id - El id de la librería para eliminar sus datos
+     */
     public function delLibreriaAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libreria_repo = $em->getRepository("BcBundle:Libreria");
@@ -86,6 +99,9 @@ class LibreriaController extends Controller {
         return $this->redirectToRoute("bc_index_libreria");
     }
 
+    /*Funcion para añadir una libreria
+     * @param: Request $request
+     */
     public function addLibreriaAction(Request $request) {
         $libreria = new Libreria();
         $form = $this->createForm(LibreriaType::class, $libreria);

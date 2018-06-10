@@ -250,7 +250,7 @@ class Libro {
     /**
      * Convert to string
      *
-     * @return \BcBundle\Entity\Categoria
+     * @return \BcBundle\Entity\Libro-titulo
      */
     public function __toString() {
         return $this->titulo;

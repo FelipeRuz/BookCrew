@@ -10,6 +10,9 @@ use BcBundle\Form\ListalibroType;
 
 class ListadolibroController extends Controller {
 
+    /*Funcion para visualizar los datos de libros del usuario
+     * @param: $id - El id del usuario
+     */
     public function indexListadolibroAction($id) {
         $em = $this->getDoctrine()->getManager();
         $query = 'SELECT a.*, c.id_usuario '
@@ -26,6 +29,11 @@ class ListadolibroController extends Controller {
         ));
     }
 
+    /*Funcion para borrar los datos de libros a la lista del usuario
+     * @param: Request $request
+     * @param: $idlibro - El id del libro para borrar
+     * @param: $idusuario - El id del usuario para borrar
+     */
     public function delListadoLibroAction($idlibro, $idusuario) {
         $em = $this->getDoctrine()->getManager();
         $query = 'DELETE FROM listalibro '
@@ -35,16 +43,13 @@ class ListadolibroController extends Controller {
         $statement->execute();
 
         return $this->redirectToRoute("login");
-        /*$em = $this->getDoctrine()->getEntityManager();
-        $listadolibro_repo = $em->getRepository("BcBundle:Listadolibro");
-        $libro = $listadolibro_repo->find($id);
-
-        $em->remove($libro);
-        $em->flush();
-
-        return $this->redirectToRoute("bc_index_libro");*/
     }
 
+    /*Funcion para añadir los datos de libros a la lista del usuario
+     * @param: Request $request
+     * @param: $idlibro - El id del libro para borrar
+     * @param: $idusuario - El id del usuario para borrar
+     */
     public function addListadoLibroAction(Request $request, $idlibro, $idusuario) {
         $em = $this->getDoctrine()->getEntityManager();
         $listalibro = new Listalibro();

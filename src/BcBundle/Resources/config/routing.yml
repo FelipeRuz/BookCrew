@@ -26,13 +26,13 @@ bc_edit_libro:
     path: /libro/edit/{id}
     defaults: { _controller: BcBundle:Libro:editLibro }    
 
-bc_delete_libro:
-    path: /libro/delete/{id}
-    defaults: { _controller: BcBundle:Libro:delLibro} 
-    
 bc_perfil_libro:
-    path: /libro/{id}
-    defaults: { _controller: BcBundle:Libro:perfilLibro }  
+    path: /libro/perfilLibro/{id}
+    defaults: { _controller: BcBundle:Libro:perfilLibro }
+
+bc_delete_libro:
+    path: /libro/delLibro/{id}
+    defaults: { _controller: BcBundle:Libro:delLibro}   
     
 bc_find_libro:
     path: /libro/findLibro
@@ -57,6 +57,10 @@ bc_validar:
 bc_add_autor:
     path: /autor/addAutor
     defaults: { _controller: BcBundle:Autor:addAutor }
+
+bc_lib_autor:
+    path: /autor/libAutor/{id}
+    defaults: { _controller: BcBundle:Autor:listLibAutor }
 
 bc_index_autor:
     path: /autor

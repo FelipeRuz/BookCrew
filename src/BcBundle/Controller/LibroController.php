@@ -17,7 +17,10 @@ class LibroController extends Controller {
     /* public function __construct() {
       $this->session=new Session();
       } */
-
+    
+    /*Funcion para obtener los datos de un perfil de un libro en concreto
+     * @param: $id - El id del libro para editar sus datos
+     */
     public function perfilLibroAction($id) {
         $em = $this->getDoctrine()->getManager();
         $em = $this->getDoctrine()->getEntityManager();
@@ -29,9 +32,12 @@ class LibroController extends Controller {
         ));
     }
 
+    /*Funcion para obtener todos los datos libros
+     *
+     */
     public function indexLibroValAction() {
         $em = $this->getDoctrine()->getManager();
-        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
+        $query = 'SELECT l.*,a.id_autor,a.nombre AS autor_nom,a.apellido ,c.* '
                 . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
                 . 'JOIN categoria c ON c.id_categoria=l.categoria '
                 . 'WHERE validacion = 1 ';
@@ -44,6 +50,9 @@ class LibroController extends Controller {
         ));
     }
 
+    /*Funcion para obtener los datos de un perfil de un libro en concreto
+     * @param: $id - El id del libro para editar sus datos
+     */
     public function indexLibroNoValAction() {
         $em = $this->getDoctrine()->getManager();
         $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.* '
@@ -59,6 +68,10 @@ class LibroController extends Controller {
         ));
     }
 
+    /*Funcion para cambiar el estado de validación de un libro
+     * @param: Request $request
+     * @param: $id - El id del libro para editar sus datos
+     */
     public function ValidarAction(Request $request, $id) {
         //Buscamos el libro por su ID,y editamos el campo "validacion"
         $em = $this->getDoctrine()->getEntityManager();
@@ -96,6 +109,10 @@ class LibroController extends Controller {
         ));
     }
 
+    /*Funcion para editar los datos de un libro
+     * @param: Request $request
+     * @param: $id - El id del libro para editar sus datos
+     */
     public function editLibroAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
@@ -106,6 +123,7 @@ class LibroController extends Controller {
 
         If ($form->isSubmitted()) {
             If ($form->isValid()) {
+                
                 $libro->setIsbn($form->get("isbn")->getData());
                 $libro->setTitulo($form->get("titulo")->getData());
                 $libro->setFormato($form->get("formato")->getData());
@@ -115,7 +133,7 @@ class LibroController extends Controller {
                 If (($form->get("portada")->getData()) == null || ($form->get("portada")->getData()) == "") {
                     $libro->setPortada("");
                 } Else {
-                    $isbn = ($form->get("isbn")->getData());
+                    $isbn = $form->get("isbn")->getData();
                     $file = $form["portada"]->getData();
                     $ext = $file->guessExtension();
                     $file_name = "uploads/" . $isbn . "-" . time() . "." . $ext;
@@ -146,6 +164,9 @@ class LibroController extends Controller {
         ));
     }
 
+    /*Funcion para eliminar datos de un libro
+     * @param: $id - El id del libro para eliminar sus datos
+     */
     public function delLibroAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $libro_repo = $em->getRepository("BcBundle:Libro");
@@ -154,9 +175,12 @@ class LibroController extends Controller {
         $em->remove($libro);
         $em->flush();
 
-        return $this->redirectToRoute("login");
+        return $this->redirectToRoute("bc_index_libro");
     }
 
+    /*Funcion para añadir un libro
+     * @param: Request $request
+     */
     public function addLibroAction(Request $request) {
         $libro = new Libro();
         $form = $this->createForm(LibroType::class, $libro);
@@ -209,12 +233,70 @@ class LibroController extends Controller {
         ));
     }
 
-    public function findLibroAction(Request $request, $campBusq, $paramBusq) {
+    /*Funcion para buscar un libro
+     * @param: Request $request
+     * @param: $id - El id del libro para editar sus datos
+     * @param: $campBusq - Campo de búsqueda
+     * @param: $paramBusq - Parametro de búsqueda
+     */
+    public function findLibroAction(Request $request/* , $campBusq, $paramBusq */) {
         $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  '
                 . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
                 . 'JOIN categoria c ON c.id_categoria=l.categoria '
                 . 'WHERE validacion = 1 ';
         /*
+          If ($form->isSubmitted()) {
+          If ($form->isValid()) {
+          $em = $this->getDoctrine()->getEntityManager();
+          $libro_repo = $em->getRepository("BcBundle:Libro");
+
+          //Según las condiciones, alteraremos la query para obtener un resultado u otro
+          if ($campBusq != null || $campBusq != "") {
+          //Si se ha introducido algun parámetro de búsqueda.
+          if ($paramBusq != null || $paramBusq != "") {
+          switch ($campBusq) {
+          case "nada":
+          //No introduciremos nada, buscará todos los libros ordenador por orden alfabético
+          $query = $query . " ORDER BY l.titulo ";
+          break;
+          case "titulo":
+          $query = $query . " AND l.titulo LIKE " . $paramBusq . "% ";
+          break;
+          case "autor":
+          $query = $query . " AND autor_nom LIKE " . $paramBusq . "% ";
+          break;
+          case "categoria":
+          $query = $query . " AND c.nombre LIKE " . $paramBusq . "% ";
+          break;
+          }
+          }
+          } else {
+          $campBusq = "";
+          $paramBusq = "";
+          }
+          }
+          } */
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $statement = $em->getConnection()->prepare($query);
+        $statement->execute();
+        $libros = $statement->fetchAll();
+        //var_dump($libros); die();
+        $form = $this->createForm(FindLibroType::class);
+        $form->handleRequest($request);
+
+        return $this->render("BcBundle:Libro:findLibro.html.twig", array(
+                    "form" => $form->createView(),
+                    "libros" => $libros
+        ));
+    }
+
+    public function resultLibroAction(Request $request, $campBusq, $paramBusq) {
+        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 ';
+
         If ($form->isSubmitted()) {
             If ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -245,17 +327,14 @@ class LibroController extends Controller {
                     $paramBusq = "";
                 }
             }
-        }*/
+        }
+        $em = $this->getDoctrine()->getEntityManager();
 
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
         $libros = $statement->fetchAll();
 
-        $form = $this->createForm(FindLibroType::class, $libro);
-        $form->handleRequest($request);
-
-        return $this->render("BcBundle:Libro:findLibro.html.twig", array(
-                    "form" => $form->createView(),
+        return $this->render("BcBundle:Libro:resultLibro.html.twig", array(
                     "libros" => $libros
         ));
     }
@@ -272,6 +351,5 @@ class LibroController extends Controller {
         $paginator = new Paginator($query, $fetchJoinCollection = true);
         return $paginator;
     }
-
     /////////////////////////////////
 }

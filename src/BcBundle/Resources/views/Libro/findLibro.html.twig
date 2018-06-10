@@ -27,39 +27,24 @@
                 <br>
             </div>
             <br>
-            {% if libros|length() == 0 or libros is null%}
-                <div class="container bg-primary">
-                    <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-5" align="center">
-                            <br>
-                            <img src="{{asset("imgdata/libreria-base.png")}}" height="75" width="75">
-                            <img src="{{asset("imgdata/user-find.png")}}" height="100" width="100">
-                            <br>
-                            <h1>
-                                <b>¿ Buscas algo ?</b>                      
-                            </h1>           
-                            <img src="{{asset("imgdata/libro-find.png")}}" height="100" width="100">
-                            <img src="{{asset("imgdata/user-base.png")}}" height="75" width="75">
-                            <br><br>
-                        </div>
+            <div class="container bg-primary">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br>
+                        <img src="{{asset("imgdata/libreria-base.png")}}" height="75" width="75">
+                        <img src="{{asset("imgdata/user-find.png")}}" height="100" width="100">
+                        <br>
+                        <h1>
+                            <b>¿ Buscas algo ?</b>                      
+                        </h1>           
+                        <img src="{{asset("imgdata/libro-find.png")}}" height="100" width="100">
+                        <img src="{{asset("imgdata/user-base.png")}}" height="75" width="75">
+                        <br><br>
                     </div>
                 </div>
-            {% else %}
-                <div class="container bg-warning">
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2>
-                                    <i class="fas fa-arrow-alt-circle-right"></i>{{listado.titulo}}</a>
-                                </h2>
-                            </div>
-                            <br>
-                        </div>
-                        <br>
-                    </div>
-            {% endif %}
+            </div>
         {% else %}
             <div class="container bg-danger">
                 <div class="row">

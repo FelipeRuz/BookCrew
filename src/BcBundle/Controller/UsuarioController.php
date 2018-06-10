@@ -16,6 +16,9 @@ class UsuarioController extends Controller {
       $this->session = new Session();
       } */
 
+    /*Funcion para visualizar los datos del usuario
+     * @param: $id - El id del usuario
+     */
     public function perfilUsuarioAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $usuario_repo = $em->getRepository("BcBundle:Usuario");
@@ -26,6 +29,9 @@ class UsuarioController extends Controller {
         ));
     }
 
+    /*Funcion para visualizar los datos de todos los usuario
+     * @param: $id - El id del usuario
+     */
     public function indexUsuarioAction() {
         $em = $this->getDoctrine()->getManager();
         $query = 'SELECT * FROM usuario;';
@@ -38,6 +44,9 @@ class UsuarioController extends Controller {
         ));
     }
 
+    /*Funcion para eliminar los datos del usuario
+     * @param: $id - El id del usuario
+     */
     public function delUsuarioAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
         $usuario_repo = $em->getRepository("BcBundle:Usuario");
@@ -49,6 +58,10 @@ class UsuarioController extends Controller {
         return $this->redirectToRoute("bc_index_usuario");
     }
 
+    /*Funcion para editar los datos del usuario
+     * @param: Request $request 
+     * @param: $id - El id del usuario
+     */
     public function editUsuarioAction(Request $request, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $usuario_repo = $em->getRepository("BcBundle:Usuario");
@@ -95,6 +108,9 @@ class UsuarioController extends Controller {
         ));
     }
 
+    /*Funcion para el inicio de sesión en la página
+     * @param: Request $request
+     */
     public function loginAction(Request $request) {
         $authenticationUtils = $this->get("security.authentication_utils");
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -162,6 +178,9 @@ class UsuarioController extends Controller {
           )); */
     }
 
+    /*Funcion para el añadir un usuario
+     * @param: Request $request
+     */
     public function AddAction(Request $request) {
         /* Esta parte la añadimos hasta poder usar la zona de adicion de usuario independiente de login */
         $usuario = new Usuario();

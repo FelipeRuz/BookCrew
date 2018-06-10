@@ -70,6 +70,7 @@ class UsuarioType extends AbstractType {
             )))
                 ->add('Cancelar', ButtonType::class, array("attr" => array(
                         "class" => "form-submit btn btn-danger",
+                        "onclick" => "confirmarAtras()"
             )))
         ;
     }

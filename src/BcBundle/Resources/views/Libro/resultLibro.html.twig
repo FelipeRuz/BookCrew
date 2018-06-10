@@ -18,86 +18,42 @@
                 <br>
             </div>
             <br>
-            <div id="vistaLibros">
-                {% for libro in libros %}
-                    {% if libro.validacion == 1 %}
-                        <div class="container bg-warning">
-                            <br>
-                            <h2 id="titleLibro">
-                                <i class="fas fa-arrow-alt-circle-right"></i><b><a href="{{path("bc_perfil_libro",{"id":libro.id_libro})}}"> {{libro.titulo}}</a></b>
-                            </h2>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4 text-center">
-                                    <br>
-                                    {% if libro.portada == null or libro.portada == "" %}
-                                        <img src="{{asset("imgdata/smile.png")}}" height="230" width="200"> 
-                                    {% else %}
-                                        <img src="{{asset(libro.portada)}}" height="230" width="200"> 
-                                    {% endif %}
-                                    {% if app.user.rol == 'ADMIN' %} 
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-3">
-                                                <a href="{{path("bc_delete_libro",{"id":libro.id_libro})}}">
-                                                    <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <a href="{{path("bc_edit_libro",{"id":libro.id_libro})}}">
-                                                    <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <a href="{{path("bc_add_listadolibros",{"idusuario":app.user.idUsuario,"idlibro":libro.id_libro})}}">
-                                                    <i class="fas fa-plus" style="font-size: 260%"></i><b>MiLista</b>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-8">
-                                    <br><br>
-                                    <h4><b>Por "</b><i>{{libro.autor_nom}} {{libro.apellido}}</i><b>"</b> </h4>
-                                    <table class="bg-success" style="width: 75%">
-                                        <tr>
-                                            <td>
-                                                <b>Publicado el </b> {{libro.fech_public|date('d-m-Y')}}
-                                            </td>
-                                            <td>
-                                                {% if libro.formato == 0 %}
-                                                    <b> Formato : </b> Físico 
-                                                {% elseif libro.formato == 1 %}
-                                                    <b> Formato : </b> Digital
-                                                {% else %}
-                                                    <b> Formato :</b> Digital y físico.
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>Categoría : "{{libro.nombre}}"</b>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <b>Disponible en : </b>
-                                    <div id="list_tiendas">
-                                        <ul>
-                                            <li><a href="{{path("bc_index_stocks",{"id":libro.id_libro})}}"><i class="fas fa-eye"></i><b> Ver librerías..</b></a></li>
-                                            <br><br>
-                                        </ul>
-                                    </div>
-                                    <br><br>
-                                </div>
-                            </div>
+            {% if libros|length() == 0 or libros is null%}
+                <div class="container bg-primary">
+                    <div class="row">
+                        <div class="col-md-3">
                         </div>
-                        <br><br> 
-                    {% endif %}
+                        <div class="col-md-5" align="center">
+                            <br>
+                            <img src="{{asset("imgdata/libreria-base.png")}}" height="75" width="75">
+                            <img src="{{asset("imgdata/user-find.png")}}" height="100" width="100">
+                            <br>
+                            <h1>
+                                <b>¿ Buscas algo ?</b>                      
+                            </h1>           
+                            <img src="{{asset("imgdata/libro-find.png")}}" height="100" width="100">
+                            <img src="{{asset("imgdata/user-base.png")}}" height="75" width="75">
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                {% for libro in libros %}
+                    <div class="container bg-warning">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>
+                                    <i class="fas fa-arrow-alt-circle-right"></i>{{libro.titulo}}</a>
+                                </h2>
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
                 {% endfor %}
-            </div> <!--Cierre vistaLibros -->
+            {% endif %}
         {% else %}
             <div class="container bg-danger">
                 <div class="row">
@@ -129,7 +85,7 @@
 {% block javascript %}
     <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
     <script>
-  $("#MenuUser").toggle();
+        $("#MenuUser").toggle();
         $("#titleUser").click(function () {
             $("#MenuUser").toggle();
         });
