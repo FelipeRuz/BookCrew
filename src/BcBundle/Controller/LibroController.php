@@ -247,122 +247,33 @@ class LibroController extends Controller {
      * @param: $campBusq - Campo de búsqueda
      * @param: $paramBusq - Parametro de búsqueda
      */
-    public function findLibroAction(Request $request/* , $campBusq, $paramBusq */) {
-        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  '
-                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-                . 'JOIN categoria c ON c.id_categoria=l.categoria '
-                . 'WHERE validacion = 1 ';
-        /*
-          If ($form->isSubmitted()) {
-          If ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
-          $libro_repo = $em->getRepository("BcBundle:Libro");
+    
+    /**
+     * Generacion de PDF con la información de los Libros
+     * @param Request $request
+     */
+    public function pdfLibroAction(Request $request) {
 
-          //Según las condiciones, alteraremos la query para obtener un resultado u otro
-          if ($campBusq != null || $campBusq != "") {
-          //Si se ha introducido algun parámetro de búsqueda.
-          if ($paramBusq != null || $paramBusq != "") {
-          switch ($campBusq) {
-          case "nada":
-          //No introduciremos nada, buscará todos los libros ordenador por orden alfabético
-          $query = $query . " ORDER BY l.titulo ";
-          break;
-          case "titulo":
-          $query = $query . " AND l.titulo LIKE " . $paramBusq . "% ";
-          break;
-          case "autor":
-          $query = $query . " AND autor_nom LIKE " . $paramBusq . "% ";
-          break;
-          case "categoria":
-          $query = $query . " AND c.nombre LIKE " . $paramBusq . "% ";
-          break;
-          }
-          }
-          } else {
-          $campBusq = "";
-          $paramBusq = "";
-          }
-          }
-          } */
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
+        $libros_repo = $em->getRepository("BcBundle:Libro");
+        $libros = $libros_repo->findAll();
 
-        $statement = $em->getConnection()->prepare($query);
-        $statement->execute();
-        $libros = $statement->fetchAll();
-        //var_dump($libros); die();
-        $form = $this->createForm(FindLibroType::class);
-        $form->handleRequest($request);
+        $htmlpdf = $this->renderView("BcBundle:Libro:Libropdf.html.twig", array("libros" => $libros));
 
-        return $this->render("BcBundle:Libro:findLibro.html.twig", array(
-                    "form" => $form->createView(),
-                    "libros" => $libros
-        ));
+        return $this->returnPDFResponseFromHTML($htmlpdf);
     }
 
-    public function resultLibroAction(Request $request, $campBusq, $paramBusq) {
-        $query = 'SELECT l.*,a.nombre AS autor_nom,a.apellido ,c.*  '
-                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-                . 'JOIN categoria c ON c.id_categoria=l.categoria '
-                . 'WHERE validacion = 1 ';
+    public function returnPDFResponseFromHTML($html) {
+        $pdf = $this->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetAuthor('BOOKCREW´S WEB');
+        $pdf->SetTitle('Información de LIBROS');
+        $pdf->SetSubject('Our Code World Subject');
+        $pdf->SetFont('helvetica', '', 11, '', true);
+        $pdf->AddPage();
 
-        If ($form->isSubmitted()) {
-            If ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $libro_repo = $em->getRepository("BcBundle:Libro");
+        $file_name = "librosINFO_PDF";
 
-                //Según las condiciones, alteraremos la query para obtener un resultado u otro
-                if ($campBusq != null || $campBusq != "") {
-                    //Si se ha introducido algun parámetro de búsqueda.
-                    if ($paramBusq != null || $paramBusq != "") {
-                        switch ($campBusq) {
-                            case "nada":
-                                //No introduciremos nada, buscará todos los libros ordenador por orden alfabético
-                                $query = $query . " ORDER BY l.titulo ";
-                                break;
-                            case "titulo":
-                                $query = $query . " AND l.titulo LIKE " . $paramBusq . "% ";
-                                break;
-                            case "autor":
-                                $query = $query . " AND autor_nom LIKE " . $paramBusq . "% ";
-                                break;
-                            case "categoria":
-                                $query = $query . " AND c.nombre LIKE " . $paramBusq . "% ";
-                                break;
-                        }
-                    }
-                } else {
-                    $campBusq = "";
-                    $paramBusq = "";
-                }
-            }
-        }
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $statement = $em->getConnection()->prepare($query);
-        $statement->execute();
-        $libros = $statement->fetchAll();
-
-        return $this->render("BcBundle:Libro:resultLibro.html.twig", array(
-                    "libros" => $libros
-        ));
+        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+        $pdf->Output($file_name . ".pdf", 'I');
     }
-
-    ///////////////////////////////////
-    /*public function getPaginateLibro($pagesize = 5, $currentPage = 1) {
-        $em = $this->getEntityManager();
-        $dql = 'SELECT l FROM BcBundle\Entity\Libro l ORDER BY e.id DESC';
-        
-        $query = 'SELECT l.*,a.id_autor,a.nombre AS autor_nom,a.apellido ,c.* '
-                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
-                . 'JOIN categoria c ON c.id_categoria=l.categoria '
-                . 'WHERE validacion = 1 ';
-        
-        $dql = $em ->createQuery($dql)
-            ->setFirstResult($pagesize*($currentPage-1))
-            ->setMaxResults($pagesize);
-        
-        $paginator = new Paginator($query,$fetchJoinCollection = true );
-        return $paginator;
-    }*/
-    /////////////////////////////////
 }

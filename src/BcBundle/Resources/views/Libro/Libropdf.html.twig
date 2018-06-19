@@ -1,0 +1,43 @@
+<table class="table table-bordered">
+    <tr align="center" class="active">
+        <th><h7><b><img src="{{asset("imgdata/ICON-BC.png")}}" height="50" width="50"></h7></b></th><th><h7><b>BOOK CREW </h7></b></th><th><h7><b>¡Comienza tu travesía en la tripulación del conocimiento!</h7></b></th>
+</tr>
+{% for libro in libros %}
+<div class="container bg-warning">
+                <h2>
+                    <i class="fas fa-arrow-alt-circle-right"></i><b> {{libro.titulo}}</b>
+                </h2>
+                <div id="bodyLibro" class="row">
+                    <div class="col-md-4 text-center">
+                        {% if libro.portada == null or libro.portada == "" %}
+                            <img src="{{asset("imgdata/smile.png")}}" height="80" width="50"> 
+                        {% else %}
+                            <img src="{{asset(libro.portada)}}" height="180" width="150"> 
+                        {% endif %}
+                        <h4><b>Por "</b><i>{{libro.autor}}</i><b>"</b> </h4>
+                        <table class="bg-success" style="width: 75%">
+                            <tr>
+                                <td>
+                                    <b>Publicado el </b> {{libro.fechpublic|date('d-m-Y')}}
+                                </td>
+                                <td>
+                                    {% if libro.formato == 0 %}
+                                        <b> Formato : </b> Físico 
+                                    {% elseif libro.formato == 1 %}
+                                        <b> Formato : </b> Digital
+                                    {% else %}
+                                        <b> Formato :</b> Digital y físico.
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Categoría : "{{libro.categoria}}"</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+{% endfor %}
+</table>

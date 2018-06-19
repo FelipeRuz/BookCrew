@@ -50,6 +50,10 @@ bc_index_NoVallibro:
     path: /libroValidacion
     defaults: { _controller: BcBundle:Libro:indexLibroNoVal }    
 
+bc_pdflibro:
+    path: /Libro/Libropdf
+    defaults: { _controller: BcBundle:Libro:pdfLibro } 
+
 bc_validar:
     path: /libroValidacion/{id}
     defaults: { _controller: BcBundle:Libro:Validar }

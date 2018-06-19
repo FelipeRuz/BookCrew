@@ -21,7 +21,12 @@
                                 <input type="button" value="Libros NO validados" class="btn btn-danger">
                             </a>
                         {% endif %} 
+                        <img src="{{asset("imgdata/libro-find.png")}}" height="50" width="50">
+                        <a href="{{path("bc_pdflibro")}}"> 
+                            <input type="button" value="Generar PDF" class="btn btn-secondary">
+                        </a>
                     </div>
+
                 </div>
                 <br>
             </div>
@@ -149,9 +154,9 @@
 {% block javascript %}
     <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
     <script>
-        $("#MenuUser").toggle();
-        $("#titleUser").click(function () {
-            $("#MenuUser").toggle();
-        });
+                                                    $("#MenuUser").toggle();
+                                                    $("#titleUser").click(function () {
+                                                        $("#MenuUser").toggle();
+                                                    });
     </script>
 {% endblock %}
