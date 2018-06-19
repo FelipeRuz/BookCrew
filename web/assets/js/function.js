@@ -70,7 +70,7 @@ function confirmarBorradoLibreria(id_del)
 
 //Función usada para confirmar los cambios de borrado de usuario.
 //var id_del ; Ruta de acceso al controlador para efectuar la funcionalidad desde el servidor.
-function confirmarBorradoLibreria(id_del)
+function confirmarBorradoUsuario(id_del)
 {
     var respuesta = confirm("¿Desea confirmar el borrado de este 'USUARIO'-> ID: "+id_del+"?");
 
