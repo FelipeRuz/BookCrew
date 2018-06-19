@@ -1,6 +1,7 @@
 BcBundle\Entity\Libro:
     type: entity
     table: libro
+    repositoryClass: BcBundle\Repository\LibroRepository
     indexes:
         autor:
             columns:

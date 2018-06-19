@@ -38,7 +38,7 @@ class LibroType extends AbstractType
                     "required" => "required"
                 ))
                 ->add('fechPublic',DateType::class, array("label"=>"Fecha de publicación ","required"=>"required","attr"=>array(
-                    "class"=> "form-name", 
+                    "class"=> "form-name",'input'=> 'timestamp', 'widget' => 'choice', "model_timezone"
                 )))  
                 ->add('portada',FileType::class, array("label"=>"Portada ","attr"=>array(
                     "class"=> "form-name btn btn-dark"),

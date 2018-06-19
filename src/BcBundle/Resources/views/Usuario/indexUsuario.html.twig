@@ -48,87 +48,82 @@
                                     <td>
                                         <div class="col-md-6">
                                             <a href="{{path("bc_edit_usuario",{"id":usuario.id_usuario})}}">
-                                                <!--<i class="fas fa-pencil-alt" style="font-size: 170%">
-                                                </i>-->
                                                 <img src="{{asset("imgdata/user-edit.png")}}" height="50" width="50">
                                                 <input type="button" value="Editar usuario" class="btn btn-warning">
                                             </a>
-
                                         </div>
                                         {% if app.user.email != usuario.email %}
                                             <div class="col-md-6">
                                                 <a href="{{path("bc_del_usuario",{"id":usuario.id_usuario})}}">
-                                                    <!--<i class="fas fa-trash" style="font-size: 170%">   
-                                                    </i>-->
                                                     <img src="{{asset("imgdata/user-del.png")}}" height="50" width="50">
                                                     <input type="button" value="Eliminar usuario" class="btn btn-danger"> 
                                                 </a>
                                             </div>
-                                            {% endif %}
-                                            <br>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h4><b>Nombre completo : </b>{{usuario.nombre}} {{usuario.apellido}}</h4>
-                                            <h4><b>E-mail : </b>{{usuario.email}}</h4>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h4><b>Tlf : </b>{{usuario.tlf}}</h4>
-                                            <h4><b>Dirección : </b>{{usuario.direccion}}; {{usuario.poblacion}}/{{usuario.provincia}}</h4>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br>
-                            </div>
+                                        {% endif %}
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4><b>Nombre completo : </b>{{usuario.nombre}} {{usuario.apellido}}</h4>
+                                        <h4><b>E-mail : </b>{{usuario.email}}</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4><b>Tlf : </b>{{usuario.tlf}}</h4>
+                                        <h4><b>Dirección : </b>{{usuario.direccion}}; {{usuario.poblacion}}/{{usuario.provincia}}</h4>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
                         </div>
                     </div>
-                    <br>
-                    {% endfor %}
-                        {% else %}
-                            <div class="container bg-danger">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                    </div>
-                                    <div class="col-md-5" align="center">
-                                        <br><br>
-                                        <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                                {% else %}
-                                    <div class="container bg-danger">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                            </div>
-                                            <div class="col-md-5" align="center">
-                                                <br><br>
-                                                <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
-                                                <br><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                        <br>
-                                        {% endblock %}
-                                            {% block javascript %}
-                                                <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
-                                                <script>
-                                                    $(document).ready(function () {
-                                                        $("#controlBusqueda").toggle();
+                </div>
+                <br>
+            {% endfor %}
+        {% else %}
+            <div class="container bg-danger">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-5" align="center">
+                        <br><br>
+                        <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container bg-danger">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5" align="center">
+                    <br><br>
+                    <h1>¡Alto ahí, forastero! ¡Debes inscribirte primero para entrar a esta sección!</h1>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <br>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#controlBusqueda").toggle();
 
-                                                        $("#act_busq").click(function () {
-                                                            $("#controlBusqueda").toggle();
-                                                        });
+            $("#act_busq").click(function () {
+                $("#controlBusqueda").toggle();
+            });
 
-                                                        $("#MenuUser").toggle();
-                                                        $("#titleUser").click(function () {
-                                                            $("#MenuUser").toggle();
-                                                        });
-                                                    });
-                                                </script>
-                                            {% endblock %}
+            $("#MenuUser").toggle();
+            $("#titleUser").click(function () {
+                $("#MenuUser").toggle();
+            });
+        });
+    </script>
+{% endblock %}

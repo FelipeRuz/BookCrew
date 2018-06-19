@@ -21,7 +21,7 @@
                             </div>
                             <br>
                             <div class="col-md-3">
-                                <a href="{{path("bc_delete_libreria",{"id":libreria.idLibreria})}}">
+                                <a onclick="confirmarBorradoLibreria({{libreria.idLibreria}})">
                                     <img src="{{asset("imgdata/libreria-del.png")}}" height="50" width="50">
                                     <input type="button" value="Eliminar libreria" class="btn btn-danger"></a>
                                 </a>
@@ -31,12 +31,12 @@
                 </div>
                 <br>
             </div>
-                <br>
+            <br>
             <div class="container bg-info">
                 <br>      
                 <br>
             </div>
-                <br>
+            <br>
             <div class="container bg-warning">
                 <br>
                 <div class="row">
@@ -50,7 +50,7 @@
                             {% if app.user.rol == 'ADMIN' %} 
                                 <br><br>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-3">
+                                <!--<div class="col-md-3">
                                     <a href="{{path("bc_edit_libreria",{"id":libreria.idLibreria})}}">
                                         <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
                                     </a>
@@ -59,7 +59,7 @@
                                     <a href="{{path("bc_delete_libreria",{"id":libreria.idLibreria})}}">
                                         <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                     </a>
-                                </div>
+                                </div>-->
                             {% endif %} 
                         </h2>
                     </div>    
@@ -127,9 +127,9 @@
 {% block javascript %}
     <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
     <script>
-        $("#MenuUser").toggle();
-        $("#titleUser").click(function () {
-            $("#MenuUser").toggle();
-        });
+                                    $("#MenuUser").toggle();
+                                    $("#titleUser").click(function () {
+                                        $("#MenuUser").toggle();
+                                    });
     </script>
 {% endblock %}

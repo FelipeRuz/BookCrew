@@ -43,8 +43,8 @@ bc_result_libro:
     defaults: { _controller: BcBundle:Libro:resultLibroVal }    
    
 bc_index_libro:
-    path: /libro
-    defaults: { _controller: BcBundle:Libro:indexLibroVal }
+    path: /libro/{page}{size}
+    defaults: { _controller: BcBundle:Libro:indexLibroVal,page:1,size:2 }
 
 bc_index_NoVallibro:
     path: /libroValidacion
@@ -71,7 +71,7 @@ bc_edit_autor:
     defaults: { _controller: BcBundle:Autor:editAutor }   
   
 bc_delete_autor:
-    path: /autor/delete/{id}
+    path: /autor/delAutor/{id}
     defaults: { _controller: BcBundle:Autor:delAutor }
 
 bc_perfil_autor:
@@ -91,7 +91,7 @@ bc_perfil_libreria:
     defaults: { _controller: BcBundle:Libreria:perfilLibreria }
 
 bc_delete_libreria:
-    path: /libreria/delete/{id}
+    path: /libreria/delLibreria/{id}
     defaults: { _controller: BcBundle:Libreria:delLibreria }
     
 bc_edit_libreria:

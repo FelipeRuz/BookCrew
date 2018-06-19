@@ -47,12 +47,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <a href="{{path("bc_edit_autor",{"id":autor.idAutor})}}">
-                                                <!--<i class="fas fa-pencil-alt" style="font-size: 250%"></i>-->
                                                 <img src="{{asset("imgdata/user-edit.png")}}" height="50" width="50">
                                             </a>
                                         </div>
                                         <div class="col-md-3">
-                                            <a href="{{path("bc_delete_autor",{"id":autor.idAutor})}}"><!--<i class="fas fa-trash" style="font-size: 250%"></i>-->
+                                            <a onclick="confirmarBorradoAutor({{autor.idAutor}})">
                                                 <img src="{{asset("imgdata/user-del.png")}}" height="50" width="50">
                                             </a>
                                         </div>
@@ -96,9 +95,9 @@
 {% block javascript %}
     <script src="{{ asset('assets/js/function.js') }}" type="text/javascript"></script>
     <script>
-        $("#MenuUser").toggle();
-        $("#titleUser").click(function () {
-            $("#MenuUser").toggle();
-        });
+                                                $("#MenuUser").toggle();
+                                                $("#titleUser").click(function () {
+                                                    $("#MenuUser").toggle();
+                                                });
     </script>
 {% endblock %}

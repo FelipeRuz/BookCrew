@@ -68,6 +68,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# KNP_Paginator Configuration
 knp_paginator:
     page_range: 5                      # rango por defecto de paginas en los controles del paginador
     default_options:

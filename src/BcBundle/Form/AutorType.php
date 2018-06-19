@@ -29,6 +29,8 @@ class AutorType extends AbstractType
                 )))
                 ->add('foto',FileType::class, array("label"=>"Foto del autor","data_class" => null,"attr"=>array(
                     "class"=> "form-name btn btn-dark"),
+                    "required"=>false,
+                    'empty_data' => '',
                     "data_class" => null
                     ))
                 ->add('Guardar',SubmitType::class,array("attr"=>array(

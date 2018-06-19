@@ -1,22 +1,24 @@
 <?php
 
 namespace BcBundle\Controller;
+use BcBundle\Repository\LibroRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use BcBundle\Entity\Libro;
 use BcBundle\Form\LibroType;
 use BcBundle\Form\FindLibroType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+
 class LibroController extends Controller {
 
     private $session;
 
-    /* public function __construct() {
+    /*public function __construct() {
       $this->session=new Session();
-      } */
+    }*/ 
     
     /*Funcion para obtener los datos de un perfil de un libro en concreto
      * @param: $id - El id del libro para editar sus datos
@@ -35,12 +37,18 @@ class LibroController extends Controller {
     /*Funcion para obtener todos los datos libros
      *
      */
-    public function indexLibroValAction() {
+    public function indexLibroValAction($page,$size) {
         $em = $this->getDoctrine()->getManager();
         $query = 'SELECT l.*,a.id_autor,a.nombre AS autor_nom,a.apellido ,c.* '
                 . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
                 . 'JOIN categoria c ON c.id_categoria=l.categoria '
-                . 'WHERE validacion = 1 ';
+                . 'WHERE validacion = 1';
+        /*$query = 'SELECT l.*,a.id_autor,a.nombre AS autor_nom,a.apellido ,c.* '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 AND fila < 2 '
+                . 'ORDER BY l.id_libro ASC '
+                . 'LIMIT 5';*/
         $statement = $em->getConnection()->prepare($query);
         $statement->execute();
         $libros = $statement->fetchAll();
@@ -340,16 +348,21 @@ class LibroController extends Controller {
     }
 
     ///////////////////////////////////
-    public function getPaginateLibro($pageSize = 5, $currenPage = 1) {
-        $em = $this->getManager();
-        $dql = "SELECT e FROM BcBundle\Entity\Libro e ORDER BY e.id DESC";
-
-        $query = $em->createQuery($dql)
-                ->setFirstResult($pageSize * ($currenPage - 1))
-                ->setMaxResults($pageSize);
-
-        $paginator = new Paginator($query, $fetchJoinCollection = true);
+    /*public function getPaginateLibro($pagesize = 5, $currentPage = 1) {
+        $em = $this->getEntityManager();
+        $dql = 'SELECT l FROM BcBundle\Entity\Libro l ORDER BY e.id DESC';
+        
+        $query = 'SELECT l.*,a.id_autor,a.nombre AS autor_nom,a.apellido ,c.* '
+                . 'FROM libro l JOIN autor a ON a.id_autor=l.autor '
+                . 'JOIN categoria c ON c.id_categoria=l.categoria '
+                . 'WHERE validacion = 1 ';
+        
+        $dql = $em ->createQuery($dql)
+            ->setFirstResult($pagesize*($currentPage-1))
+            ->setMaxResults($pagesize);
+        
+        $paginator = new Paginator($query,$fetchJoinCollection = true );
         return $paginator;
-    }
+    }*/
     /////////////////////////////////
 }

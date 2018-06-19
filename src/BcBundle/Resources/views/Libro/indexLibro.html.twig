@@ -15,11 +15,8 @@
                     </div>
                     <div class="col-md-6">
                         <br><br><br><br>
-                         <!--<img src="{{asset("imgdata/libro-find.png")}}" height="50" width="50">
-                       <a href="{{path("bc_find_libro")}}">
-                            <input id="act_busq" type="button" value="¿Buscas algo?" class="btn btn-info">
-                        </a>-->
                         {% if app.user.rol == 'ADMIN' %}
+                            <img src="{{asset("imgdata/libro-find.png")}}" height="50" width="50">
                             <a href="{{path("bc_index_NoVallibro")}}"> 
                                 <input type="button" value="Libros NO validados" class="btn btn-danger">
                             </a>
@@ -51,12 +48,12 @@
                                     {% else %}
                                         <img src="{{asset(libro.portada)}}" height="230" width="200"> 
                                     {% endif %}
-                                    {% if app.user.rol == 'ADMIN' %} 
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        {% if app.user.rol == 'ADMIN' %} 
                                             <div class="col-md-3">
-                                                <a href="{{path("bc_delete_libro",{"id":libro.id_libro})}}">
+                                                <a onclick="confirmarBorradoLibro({{libro.id_libro}})">
                                                     <img src="{{asset("imgdata/libro-del.png")}}" height="50" width="50">
                                                 </a>
                                             </div>
@@ -65,14 +62,14 @@
                                                     <img src="{{asset("imgdata/libro-edit.png")}}" height="50" width="50">
                                                 </a>
                                             </div>
-                                            <div class="col-md-3">
-                                                <a href="{{path("bc_add_listadolibros",{"idusuario":app.user.idUsuario,"idlibro":libro.id_libro})}}">
-                                                    <i class="fas fa-plus" style="font-size: 260%"></i><b>MiLista</b>
-                                                </a>
-                                            </div>
+                                        {% endif %}
+                                        <div class="col-md-3">
+                                            <a href="{{path("bc_add_listadolibros",{"idusuario":app.user.idUsuario,"idlibro":libro.id_libro})}}">
+                                                <i class="fas fa-plus" style="font-size: 260%"></i><b>MiLista</b>
+                                            </a>
                                         </div>
-                                        <br><br>
-                                    {% endif %}
+                                    </div>
+                                    <br><br>
                                 </div>
                                 <div class="col-md-8">
                                     <br><br>

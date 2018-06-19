@@ -34,7 +34,8 @@
                             <h2>
                                 <i class="fas fa-arrow-alt-circle-right"></i><a href="{{path("bc_perfil_libro",{"id":listado.id_libro})}}"> {{listado.titulo}}</a>  
                                 <h3>
-                                    <i class="fas fa-eye"></i><a href="{{path("bc_perfil_autor",{"id":listado.autor})}}"> {{listado.autor_nom}} {{listado.apellido}}</a>
+                                    <i class="fas fa-eye"></i>
+                                    <a href="{{path("bc_perfil_autor",{"id":listado.autor})}}"> {{listado.autor_nom}} {{listado.apellido}}</a>
                                 </h3>
                             </h2>
                         </div>
@@ -69,10 +70,7 @@
             </div>
         </div>
     {% endif %}
-
-
 {% endblock %}
-
 {% block javascript %}
     <script>
         $("#MenuUser").toggle();
